@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>侧边菜单</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<style type="text/css">
+			.mui-content {
+				background-color: #fff;
+				padding-top: 0;
+			}
+			
+			body {
+				background-color: #fff;
+			}
+			
+			.mui-table-view:before {
+				display: none;
+			}
+			
+			.menu .bbh {
+				position: absolute;
+				width: 100%;
+				text-align: center;
+				bottom: 20px;
+				left: 0;
+				font-size: 12px;
+			}
+			.cebg{
+				display: block;
+				height:250px
+			}
+			@media only screen and  (max-width: 225px) {
+				.cebg{
+					height:220px
+				}
+			}
+		</style>
+	</head>
+
+	<body class="menu">
+		<div class="mui-content">
+			<div class="tophead relative">
+				<img src="img/cebg-index.jpg" alt="" width="100%"  class="cebg"/>
+				<div class="flexcenter">
+					<img src="img/tx.png" alt="" />
+					<span class="white" id="yhm"></span>
+				</div>
+			</div>
+			<div class="pdauto1">
+				<ul class="mui-table-view mui-table-view-chevron navstyle">
+					<li class="mui-table-view-cell mui-media">
+						<a class="jumpnew" href="yjfk">
+							<div class="mui-media-object mui-pull-left"><img src="img/yjfk-index.png" alt="" width="20" /></div>
+							<div class="mui-media-body">
+								意见反馈
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media" id="checkversion">
+						<div class="mui-media-object mui-pull-left"><img src="img/bbgx.png" alt="" width="20" /></div>
+						<div class="mui-media-body">检查更新
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-media" id="qchc">
+						<div class="mui-media-object mui-pull-left"><img src="img/qchc-index.png" width="20"></div>
+						<div class="mui-media-body">
+							清除缓存
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-media" id="exit">
+						<div class="mui-media-object mui-pull-left"><img src="img/tcxt-index.png" width="20"></div>
+						<div class="mui-media-body" >
+							退出系统
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		<div class="bbh">版本号：<span id="version"></span></div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/update.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			var aniShow = "slide-in-right";
+			var subWebview = null,
+				template = null,
+				index = null;
+			mui.plusReady(function() {
+				var version = plus.runtime.version;
+				mui("#version")[0].innerText = version;
+				document.getElementById("yhm").innerHTML = window.localStorage.getItem('userName');
+				
+				//跳转
+				openNewWindow();
+				//获得主页面webview引用；
+				index = plus.webview.currentWebview().opener();
+				var _self = plus.webview.currentWebview();
+				_self.drag({
+					direction: "left",
+					moveMode: "followFinger"
+				}, {
+					view: index,
+					moveMode: "follow"
+				}, function(e) {
+					if(e.result){
+						index.setStyle({mask:'none'});
+					}
+				});
+				
+//				index.drag({
+//					direction: "left",
+//					moveMode: "followFinger"
+//				}, {
+//					view: _self,
+//					moveMode: "follow"
+//				}, function(e) {
+//					if(e.result){
+//						index.setStyle({mask:'none'});
+//					}
+//				});
+				mui("body").on("tap", "#exit", function() {
+					var btn = ["确定", "取消"];
+					mui.confirm('确认退出系统？', '', btn, function(e) {
+						if(e.index == 0) {
+							var all = plus.webview.all();
+							for(var i = 0, len = all.length; i < len; i++) {
+								if(all[i] !== plus.webview.getLaunchWebview()) {
+									all[i].close("slide-out-right", 300);
+								}
+							}
+							window.localStorage.clear();
+						}
+					});
+				});
+				mui("body").on("tap", "#qchc", function() {
+					plus.webview.getWebviewById('index.html').reload();
+					setTimeout(function() {
+						mui.toast("缓存已清除^-^");
+					},300);
+					mui.fire(plus.webview.getLaunchWebview(), "refresh0");
+				})
+			})
+
+			/**
+			 * 关闭侧滑菜单
+			 */
+			function close() {
+				mui.fire(mui.currentWebview.opener(), "menu:close");
+			}
+			mui.init({
+				swipeBack: false,
+				keyEventBind: {
+					backbutton: false //关闭back按键监听
+				}
+			});
+		</script>
+	</body>
+
+</html>
