@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			html,
+			body {
+				background-color: #efeff4;
+				-webkit-overflow-scrolling: touch;
+				overflow-scrolling: touch;
+			}
+			
+			a {
+				color: #000;
+			}
+			
+			.mui-bar .mui-title {
+				color: #000;
+			}
+			.head-bg {
+				width: 100%;
+				height: 380px;
+				background-color: #b2b5ca;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			
+			.head-bg img {
+				width: 200px;
+				height: 260px;
+				box-shadow: 10px 10px 5px #888888;
+				object-fit: cover;
+			}
+			.mui-bar-transparent{
+				/*background-color: rgba(178,181,202,0);*/
+				background-color: rgba(241,241,237,0);
+			}
+			.pd14 {
+				padding: 14px;
+			}
+			.pd14 h3 {
+				line-height: 1.4;
+			}
+			.flex {
+				width: 100%;
+				display: flex;
+			}
+			.book-rate {
+				width: 80px;
+				height: 80px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				box-shadow: 5px 5px 20px #888888;
+			}
+			.book-summary-all {
+				display: -webkit-box;
+			    overflow: hidden;
+			    white-space: normal!important;
+			    text-overflow: ellipsis;
+			    word-wrap: break-word;
+			    background-color: #eee;
+			    border-radius: 10px;
+			    margin: 10px 0;
+			    padding: 0 10px;
+			}
+			.book-summary {
+				display: -webkit-box;
+			    overflow: hidden;
+			    white-space: normal!important;
+			    text-overflow: ellipsis;
+			    word-wrap: break-word;
+			    -webkit-line-clamp: 6;
+			    -webkit-box-orient: vertical;
+			    background-color: #eee;
+			    border-radius: 10px;
+			    margin: 10px 0;
+			    padding: 0 10px;
+			}
+		</style>
+	</head>
+
+	<body >
+		<header id="header" class="mui-bar mui-bar-transparent" data-top='0' data-offset='340' data-duration='16'>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">图书</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="head-bg">
+		    	<img src="https://img3.doubanio.com/lpic/s27264181.jpg"/>
+		    </div>
+		    
+		    <div class="pd14 flex">
+		    	<div class="book-info" style="flex: 1;">
+		    		<h3>解忧杂货店</h3>
+		    		<p>作者：东野圭吾<br />
+		    		出版社：南海出版社<br />
+		    		出版时间：2014-5</p>
+		    	</div>
+		    	<div class="mui-card book-rate" style="width: 80px;height:80px;">
+		    		<div>
+		    			<p>评分</p>
+		    			<h3>4.7</h3>
+		    		</div>
+		    	</div>
+		    </div>
+		    
+		    <div class="book-detail-section">
+	    		<p>简介</p>
+	    		<div class="book-summary" id="test"></div>	
+	    	</div>
+	    	<div class="book-detail-section">
+	    		<p>作者</p>
+	    		<div></div>	
+	    	</div>
+		    	
+		    	
+	    	<div id="" style="height: 900px;">
+	    		
+	    	</div>
+		</div>
+		
+		
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			var summary = '现代人内心流失的东西，这家杂货店能帮你找回——\n僻静的街道旁有一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答。\n因男友身患绝症，年轻女孩静子在爱情与梦想间徘徊；克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……\n他们将困惑写成信投进杂货店，随即奇妙的事情竟不断发生。\n生命中的一次偶然交会，将如何演绎出截然不同的人生？\n如今回顾写作过程，我发现自己始终在思考一个问题：站在人生的岔路口，人究竟应该怎么做？我希望读者能在掩卷时喃喃自语：我从未读过这样的小说。——东野圭吾';
+			var catalog = '第一章 回答在牛奶箱里\n第二章 深夜的口琴声\n第三章 在思域车上等到天亮\n第四章 听着披头士默祷\n第五章 来自天上的祈祷';
+			
+			 var subStr=/\n/ig;//直接量法创建正则表达式对象,不区分大小写,全局查找
+			 var result=summary.replace(subStr,"<br><br>");//把'is'替换为空字符串
+			 console.log(result);//th all there 
+			
+			document.getElementById("test").innerHTML = result;
+			
+
+			window.addEventListener('tap',function(e) {
+				console.log(e.target.tagName.toUpperCase() == 'PRE');
+				var moreInfo = e.target;
+				if(moreInfo.className == 'book-summary') {
+					moreInfo.className = 'book-summary-all';
+				}else if(moreInfo.className == 'book-summary-all'){
+					moreInfo.className = 'book-summary';
+				}
+			})
+			
+			
+//			var bookId = '25862578';
+//			var urlget = 'https://api.douban.com/v2/book/' + bookId;
+//			console.log();
+//		
+//			mui.ajax({
+//				url: urlget,
+//				type: 'get',
+//				dataType: 'json',
+//				success: function(data) {
+//					console.log(data);
+//				},
+//				error: function(err) {
+//					mui.toast("访问出错啦")
+//				},
+//				beforeSend: function() {
+////									plus.nativeUI.showWaiting('等待中');
+//				},
+//				complete: function() {
+////									plus.nativeUI.closeWaiting();
+//				}
+//			})
+		</script>
+	</body>
+
+</html>

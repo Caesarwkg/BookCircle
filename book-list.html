@@ -37,10 +37,27 @@
 			.mui-table-view:after,.mui-table-view:before {
 			    height: 0;
 			}
-			section {
-				margin-top: 20px;
-				padding: 0 15px;
+			pre {
+				margin: 20px 20px 20px 15px;
+				padding: 5px 0px 0px 10px;
 				border-top: 0.5px solid #eee;
+				font-family: "微软雅黑";
+				position: relative;
+			}
+			pre a {
+				display: inline-block;
+				position: relative;
+				right: 0;
+				bottom: 0;
+			}
+			.mui-ellipsis-3 {
+			    display: -webkit-box;
+			    overflow: hidden;
+			    white-space: normal!important;
+			    text-overflow: ellipsis;
+			    word-wrap: break-word;
+			    -webkit-line-clamp: 3;
+			    -webkit-box-orient: vertical;
 			}
 			.mui-ellipsis-4 {
 			    display: -webkit-box;
@@ -53,7 +70,29 @@
 			}
 			.mui-table-view {
 			    margin-top: 20px;
-			    margin-bottom: 50px;
+			    margin-bottom: 70px;
+			}
+			.book-summary-all {
+				display: -webkit-box;
+			    overflow: hidden;
+			    white-space: normal!important;
+			    text-overflow: ellipsis;
+			    word-wrap: break-word;
+			    padding: 0 10px;
+			    border-top: 0.5px solid #f1f1ed;
+			    margin: 0 10px;
+			}
+			.book-summary {
+				display: -webkit-box;
+			    overflow: hidden;
+			    white-space: normal!important;
+			    text-overflow: ellipsis;
+			    word-wrap: break-word;
+			    -webkit-line-clamp: 4;
+			    -webkit-box-orient: vertical;
+			    padding: 0 10px;
+			    border-top: 0.5px solid #f1f1ed;
+			    margin: 0 10px;
 			}
 		</style>
 	</head>
@@ -72,11 +111,11 @@
 				            <div class="mui-media-body">
 				               <div class="book-title mui-ellipsis-2">解忧杂货店</div>
 				                <p>评分：4.7</p>
-				                <p class="mui-ellipsis-2">[日] 东野圭吾 / 2014-5 / 南海出版公司</p>
+				                <p class="mui-ellipsis-3">[日] 东野圭吾 / 2014-5 / 南海出版公司</p>
 				            </div>
 				        </a>
 				    </div>
-				    <section class="mui-ellipsis-4">现代人内心流失的东西，这家杂货店能帮你找回——</section>
+				    <div class="book-summary" id="one"></div>
 				</li>
 				
 				<li class="mui-table-view">
@@ -157,7 +196,17 @@
 				    	//现代人内心流失的东西，这家杂货店能帮你找回——\n僻静的街道旁有一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答。\n因男友身患绝症，年轻女孩静子在爱情与梦想间徘徊；克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……\n他们将困惑写成信投进杂货店，随即奇妙的事情竟不断发生。\n生命中的一次偶然交会，将如何演绎出截然不同的人生？\n如今回顾写作过程，我发现自己始终在思考一个问题：站在人生的岔路口，人究竟应该怎么做？我希望读者能在掩卷时喃喃自语：我从未读过这样的小说。——东野圭吾
 //			document.getElementById("summary").innerHTML = "现代人内心流失的东西，这家杂货店能帮你找回——\n僻静的街道旁有一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答。\n因男友身患绝症，年轻女孩静子在爱情与梦想间徘徊；克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……\n他们将困惑写成信投进杂货店，随即奇妙的事情竟不断发生。\n生命中的一次偶然交会，将如何演绎出截然不同的人生？\n如今回顾写作过程，我发现自己始终在思考一个问题：站在人生的岔路口，人究竟应该怎么做？我希望读者能在掩卷时喃喃自语：我从未读过这样的小说。——东野圭吾";
 //			document.getElementById("summary2").innerHTML = "现代人内心流失的东西，这家杂货店能帮你找回——\n僻静的街道旁有一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答。\n因男友身患绝症，年轻女孩静子在爱情与梦想间徘徊；克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……\n他们将困惑写成信投进杂货店，随即奇妙的事情竟不断发生。\n生命中的一次偶然交会，将如何演绎出截然不同的人生？\n如今回顾写作过程，我发现自己始终在思考一个问题：站在人生的岔路口，人究竟应该怎么做？我希望读者能在掩卷时喃喃自语：我从未读过这样的小说。——东野圭吾";
+			document.getElementById("one").innerHTML = "现代人内心流失的东西，这家杂货店能帮你找回——<br>僻静的街道旁有一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答。<br>因男友身患绝症，年轻女孩静子在爱情与梦想间徘徊；克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……\n他们将困惑写成信投进杂货店，随即奇妙的事情竟不断发生。\n生命中的一次偶然交会，将如何演绎出截然不同的人生？\n如今回顾写作过程，我发现自己始终在思考一个问题：站在人生的岔路口，人究竟应该怎么做？我希望读者能在掩卷时喃喃自语：我从未读过这样的小说。——东野圭吾"
 			
+			document.getElementById("refresh").addEventListener('tap',function(e) {
+				console.log(e.target.tagName.toUpperCase() == 'PRE');
+				var moreInfo = e.target;
+				if(moreInfo.className == 'book-summary') {
+					moreInfo.className = 'book-summary-all';
+				}else if(moreInfo.className == 'book-summary-all'){
+					moreInfo.className = 'book-summary';
+				}
+			})
 		</script>
 	</body>
 

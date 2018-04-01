@@ -152,7 +152,7 @@ function openWindow(href, attr) {
 }
 
 //下拉刷新 上拉加载
-function pullrefreshInit(url, randerlist, key) { //key:true --- 刘铮清接口
+function pullrefreshInit(url, randerlist) { //key:true --- 刘铮清接口
 	
 	mui.init({
 		pullRefresh: {
@@ -184,7 +184,7 @@ function pullrefreshInit(url, randerlist, key) { //key:true --- 刘铮清接口
 		setTimeout(function() {
 			mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 			mui('#pullrefresh').pullRefresh().refresh(true);
-			getListByCallindex(url, pageIndex, randerlist, true, key);
+			getListByCallindex(url, pageIndex, randerlist, true);
 		}, 300);
 	}
 
@@ -194,7 +194,7 @@ function pullrefreshInit(url, randerlist, key) { //key:true --- 刘铮清接口
 	function pullupRefresh() {
 		setTimeout(function() {
 			if(totalnum < totalall) {
-				getListByCallindex(url, pageIndex, randerlist, false, key);
+				getListByCallindex(url, pageIndex, randerlist, false);
 			}
 		}, 300);
 	}
@@ -212,13 +212,9 @@ function pullrefreshInit(url, randerlist, key) { //key:true --- 刘铮清接口
 
 	//请求列表接口
 
-	function getListByCallindex(url, pageNo, callback, isRefresh, key) { //key:true --刘铮清接口
+	function getListByCallindex(url, pageNo, callback, isRefresh) { 
 		var scroll_list = [];
-		if(key) {
-			var scroll_url = config.url1 + url;
-		} else {
-			var scroll_url = config.url + url;
-		}
+		var scroll_url = config.url + url;
 		console.log(scroll_url+"userId="+window.localStorage.getItem('userId')+"&pageNo="+pageNo+"&pageSize=10");
 		var self = plus.webview.currentWebview();
 		var id = self.key;
@@ -243,7 +239,7 @@ function pullrefreshInit(url, randerlist, key) { //key:true --- 刘铮清接口
 					scroll_list = data.list;
 					totalnum = (pageNo - 1) * 10 + scroll_list.length;
 					if(callback instanceof Function) {
-						callback(null, scroll_list, isRefresh, data);
+						callback(null, scroll_list, isRefresh);
 						pageIndex++;
 					}
 				} else {
@@ -298,12 +294,9 @@ function getDetailById(url, id, callback) {
 	})
 }
 
-function muiGet(url, callback, key, type) {
-	if(key) { //刘铮清接口
-		var urlget = config.url1 + url;
-	} else { //默认刘镇涛接口
-		var urlget = config.url + url;
-	}
+function muiGet(url, callback, type) {
+	
+	var urlget = config.url + url;
 	console.log(urlget);
 	if(type) {
 		type = 'post';

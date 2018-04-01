@@ -39,18 +39,18 @@
 			#swiper-banner img {
 				width: 100%;
 				height: 160px;
-				object-fit: fixed;
+				object-fit: cover;
 			}
 			#swiper-newbooks .swiper-slide img ,#swiper-hotbooks .swiper-slide img {
 				width: 100%;
 				height: 150px;
-				object-fit: fixed;
+				object-fit: cover;
 			}
 			@media only screen and (max-width: 374px) {
 				#swiper-newbooks .swiper-slide img ,#swiper-hotbooks .swiper-slide img {
 					width: 100%;
 					height: 130px;
-					object-fit: fixed;
+					object-fit: cover;
 				}
 			}
 			#swiper-newbooks .swiper-slide img ,#swiper-hotbooks .swiper-slide img ,.mui-table-view .mui-media-object{
@@ -82,6 +82,33 @@
 				float:right;
 				margin-right: 20px;
 			}
+			.mui-scroll {
+				background-color: #fff;
+			}
+			.book-summary-all {
+				display: -webkit-box;
+			    overflow: hidden;
+			    white-space: normal!important;
+			    text-overflow: ellipsis;
+			    word-wrap: break-word;
+			    background-color: #eee;
+			    border-radius: 10px;
+			    margin: 10px 0;
+			    padding: 0 10px;
+			}
+			.book-summary {
+				display: -webkit-box;
+			    overflow: hidden;
+			    white-space: normal!important;
+			    text-overflow: ellipsis;
+			    word-wrap: break-word;
+			    -webkit-line-clamp: 2;
+			    -webkit-box-orient: vertical;
+			    background-color: #eee;
+			    border-radius: 10px;
+			    margin: 10px 0;
+			    padding: 0 10px;
+			}
 		</style>
 	</head>
 
@@ -105,7 +132,7 @@
 					<!-- Swiper -->
 					<div class="swiper-container" id="swiper-newbooks">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide">
+							<div class="swiper-slide jumpnew" href='book-detail'>
 								<div>
 									<img src="https://img3.doubanio.com/lpic/s27264182.jpg" /><br />
 									<div class="book-title mui-ellipsis">解忧杂货店</div>
@@ -185,6 +212,7 @@
 						               <div class="book-title mui-ellipsis-2">解忧杂货店</div>
 						                <p>评分：4.7</p>
 						                <p class="mui-ellipsis-2">[日] 东野圭吾 / 2014-5 / 南海出版公司</p>
+						                <!--<p class="book-summary">现代人内心流失的东西，这家杂货店能帮你找回——<br>僻静的街道旁有一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答。<br>因男友身患绝症，年轻女孩静子在爱情与梦想间徘徊；克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……\n他们将困惑写成信投进杂货店，随即奇妙的事情竟不断发生。\n生命中的一次偶然交会，将如何演绎出截然不同的人生？\n如今回顾写作过程，我发现自己始终在思考一个问题：站在人生的岔路口，人究竟应该怎么做？我希望读者能在掩卷时喃喃自语：我从未读过这样的小说。——东野圭吾</p>-->
 						            </div>
 						        </a>
 					        </div>
@@ -252,6 +280,9 @@
 		<script>
 			openNewWindow();
 			
+			mui.init({
+				statusBarBackground: '#f1f1ed'
+			})
 			//为你推荐的懒加载图片初始化
 			mui(document).imageLazyload({
 				placeholder: 'img/lazy.jpg'
@@ -310,7 +341,16 @@
 				},10)
 						
 			});
-
+			
+//			document.getElementById("refresh").addEventListener('tap',function(e) {
+//				console.log(e.target.tagName.toUpperCase() == 'PRE');
+//				var moreInfo = e.target;
+//				if(moreInfo.className == 'book-summary') {
+//					moreInfo.className = 'book-summary-all';
+//				}else if(moreInfo.className == 'book-summary-all'){
+//					moreInfo.className = 'book-summary';
+//				}
+//			})
 		</script>
 	</body>
 

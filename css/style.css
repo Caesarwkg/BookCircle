@@ -1666,14 +1666,11 @@ header .mui-segmented-control .mui-control-item{
 
 
 
-
-
-/*login.html*/
-.mui-content ,.login {
-	height: 100%;
-	width: 100%;
+.mui-scroll-wrapper {
 	background-color: #fff;
 }
+
+
 
 /*logo*/
 .login .login_logo {
@@ -1737,4 +1734,9 @@ header .mui-segmented-control .mui-control-item{
 }
 .login .login_bottom .otherways span:nth-child(1){
 	margin-right: 44px;
+}
+.book-logo {
+	width: 84px;
+	height: 84px;
+	border-radius: 50%;
 }

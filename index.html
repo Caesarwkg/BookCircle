@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title></title>
     <link href="css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
@@ -11,23 +13,24 @@
     	.mui-bar {
 			box-sizing: border-box;
 		}
-		.header-blank-icon {
-			line-height: 44px;
-			margin-right: 5px; 
-			width: 2em;
+		.mui-action-menu  {
+			/*line-height: 44px;*/
+			width: 2.5em;
 		}
 		#search-cancle {
 			line-height: 44px;
 			text-decoration: underline;
 			margin-left: 5px; 
 			visibility: hidden;
+			width: 2.5em;
+			text-align: right;
 		}
 	
     </style>
 </head>
 <body class="relative">
 	<header class="mui-bar mui-bar-nav flex_x">
-		<a href="javascript:;" class="header-blank-icon"></a>
+		<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left  nav"></a>
 		<form class="mui-input-row mui-search flex_x" action="" style="flex:1">
 			<input type="search" class="mui-input-clear" placeholder="搜索图书">
 		</form>
@@ -201,26 +204,26 @@
 	 			 	contentWebview.evalJS("plus.webview.currentWebview().reload();");
 				}
 			});
-//			window.addEventListener("tabmore",function(e){
-//				var tab=e.detail.tabnum;
-//				var defaultTab = document.getElementById("tab"+tab);
-//				mui.trigger(defaultTab, 'tap');
-//				//切换选项卡高亮
-//				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
-//				if(defaultTab !== current) {
-//					current.classList.remove('mui-active');
-//					defaultTab.classList.add('mui-active');
-//				}
-//			
-//			})
-//			mui(".nav")[0].addEventListener("click", function(e) {
-//				var  _left = parseInt(_self.getStyle().left);
-//				if(_left > 0) { //处于显示状态
-//					closeMenu();
-//				} else {
-//					openMenu();
-//				}
-//			}, false);
+			window.addEventListener("tabmore",function(e){
+				var tab=e.detail.tabnum;
+				var defaultTab = document.getElementById("tab"+tab);
+				mui.trigger(defaultTab, 'tap');
+				//切换选项卡高亮
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if(defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+			
+			})
+			mui(".nav")[0].addEventListener("click", function(e) {
+				var  _left = parseInt(_self.getStyle().left);
+				if(_left > 0) { //处于显示状态
+					closeMenu();
+				} else {
+					openMenu();
+				}
+			}, false);
 			
 			/**
 			 * 显示侧滑菜单
