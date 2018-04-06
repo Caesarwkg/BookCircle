@@ -11,7 +11,7 @@ mui.init({
 });
 
 var config = {
-	url: 'http://huishan.05oa.com:55555/mobile/hssfj/', //刘镇涛
+	url: '', //豆瓣
 	url1: 'http://huishan.05oa.com:55555/mobile/hssfj/', //刘铮清
 	phoneReg: /^1[3|4|5|8][0-9]\d{4,8}$/,
 }
@@ -152,7 +152,7 @@ function openWindow(href, attr) {
 }
 
 //下拉刷新 上拉加载
-function pullrefreshInit(url, randerlist) { //key:true --- 刘铮清接口
+function pullrefreshInit(url, callback) { 
 	
 	mui.init({
 		pullRefresh: {
@@ -171,8 +171,10 @@ function pullrefreshInit(url, randerlist) { //key:true --- 刘铮清接口
 			}
 		}
 	});
+	
 	//初始化翻页参数
-	var pageIndex = 1;
+//	var pageIndex = 1;
+	var pageIndex = 0;
 	var totalnum = -1; //列表当前个数
 	var totalall = 0; //列表总个数
 	/**
@@ -180,11 +182,12 @@ function pullrefreshInit(url, randerlist) { //key:true --- 刘铮清接口
 	 */
 	function pulldownRefresh() {
 		//		mui.toast("正在更新数据");
-		pageIndex = 1;
+//		pageIndex = 1;
+		pageIndex = 0;
 		setTimeout(function() {
 			mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 			mui('#pullrefresh').pullRefresh().refresh(true);
-			getListByCallindex(url, pageIndex, randerlist, true);
+			getListByCallindex(url, pageIndex, callback, true);
 		}, 300);
 	}
 
@@ -194,7 +197,7 @@ function pullrefreshInit(url, randerlist) { //key:true --- 刘铮清接口
 	function pullupRefresh() {
 		setTimeout(function() {
 			if(totalnum < totalall) {
-				getListByCallindex(url, pageIndex, randerlist, false);
+				getListByCallindex(url, pageIndex, callback, false);
 			}
 		}, 300);
 	}
@@ -215,37 +218,45 @@ function pullrefreshInit(url, randerlist) { //key:true --- 刘铮清接口
 	function getListByCallindex(url, pageNo, callback, isRefresh) { 
 		var scroll_list = [];
 		var scroll_url = config.url + url;
-		console.log(scroll_url+"userId="+window.localStorage.getItem('userId')+"&pageNo="+pageNo+"&pageSize=10");
-		var self = plus.webview.currentWebview();
-		var id = self.key;
-		if(id) {
-			scroll_url=scroll_url+"id=" + id;
-		}
+		console.log(scroll_url);
+//		console.log(scroll_url+"userId="+window.localStorage.getItem('userId')+"&pageNo="+pageNo+"&pageSize=10");
+		console.log(scroll_url+"&userId="+window.localStorage.getItem('userId')+"&start="+pageNo+"&count=10");
+//		var self = plus.webview.currentWebview();
+//		var id = self.key;
+//		if(id) {
+//			scroll_url=scroll_url+"id=" + id;
+//		}
 		mui.ajax({
 			url: scroll_url,
 			type: 'get',
 			dataType: 'json',
 			data: {
 				//				userId:"w8vhr8nqtdpb",
-				pageNo: pageNo,
-				pageSize: 10,
-				userId: window.localStorage.getItem('userId')
+//				pageNo: pageNo,
+//				pageSize: 10,
+				start:pageNo,
+				count:10,
+//				userId: window.localStorage.getItem('userId')
 			},
 			success: function(data) {
 				console.log(data)
-				if(data.success) {
-					var data = data.result;
-					totalall = data.total;
-					scroll_list = data.list;
-					totalnum = (pageNo - 1) * 10 + scroll_list.length;
-					if(callback instanceof Function) {
-						callback(null, scroll_list, isRefresh);
-						pageIndex++;
-					}
-				} else {
-					//接口报错
-					callback("接口出错啦~");
+				if(callback instanceof Function) {
+					callback(null, data.books, isRefresh,data);
+					pageIndex++;
 				}
+//				if(data.success) {
+//					var data = data.result;
+//					totalall = data.total;
+//					scroll_list = data.list;
+//					totalnum = (pageNo - 1) * 10 + scroll_list.length;
+//					if(callback instanceof Function) {
+//						callback(null, scroll_list, isRefresh);
+//						pageIndex++;
+//					}
+//				} else {
+//					//接口报错
+//					callback("接口出错啦~");
+//				}
 			},
 			error: function(err) {
 				mui.toast("访问出错啦")

@@ -29,12 +29,14 @@
     </style>
 </head>
 <body class="relative">
-	<header class="mui-bar mui-bar-nav flex_x">
-		<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left  nav"></a>
-		<form class="mui-input-row mui-search flex_x" action="" style="flex:1">
-			<input type="search" class="mui-input-clear" placeholder="搜索图书">
-		</form>
-		<a href="javascript:;" id="search-cancle" >取消</a>
+	<header class="mui-bar mui-bar-nav">
+		<div class=" flex_x">
+			<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left nav" id="left-menu"></a>
+			<form class="mui-input-row mui-search flex_x" id="search-input-form" style="flex:1">
+				<input type="search" class="mui-input-clear" id="search-input" placeholder="搜索图书">
+			</form>
+			<a href="javascript:;" id="search-cancle" >取消</a>
+		</div>
 	</header>
 	
 	<nav class="mui-bar mui-bar-tab">
@@ -70,6 +72,14 @@
 			var subpage_style = {
 				top: '45px',
 				bottom: '51px'
+			};
+			var searchpages = [
+				'book-search-list.html',
+				'user-search-list.html'
+			];
+			var searchpage_style = {
+				top: '45px',
+				bottom: '0'
 			};
 			var aniShow = {};
 			var menu = null;
@@ -140,6 +150,46 @@
 						}
 					}
 				}
+					
+				//图书搜索webview
+				var searchTab = searchTab = plus.webview.create(searchpages[0], subpages[0], searchpage_style);
+				//标志位，图书搜索列表页是否已经展示
+				var flag_search = false;
+				document.getElementById("search-input").addEventListener('focus',function() {
+					if(!flag_search) {
+						plus.webview.hide(subpages[0]);
+						plus.webview.show(searchTab);
+						document.getElementById("left-menu").style.visibility = 'hidden';
+						document.getElementById("search-cancle").style.visibility = 'visible';
+						flag_search = true;
+					}else {
+						flag_search = false;
+					}
+				});
+				document.getElementById("search-cancle").addEventListener('tap',function() {
+					if(flag_search) {
+						plus.webview.hide(searchTab);
+						plus.webview.show(subpages[0]);
+						document.getElementById("search-input").value = '';
+						document.getElementById("search-input").blur();
+						document.getElementById("left-menu").style.visibility = 'visible';
+						document.getElementById("search-cancle").style.visibility = 'hidden';
+						searchTab.evalJS("plus.webview.currentWebview().reload();");
+						flag_search = false;
+					}else {
+						flag_search = true;
+					}
+				});
+				document.getElementById("search-input-form").onsubmit = function() {
+					var searchValue = document.getElementById("search-input").value;
+					localStorage.setItem("searchValue",searchValue); 
+					mui.fire(searchTab,'searchBooks',{
+					    searchValue:searchValue
+					  });
+					document.getElementById("search-input").blur();
+					return false;
+				}
+				
 			})
 			
 			//设置
@@ -280,6 +330,8 @@
 					}.bind(this)
 				)
 			};
+		
+			
 			openNewWindow();
 			atap();
 			
