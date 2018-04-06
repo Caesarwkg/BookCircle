@@ -1740,3 +1740,10 @@ header .mui-segmented-control .mui-control-item{
 	height: 84px;
 	border-radius: 50%;
 }
+
+.hide {
+	display: none !important;
+}
+.show {
+	display: block !important;;
+}

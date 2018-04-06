@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我的</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<style type="text/css">
+			.mui-content {
+				overflow: scroll;
+			}
+			.mine-tx-bg {
+				width: 100%;
+				height: 260px;
+				background: url(img/mine-bg.png)  top;
+				background-color: #086bd3;
+				background-size: 100% auto;
+				text-align: center;
+				position: relative;
+			}
+			
+			.mine-tx-bg .username {
+				font-size: 20px;
+				color: #fff;
+			}
+			
+			.mine-tx-bg .time {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				/*padding: 10px 0;*/
+				padding-bottom: 5px;
+				background-color: rgba(1, 93, 191, 0.4);
+				color: #d9d9d9;
+				font-size: 16px;
+				width: 100%;
+				position: absolute;
+				bottom: 0;
+			}
+			
+			.mine-tx-bg .time>div {
+				width: 50%;
+			}
+			
+			.mine-tx-bg .time>div:nth-child(1) {
+				border-right: 1px solid #7ca2d2;
+			}
+			
+			.txboder {
+				width: 80px;
+				height: 80px;
+				border: 3px solid #679fe8;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+			.mui-btn {
+				margin-top: 10px;
+				color: #fff;
+				border-color: #fff;
+				border-radius: 15px;
+			}
+			/*.follow div {
+				font-size: ;
+			}*/
+			.follow div:nth-child(1) {
+				padding-right: 10px;
+				float: left;
+			}
+			.follow div:nth-child(2) {
+				padding-left: 5px;
+				width: 40px;
+				border-left: 1px solid #fff;
+				float: left;
+			}
+			.mui-bar {
+				position: static;
+				background-color: rgba(8, 107, 211, 0);
+				z-index: -1;
+				border-bottom: 0;
+				color: #fff;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper" >
+			
+			<div class="mui-scroll">
+				<div class="mine-tx-bg">
+					<div class="mui-bar mui-bar-nav">
+					    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					</div>
+					<img src="img/tx.png" class="txboder" />
+					<div class="username" id="username">胸毛当地毯</div>
+					<!--<button type="button" class="mui-btn mui-btn-outlined" id="editBtn"><span class="mui-icon iconfont icon-edit"></span> 编辑</button>-->
+					<div class="mui-btn mui-btn-outlined follow">
+						<!--<div>
+							<span class="mui-icon iconfont icon-add"></span> 关注
+						</div>-->
+						<!--<div>
+							<span class="mui-icon iconfont icon-selected"></span> 已关注
+						</div>-->
+						<div>
+							<span class="mui-icon iconfont icon-trust"></span> 相互关注
+						</div>
+						<div>
+							<span class="mui-icon iconfont icon-email"></span>
+						</div>
+					</div>
+					<div class="time">
+						<div>
+							<div id="fwtime">关注</div><u>20</u></div>
+						<div>
+							<div id="xxtime">粉丝</div><u>60</u></div>
+					</div>
+				</div>
+				<div class="mui-slider">
+				    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				        <a class="mui-control-item" href="#item1">书架</a>
+				        <a class="mui-control-item" href="#item2">动态</a>
+				        <a class="mui-control-item" href="#item3">关于</a>
+				    </div>
+				    <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				    <div class="mui-slider-group">
+				        <div id="item1" class="mui-slider-item mui-control-content mui-active">
+				            <ul class="mui-table-view">
+				                <li class="mui-table-view-cell">第1个选项卡子项</li>
+				                <li class="mui-table-view-cell">第1个选项卡子项</li>
+				            </ul>
+				        </div>
+				        <div id="item2" class="mui-slider-item mui-control-content">
+				            <ul class="mui-table-view">
+				                <li class="mui-table-view-cell">第2个选项卡子项</li>
+				                <li class="mui-table-view-cell">第2个选项卡子项</li>
+				            </ul>
+				        </div>
+				        <div id="item3" class="mui-slider-item mui-control-content">
+				            <ul class="mui-table-view">
+				                <li class="mui-table-view-cell">第3个选项卡子项</li>
+				                <li class="mui-table-view-cell">第3个选项卡子项</li>
+				            </ul>
+				        </div>
+				    </div>
+				</div>
+			</div>
+			
+			
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.init({
+//				statusBarBackground: '#086bd3'
+			})
+			mui.plusReady(function() {
+				//index页关闭侧滑菜单
+				plus.webview.getWebviewById("index.html").evalJS("closeMenu();plus.webview.currentWebview().setStyle({mask:'none'})")
+			})
+		</script>
+	</body>
+
+</html>

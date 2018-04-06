@@ -14,48 +14,72 @@
 			box-sizing: border-box;
 		}
 		.mui-action-menu  {
-			/*line-height: 44px;*/
-			width: 2.5em;
+			margin-right: 5px;
 		}
 		#search-cancle {
 			line-height: 44px;
 			text-decoration: underline;
-			margin-left: 5px; 
 			visibility: hidden;
-			width: 2.5em;
+			width: 60px;
 			text-align: right;
+		    margin-right: -10px;
+		    margin-left: -10px;
+		    padding-right: 10px;
+		    padding-left: 10px;
 		}
-	
+		.index-title {
+			width: 100%;
+			/*display: block;*/
+			height: 44px;
+		}
+		.flex {
+			display: flex;
+		}
+		
     </style>
 </head>
 <body class="relative">
 	<header class="mui-bar mui-bar-nav">
-		<div class=" flex_x">
+		<!--<div class="flex_x">
 			<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left nav" id="left-menu"></a>
 			<form class="mui-input-row mui-search flex_x" id="search-input-form" style="flex:1">
 				<input type="search" class="mui-input-clear" id="search-input" placeholder="搜索图书">
 			</form>
 			<a href="javascript:;" id="search-cancle" >取消</a>
+		</div>-->
+		<div class="index-title flex">
+		    <a id="left-menu" class="mui-icon mui-action-menu mui-icon iconfont icon-gerenzhongxin  mui-pull-left nav" style="width: 60px;"></a>
+			<form class="mui-input-row mui-search" id="search-input-form" style="flex:1">
+				<input type="search" class="mui-input-clear" id="search-input" placeholder="搜索图书">
+			</form>
+			<a href="javascript:;" id="search-cancle" class="mui-pull-right" >取消</a>
 		</div>
+		<div class="index-title hide">
+		    <h1 class="mui-title">标题2</h1>
+		</div>
+		<div class="index-title hide">
+		    <h1 class="mui-title">标题3</h1>
+		</div>
+		<!--<div class="index-title hide">
+		</div>-->
 	</header>
-	
 	<nav class="mui-bar mui-bar-tab">
-		<a class="mui-tab-item mui-active" href="discover.html">
+		<a class="mui-tab-item mui-active" href="discover.html" data-titleNum='0'>
 			<span class="mui-icon iconfont icon-compass"></span>
 			<span class="mui-tab-label" title="" id="tab1">发现</span>
 		</a>
-		<a class="mui-tab-item" href="discover.html" id="tab2">
+		<a class="mui-tab-item" href="circle.html" id="tab2" data-titleNum='1'>
 			<span class="mui-icon iconfont icon-office"></span>
 			<span class="mui-tab-label" title="">书圈</span>
 		</a>
-		<a class="mui-tab-item" href="discover.html" id="tab3">
+		<a class="mui-tab-item" href="friend.html" id="tab3" data-titleNum='2'>
 			<span class="mui-icon iconfont icon-comments"></span>
 			<span class="mui-tab-label" title="">书友</span>
 		</a>
-		<a class="mui-tab-item" href="discover.html" id="tab4">
+		<!--<a class="mui-tab-item" href="account.html" id="tab4" data-titleNum='3'>
 			<span class="mui-icon iconfont icon-account"></span>
 			<span class="mui-tab-label" title="" >我的</span>
-		</a>
+		</a>-->
 	</nav>
 	
 	<script src="js/mui.min.js"></script>
@@ -65,9 +89,9 @@
 				statusBarBackground: '#f1f1ed'
 			});
 			var subpages = ['discover.html',
-				'login.html',
-				'regist.html',
-				'discover.html'
+				'circle.html',
+				'friend.html',
+//				'account.html'
 			];
 			var subpage_style = {
 				top: '45px',
@@ -172,6 +196,7 @@
 						plus.webview.show(subpages[0]);
 						document.getElementById("search-input").value = '';
 						document.getElementById("search-input").blur();
+						document.getElementById("search-input-form").classList.remove("mui-active");
 						document.getElementById("left-menu").style.visibility = 'visible';
 						document.getElementById("search-cancle").style.visibility = 'hidden';
 						searchTab.evalJS("plus.webview.currentWebview().reload();");
@@ -199,9 +224,12 @@
 			//当前激活选项
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
+			var titleList = document.getElementsByClassName("index-title");
+			var activeTitle = titleList[0];
 			//选项卡点击事件
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var targetTab = this.getAttribute('href');
+				var targetTitleNum = this.getAttribute('data-titleNum');
 //				if(targetTab != "view_sy/home.html") {
 //					mui(".nav")[0].style.display = "none";
 //				} else if(targetTab == "view_sy/home.html") {
@@ -220,6 +248,9 @@
 ////					plus.navigator.setStatusBarBackground("#f1f1ed");
 //					mui(".setting")[0].style.display = "none";
 //				}
+				if(targetTab == "account.html") {
+					
+				}
 				if(targetTab == activeTab) {
 					return;
 				}
@@ -235,10 +266,13 @@
 					mui.extend(aniShow, temp);
 					plus.webview.show(targetTab, "fade-in", 300);
 				}
+				titleList[targetTitleNum].classList.remove("hide");
 				//隐藏当前;
 				plus.webview.hide(activeTab);
+				activeTitle.classList.add("hide");
 				//更改当前活跃的选项卡
 				activeTab = targetTab;
+				activeTitle = titleList[targetTitleNum];
 			});
 			var doubletapLock = false;
 			mui('.mui-bar-tab').on('doubletap', 'a', function(e) {
