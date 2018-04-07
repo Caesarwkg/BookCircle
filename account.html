@@ -84,14 +84,36 @@
 				border-bottom: 0;
 				color: #fff;
 			}
-			
+			.mui-slider {
+				height: 100%;
+			}
+			.mui-slider-group {
+				height: calc(100% - 40px);
+			}
+			.mui-slider-item {
+				overflow: scroll;
+				border-bottom: none !important;
+			}
+			.book-list li {
+				width: 30%;
+				float: left;
+				padding: 11px;
+			}
+			.book-list li:nth-child(3n - 1), .book-list li:nth-child(3n - 3){
+				margin-left: 5%;
+			}
+			.book-list li img{
+				border-radius: 3px;
+			}
+			.mui-table-view-cell:last-child:after, .mui-table-view-cell:last-child:before{
+				height: 1px;
+			}
 		</style>
 	</head>
 
 	<body>
 		<div class="mui-content mui-scroll-wrapper" >
 			
-			<div class="mui-scroll">
 				<div class="mine-tx-bg">
 					<div class="mui-bar mui-bar-nav">
 					    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -122,16 +144,35 @@
 				</div>
 				<div class="mui-slider">
 				    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-				        <a class="mui-control-item" href="#item1">书架</a>
-				        <a class="mui-control-item" href="#item2">动态</a>
-				        <a class="mui-control-item" href="#item3">关于</a>
+				        <a class="mui-control-item" href="#item1">书架 <span class="mui-badge mui-badge-inverted">23</span></a>
+				        <a class="mui-control-item" href="#item2">动态 <span class="mui-badge mui-badge-inverted">2</span></a>
+				        <a class="mui-control-item" href="#item3">关于 <span class="mui-badge mui-badge-inverted">4</span></a>
 				    </div>
 				    <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
 				    <div class="mui-slider-group">
 				        <div id="item1" class="mui-slider-item mui-control-content mui-active">
-				            <ul class="mui-table-view">
-				                <li class="mui-table-view-cell">第1个选项卡子项</li>
-				                <li class="mui-table-view-cell">第1个选项卡子项</li>
+				            <ul class="mui-table-view book-list">
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
+				                	                
+				                
 				            </ul>
 				        </div>
 				        <div id="item2" class="mui-slider-item mui-control-content">
@@ -148,7 +189,6 @@
 				        </div>
 				    </div>
 				</div>
-			</div>
 			
 			
 		</div>
