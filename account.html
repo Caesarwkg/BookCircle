@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>我的</title>
+		<title>账户</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -108,6 +108,28 @@
 			.mui-table-view-cell:last-child:after, .mui-table-view-cell:last-child:before{
 				height: 1px;
 			}
+			.account-info-section {
+				padding: 11px 15px;
+			}
+			.account-info-section li {
+				display: flex;
+			}
+			.account-info-section li p {
+				margin-right: 10px;
+			}
+			.account-info-title {
+				margin-bottom: 10px;
+			}
+			.account-info-title:before {
+				content: "";
+				width: 0.3em;
+				height: 18px;
+				margin-left: 5px;
+				margin-right: 10px;
+				display: block;
+				float: left;
+				background-color: #007AFF;
+			}
 		</style>
 	</head>
 
@@ -120,25 +142,25 @@
 					</div>
 					<img src="img/tx.png" class="txboder" />
 					<div class="username" id="username">胸毛当地毯</div>
-					<!--<button type="button" class="mui-btn mui-btn-outlined" id="editBtn"><span class="mui-icon iconfont icon-edit"></span> 编辑</button>-->
-					<div class="mui-btn mui-btn-outlined follow">
+					<div type="button" class="mui-btn mui-btn-outlined jumpnew" href="account-info"><span class="mui-icon iconfont icon-edit"></span> 编辑</div>
+					<!--<div class="mui-btn mui-btn-outlined follow">-->
 						<!--<div>
 							<span class="mui-icon iconfont icon-add"></span> 关注
 						</div>-->
 						<!--<div>
 							<span class="mui-icon iconfont icon-selected"></span> 已关注
 						</div>-->
-						<div>
+						<!--<div>
 							<span class="mui-icon iconfont icon-trust"></span> 相互关注
 						</div>
 						<div>
 							<span class="mui-icon iconfont icon-email"></span>
 						</div>
-					</div>
+					</div>-->
 					<div class="time">
-						<div>
+						<div href="following-list" class="jumpnew">
 							<div id="fwtime">关注</div><u>20</u></div>
-						<div>
+						<div href="followers-list" class="jumpnew">
 							<div id="xxtime">粉丝</div><u>60</u></div>
 					</div>
 				</div>
@@ -182,10 +204,27 @@
 				            </ul>
 				        </div>
 				        <div id="item3" class="mui-slider-item mui-control-content">
-				            <ul class="mui-table-view">
-				                <li class="mui-table-view-cell">第3个选项卡子项</li>
-				                <li class="mui-table-view-cell">第3个选项卡子项</li>
-				            </ul>
+				            <div class="account-info-section">
+				            	<div class="account-info-title">个人信息</div>
+				            	<ul>
+				            		<li>
+				            			<p>昵称：</p><p>胸毛当地毯</p>
+				            		</li>
+				            		<li>
+				            			<p>性别：</p><p>男</p>
+				            		</li>
+				            		<li>
+				            			<p>年龄：</p><p>22</p>
+				            		</li>
+				            		<li>
+				            			<p>地区：</p><p>江苏 无锡</p>
+				            		</li>
+				            	</ul>
+				            </div>
+				            <div class="account-info-section">
+				            	<div class="account-info-title">个人介绍</div>
+				            	<p>大家好我是xxx</p>
+				            </div>
 				        </div>
 				    </div>
 				</div>
@@ -199,6 +238,7 @@
 			mui.init({
 //				statusBarBackground: '#086bd3'
 			})
+			openNewWindow();
 			mui.plusReady(function() {
 				//index页关闭侧滑菜单
 				plus.webview.getWebviewById("index.html").evalJS("closeMenu();plus.webview.currentWebview().setStyle({mask:'none'})")

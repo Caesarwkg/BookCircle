@@ -35,7 +35,6 @@
 		.flex {
 			display: flex;
 		}
-		
     </style>
 </head>
 <body class="relative">
@@ -48,7 +47,7 @@
 			<a href="javascript:;" id="search-cancle" >取消</a>
 		</div>-->
 		<div class="index-title flex">
-		    <a id="left-menu" class="mui-icon mui-action-menu mui-icon iconfont icon-gerenzhongxin  mui-pull-left nav" style="width: 60px;"></a>
+		    <a id="left-menu" class="mui-icon iconfont icon-gerenzhongxin  mui-pull-left nav" style="width: 60px;"></a>
 			<form class="mui-input-row mui-search" id="search-input-form" style="flex:1">
 				<input type="search" class="mui-input-clear" id="search-input" placeholder="搜索图书">
 			</form>
@@ -58,11 +57,12 @@
 		    <h1 class="mui-title">标题2</h1>
 		</div>
 		<div class="index-title hide">
-		    <h1 class="mui-title">标题3</h1>
+	    	<a class="mui-icon iconfont icon-friendadd mui-pull-left jumpnew" href="account-search-list"></a>
+		    <h1 class="mui-title">书友</h1>
 		</div>
 		<!--<div class="index-title hide">
 		</div>-->
-	</header>
+	</header> 
 	<nav class="mui-bar mui-bar-tab">
 		<a class="mui-tab-item mui-active" href="discover.html" data-titleNum='0'>
 			<span class="mui-icon iconfont icon-compass"></span>
@@ -72,7 +72,7 @@
 			<span class="mui-icon iconfont icon-office"></span>
 			<span class="mui-tab-label" title="">书圈</span>
 		</a>
-		<a class="mui-tab-item" href="friend.html" id="tab3" data-titleNum='2'>
+		<a class="mui-tab-item" href="contact-list.html" id="tab3" data-titleNum='2'>
 			<span class="mui-icon iconfont icon-comments"></span>
 			<span class="mui-tab-label" title="">书友</span>
 		</a>
@@ -90,7 +90,7 @@
 			});
 			var subpages = ['discover.html',
 				'circle.html',
-				'friend.html',
+				'contact-list.html',
 //				'account.html'
 			];
 			var subpage_style = {

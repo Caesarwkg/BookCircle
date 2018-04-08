@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>账户信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link href="css/mui.picker.min.css" rel="stylesheet" />
+		<link href="css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<style type="text/css">
+			html, body,.mui-content{
+				background-color: #f3f3f3;
+			}
+			.mui-navigate-right span {
+				float: right;
+				margin-right: 20px;
+				color: #bbb;
+			}
+			.mui-card {
+				margin: 10px 0 0 0;
+				border-radius: 0;
+				box-shadow: none;
+			}
+			.mui-card-content-inner {
+				padding-bottom: 0 ;
+			}
+			.mui-card-content-inner textarea{
+				border: none;
+				padding: 0;
+				font-size: 14px;
+				height: 63px;
+				margin-bottom: 0;
+			}
+			.mui-card-footer:before {
+				height: 0;
+			}
+			.mui-table-view-cell:last-child:after, .mui-table-view-cell:last-child:before {
+				height: 1px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的资料</h1>
+		</header>
+
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right jumpnew" href="change-account-info" data-key="username">
+						昵称<span>胸毛当地毯</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="showSexPicker">
+						性别<span>男</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id='pickDateBtn'>
+						生日<span>1996-02-10</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="showCityPicker">
+						地区<span>江苏 无锡</span>
+					</a>
+				</li>
+			</ul>
+			<div class="mui-card">
+				<div class="mui-card-header">介绍</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<textarea maxlength="140" placeholder="个人介绍..."></textarea>
+					</div>
+				</div>
+				<div class="mui-card-footer">140</div>
+			</div>
+			<ul class="mui-table-view" style="margin-top: 10px;">
+		        <li class="mui-table-view-cell">
+		            <a class="mui-navigate-right jumpnew" href="change-account-info" data-key="pwd">
+		                密码修改
+		            </a>
+		        </li>
+		    </ul>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.picker.min.js"></script>
+		<script src="js/mui.poppicker.js"></script>
+		<script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/public.js"></script>
+		<script>
+			openNewWindow();
+			
+			var birthday = "未填";
+			//生日picker
+			document.getElementById("pickDateBtn").addEventListener('tap', function() {
+				var dDate = new Date();
+				dDate.setFullYear(1990, 0, 1);
+				var minDate = new Date();
+				minDate.setFullYear(1920, 0, 1);
+				var maxDate = new Date();
+//				maxDate.setFullYear(2016, 11, 31);
+				plus.nativeUI.pickDate(function(e) {
+					var d = e.date;
+//					info.innerText = '您选择的日期是:' + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+					birthday = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+					mui.alert(birthday);
+				}, function(e) {
+//					info.innerText = "您没有选择日期";
+				}, {
+					title: "请选择日期",
+					date: dDate,
+					minDate: minDate,
+					maxDate: maxDate
+				});
+			})
+			
+			//性别picker
+			var sex = "未填";
+			var sexPicker = new mui.PopPicker();
+			sexPicker.setData([{
+				value: '男',
+				text: '男'
+			}, {
+				value: '女',
+				text: '女'
+			}]);
+			document.getElementById('showSexPicker').addEventListener('tap', function(event) {
+				sexPicker.show(function(items) {
+					sex = JSON.stringify(items[0]);
+					mui.alert(sex);
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+			
+			//地区picker
+			var city = "未填";
+			var cityPicker = new mui.PopPicker({
+				layer: 2
+			});
+			cityPicker.setData(cityData);
+			var showCityPickerButton = document.getElementById('showCityPicker');
+			showCityPickerButton.addEventListener('tap', function(event) {
+				cityPicker.show(function(items) {
+					city = "你选择的城市是:" + items[0].text + " " + items[1].text;
+					mui.alert(city);
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+		</script>
+	</body>
+
+</html>

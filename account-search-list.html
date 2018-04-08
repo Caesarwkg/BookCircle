@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>添加关注</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.title {
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			
+			.oa-contact-cell.mui-table .mui-table-cell {
+				padding: 11px 0;
+				vertical-align: middle;
+			}
+			
+			.oa-contact-cell {
+				position: relative;
+				margin: -11px 0;
+			}
+			
+			.oa-contact-avatar {
+				width: 75px;
+			}
+			
+			.oa-contact-avatar img {
+				width: 60px;
+				height: 60px;
+				border-radius: 50%;
+			}
+			
+			.oa-contact-content {
+				width: 100%;
+			}
+			
+			.oa-contact-name {
+				margin-right: 20px;
+			}
+			
+			.oa-contact-name,
+			.oa-contact-position {
+				float: left;
+			}
+			
+			.mui-content {
+				overflow: scroll;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 40px;
+				max-width: 80px;
+				height: 110px;
+			}
+			
+			a:active {
+				color: #000000;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav index-title">
+			<form class="mui-input-row mui-search" onsubmit="return false">
+				<input type="search" class="mui-input-clear" placeholder="搜索用户">
+			</form>
+		</header>
+		<div id="pullrefresh" class="mui-scroll-wrapper mui-content">
+			<div class="mui-scroll discover-section">
+				<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="scroll_list">
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-cell">
+							<div class="oa-contact-cell mui-table">
+								<div class="oa-contact-avatar mui-table-cell">
+									<img src="img/tx.png" />
+								</div>
+								<div class="oa-contact-content mui-table-cell">
+									<div class="mui-clearfix">
+										<h4 class="oa-contact-name">周猛</h4>
+									</div>
+									<p class="oa-contact-email mui-h6 mui-ellipsis">
+										yewenjie@sina.com
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			//			mui.plusReady(function() {
+
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+
+			var pageIndex = 1;
+			var totalnum = -1; //列表当前个数
+			var totalall = 0; //列表总个数
+
+			window.addEventListener('searchBooks', function(event) {
+				document.getElementById("scroll_list").innerHTML = "";
+				//				plus.webview.currentWebview().reload(true);
+				console.log(event.detail.searchValue);
+				if(mui.os.plus) {
+					mui.plusReady(function() {
+						setTimeout(function() {
+							mui('#pullrefresh').pullRefresh().pullupLoading();
+						}, 300);
+					});
+				} else {
+					mui.ready(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					});
+				}
+			});
+
+			function callback(err, list, isRefresh, result) {
+				var itemStr = "";
+				list.forEach(function(item) {
+					itemStr += `<li class="mui-table-view-cell mui-media" >
+							<div class="mui-slider-handle">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="${item.images.large}">
+									<div class="mui-media-body">
+										<div class="book-title mui-ellipsis-2">${item.title}</div>
+										<p>评分：${item.rating.average}</p>
+										<p class="mui-ellipsis-2">${item.author}  ${item.pubdate}  ${item.publisher}</p>
+									</div>
+								</a>
+							</div>
+
+						</li>`;
+				});
+
+				document.getElementById("scroll_list").innerHTML += itemStr;
+			}
+
+			function pullupRefresh() {
+				setTimeout(function() {
+					if(totalnum < totalall) {
+						getListByCallindex("search.json", pageIndex, callback, false);
+					}
+				}, 300);
+			}
+
+			function getListByCallindex(url, pageNo, callback, isRefresh) {
+				var scroll_list = [];
+				var scroll_url = config.url + url;
+				console.log(scroll_url);
+				console.log(scroll_url + "&userId=" + window.localStorage.getItem('userId') + "&start=" + pageNo + "&count=10");
+
+				mui.ajax({
+					url: scroll_url,
+					type: 'get',
+					dataType: 'json',
+					data: {
+						start: pageNo,
+						count: 10,
+					},
+					success: function(data) {
+						console.log(data)
+						if(callback instanceof Function) {
+							callback(null, data.books, isRefresh, data);
+							pageIndex++;
+						}
+					},
+					error: function(err) {
+						mui.toast("访问出错啦")
+					},
+					beforeSend: function() {},
+					complete: function() {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(totalnum == totalall);
+					}
+				})
+			}
+			//			})
+			//			}
+
+			//			window.addEventListener('searchBooks', function(event) {
+			//				console.log(event.detail.searchValue);
+			//				document.getElementById("scroll_list").innerHTML = "";
+			//				pullrefreshInit('search.json', function(err, list, isRefresh, result) {
+			//					var itemStr = "";
+			//					list.forEach(function(item) {
+			//						itemStr += `<li class="mui-table-view-cell mui-media" >
+			//									<div class="mui-slider-handle">
+			//										<a href="javascript:;">
+			//											<img class="mui-media-object mui-pull-left" src="${item.images.large}">
+			//											<div class="mui-media-body">
+			//												<div class="book-title mui-ellipsis-2">${item.title}</div>
+			//												<p>评分：${item.rating.average}</p>
+			//												<p class="mui-ellipsis-2">${item.author}  ${item.pubdate}  ${item.publisher}</p>
+			//											</div>
+			//										</a>
+			//									</div>
+			//
+			//								</li>`;
+			//					});
+			//
+			//					document.getElementById("scroll_list").innerHTML += itemStr;
+			//				});
+			//
+			//			})
+		</script>
+	</body>
+
+</html>
