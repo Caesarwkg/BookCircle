@@ -1,97 +1,131 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title></title>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
-    <style type="text/css">
-    	.mui-bar {
-			box-sizing: border-box;
-		}
-		.mui-action-menu  {
-			margin-right: 5px;
-		}
-		#search-cancle {
-			line-height: 44px;
-			text-decoration: underline;
-			visibility: hidden;
-			width: 60px;
-			text-align: right;
-		    margin-right: -10px;
-		    margin-left: -10px;
-		    padding-right: 10px;
-		    padding-left: 10px;
-		}
-		.index-title {
-			width: 100%;
-			/*display: block;*/
-			height: 44px;
-		}
-		.flex {
-			display: flex;
-		}
-    </style>
-</head>
-<body class="relative">
-	<header class="mui-bar mui-bar-nav">
-		<!--<div class="flex_x">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<style type="text/css">
+			.mui-bar {
+				box-sizing: border-box;
+			}
+			
+			.mui-action-menu {
+				margin-right: 5px;
+			}
+			
+			#search-cancle {
+				line-height: 44px;
+				text-decoration: underline;
+				visibility: hidden;
+				width: 60px;
+				text-align: right;
+				margin-right: -10px;
+				margin-left: -10px;
+				padding-right: 10px;
+				padding-left: 10px;
+			}
+			
+			.index-title {
+				width: 100%;
+				/*display: block;*/
+				height: 44px;
+			}
+			
+			.flex {
+				display: flex;
+			}
+			
+			.mui-title .mui-btn {
+				width: 80px;
+			}
+			
+			.mui-title .mui-btn.mui-active {
+				background-color: #2795D0;
+				border-color: #2795D0;
+				color: #fff;
+			}
+			
+			.mui-title .mui-btn:nth-child(1) {
+				border-bottom-left-radius: 17px;
+				border-top-left-radius: 17px;
+				border-bottom-right-radius: 0;
+				border-top-right-radius: 0;
+			}
+			
+			.mui-title .mui-btn:nth-child(2) {
+				border-bottom-left-radius: 0;
+				border-top-left-radius: 0;
+				border-bottom-right-radius: 17px;
+				border-top-right-radius: 17px;
+				margin-left: -1px;
+			}
+		</style>
+	</head>
+
+	<body class="relative">
+		<header class="mui-bar mui-bar-nav">
+			<!--<div class="flex_x">
 			<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left nav" id="left-menu"></a>
 			<form class="mui-input-row mui-search flex_x" id="search-input-form" style="flex:1">
 				<input type="search" class="mui-input-clear" id="search-input" placeholder="搜索图书">
 			</form>
 			<a href="javascript:;" id="search-cancle" >取消</a>
 		</div>-->
-		<div class="index-title flex">
-		    <a id="left-menu" class="mui-icon iconfont icon-gerenzhongxin  mui-pull-left nav" style="width: 60px;"></a>
-			<form class="mui-input-row mui-search" id="search-input-form" style="flex:1">
-				<input type="search" class="mui-input-clear" id="search-input" placeholder="搜索图书">
-			</form>
-			<a href="javascript:;" id="search-cancle" class="mui-pull-right" >取消</a>
-		</div>
-		<div class="index-title hide">
-		    <h1 class="mui-title">标题2</h1>
-		</div>
-		<div class="index-title hide">
-	    	<a class="mui-icon iconfont icon-friendadd mui-pull-left jumpnew" href="account-search-list"></a>
-		    <h1 class="mui-title">书友</h1>
-		</div>
-		<!--<div class="index-title hide">
+			<div class="index-title flex">
+				<a id="left-menu" class="mui-icon iconfont icon-gerenzhongxin  mui-pull-left nav" style="width: 60px;"></a>
+				<form class="mui-input-row mui-search" id="search-input-form" style="flex:1">
+					<input type="search" class="mui-input-clear" id="search-input" placeholder="搜索图书">
+				</form>
+				<a href="javascript:;" id="search-cancle" class="mui-pull-right">取消</a>
+			</div>
+			<div class="index-title hide">
+				<h1 class="mui-title">
+		    	<div class="mui-btn mui-btn-outlined mui-active">公共</div><div  class="mui-btn mui-btn-outlined">关注</div>
+		    </h1>
+				<a class="mui-icon iconfont icon-edit mui-pull-right"></a>
+			</div>
+			<div class="index-title hide">
+				<a class="mui-icon iconfont icon-friendadd mui-pull-left"></a>
+				<h1 class="mui-title">书友</h1>
+			</div>
+			<!--<div class="index-title hide">
 		</div>-->
-	</header> 
-	<nav class="mui-bar mui-bar-tab">
-		<a class="mui-tab-item mui-active" href="discover.html" data-titleNum='0'>
-			<span class="mui-icon iconfont icon-compass"></span>
-			<span class="mui-tab-label" title="" id="tab1">发现</span>
-		</a>
-		<a class="mui-tab-item" href="circle.html" id="tab2" data-titleNum='1'>
-			<span class="mui-icon iconfont icon-office"></span>
-			<span class="mui-tab-label" title="">书圈</span>
-		</a>
-		<a class="mui-tab-item" href="contact-list.html" id="tab3" data-titleNum='2'>
-			<span class="mui-icon iconfont icon-comments"></span>
-			<span class="mui-tab-label" title="">书友</span>
-		</a>
-		<!--<a class="mui-tab-item" href="account.html" id="tab4" data-titleNum='3'>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="discover.html" data-titleNum='0'>
+				<span class="mui-icon iconfont icon-compass"></span>
+				<span class="mui-tab-label" title="" id="tab1">发现</span>
+			</a>
+			<a class="mui-tab-item" href="circle-list.html" id="tab2" data-titleNum='1'>
+				<span class="mui-icon iconfont icon-office"></span>
+				<span class="mui-tab-label" title="">书圈</span>
+			</a>
+			<a class="mui-tab-item" href="contact-list.html" id="tab3" data-titleNum='2'>
+				<span class="mui-icon iconfont icon-email"></span>
+				<span class="mui-tab-label" title="">书友</span>
+			</a>
+			<!--<a class="mui-tab-item" href="account.html" id="tab4" data-titleNum='3'>
 			<span class="mui-icon iconfont icon-account"></span>
 			<span class="mui-tab-label" title="" >我的</span>
 		</a>-->
-	</nav>
-	
-	<script src="js/mui.min.js"></script>
-	<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript">
-		mui.init({
+		</nav>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init({
 				statusBarBackground: '#f1f1ed'
 			});
 			var subpages = ['discover.html',
-				'circle.html',
+				'circle-list.html',
 				'contact-list.html',
-//				'account.html'
+				//				'account.html'
 			];
 			var subpage_style = {
 				top: '45px',
@@ -108,7 +142,6 @@
 			var aniShow = {};
 			var menu = null;
 			var _self;
-			
 
 			//初始化，并预加载webview模式的选项卡			
 			function preload() {
@@ -138,13 +171,15 @@
 				//					plus.navigator.setStatusBarBackground("#f1f1ed");
 				//				plus.navigator.setStatusBarStyle('UIStatusBarStyleBlackOpaque');
 				_self = plus.webview.currentWebview();
-				_self.addEventListener('maskClick', function(){
+				_self.addEventListener('maskClick', function() {
 					closeMenu();
-					_self.setStyle({mask:'none'});
-				},false);
+					_self.setStyle({
+						mask: 'none'
+					});
+				}, false);
 				//开启回弹
 				_self.setStyle({
-//					bounce: "all",//窗口遇到边框是否有反弹效果
+					//					bounce: "all",//窗口遇到边框是否有反弹效果
 					popGesture: 'none' //首页有侧滑菜单，因此屏蔽首页的侧滑关闭功能
 				});
 				for(var i = 0; i < 4; i++) {
@@ -158,7 +193,7 @@
 					}
 					_self.append(sub);
 				}
-				
+
 				var first = null;
 				mui.back = function() {
 					//首次按键，提示‘再按一次退出应用’
@@ -174,23 +209,23 @@
 						}
 					}
 				}
-					
+
 				//图书搜索webview
 				var searchTab = searchTab = plus.webview.create(searchpages[0], subpages[0], searchpage_style);
 				//标志位，图书搜索列表页是否已经展示
 				var flag_search = false;
-				document.getElementById("search-input").addEventListener('focus',function() {
+				document.getElementById("search-input").addEventListener('focus', function() {
 					if(!flag_search) {
 						plus.webview.hide(subpages[0]);
 						plus.webview.show(searchTab);
 						document.getElementById("left-menu").style.visibility = 'hidden';
 						document.getElementById("search-cancle").style.visibility = 'visible';
 						flag_search = true;
-					}else {
+					} else {
 						flag_search = false;
 					}
 				});
-				document.getElementById("search-cancle").addEventListener('tap',function() {
+				document.getElementById("search-cancle").addEventListener('tap', function() {
 					if(flag_search) {
 						plus.webview.hide(searchTab);
 						plus.webview.show(subpages[0]);
@@ -201,22 +236,22 @@
 						document.getElementById("search-cancle").style.visibility = 'hidden';
 						searchTab.evalJS("plus.webview.currentWebview().reload();");
 						flag_search = false;
-					}else {
+					} else {
 						flag_search = true;
 					}
 				});
 				document.getElementById("search-input-form").onsubmit = function() {
 					var searchValue = document.getElementById("search-input").value;
-					localStorage.setItem("searchValue",searchValue); 
-					mui.fire(searchTab,'searchBooks',{
-					    searchValue:searchValue
-					  });
+					localStorage.setItem("searchValue", searchValue);
+					mui.fire(searchTab, 'searchBooks', {
+						searchValue: searchValue
+					});
 					document.getElementById("search-input").blur();
 					return false;
 				}
-				
+
 			})
-			
+
 			//设置
 			/*mui(".setting")[0].addEventListener('tap',function() {
 				openWindow("view_others/settings",'');
@@ -230,32 +265,9 @@
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var targetTab = this.getAttribute('href');
 				var targetTitleNum = this.getAttribute('data-titleNum');
-//				if(targetTab != "view_sy/home.html") {
-//					mui(".nav")[0].style.display = "none";
-//				} else if(targetTab == "view_sy/home.html") {
-//					mui(".nav")[0].style.display = "block";
-//				}
-//				if(targetTab == "view_mine/mine.html") {
-//					mui(".header")[0].style.backgroundColor = "#086bd3";
-//					mui(".header")[0].style.borderColor = "#086bd3";
-//					mui(".mui-title")[0].style.color = "#fff";
-////					plus.navigator.setStatusBarBackground("#055ec5");
-//					mui(".setting")[0].style.display = "block";
-//				} else {
-//					mui(".header")[0].style.backgroundColor = "#f1f1ed";
-//					mui(".header")[0].style.borderColor = "#ccc";
-//					mui(".mui-title")[0].style.color = "#000";
-////					plus.navigator.setStatusBarBackground("#f1f1ed");
-//					mui(".setting")[0].style.display = "none";
-//				}
-				if(targetTab == "account.html") {
-					
-				}
 				if(targetTab == activeTab) {
 					return;
 				}
-				//更换标题
-				//title.innerHTML = this.querySelector('.mui-tab-label').getAttribute('title');
 				//显示目标选项卡
 				if(mui.os.ios || aniShow[targetTab]) {
 					plus.webview.show(targetTab);
@@ -278,19 +290,19 @@
 			mui('.mui-bar-tab').on('doubletap', 'a', function(e) {
 				if(doubletapLock) {
 					return;
-				}else {
+				} else {
 					doubletapLock = true;
-					setTimeout(function(){
+					setTimeout(function() {
 						doubletapLock = false;
-					},1000*2);	//加个两秒钟的双击锁
+					}, 1000 * 2); //加个两秒钟的双击锁
 					var targetTab = this.getAttribute('href');
-				    var  contentWebview = plus.webview.getWebviewById(targetTab);
-	 			 	contentWebview.evalJS("plus.webview.currentWebview().reload();");
+					var contentWebview = plus.webview.getWebviewById(targetTab);
+					contentWebview.evalJS("plus.webview.currentWebview().reload();");
 				}
 			});
-			window.addEventListener("tabmore",function(e){
-				var tab=e.detail.tabnum;
-				var defaultTab = document.getElementById("tab"+tab);
+			window.addEventListener("tabmore", function(e) {
+				var tab = e.detail.tabnum;
+				var defaultTab = document.getElementById("tab" + tab);
 				mui.trigger(defaultTab, 'tap');
 				//切换选项卡高亮
 				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
@@ -298,23 +310,42 @@
 					current.classList.remove('mui-active');
 					defaultTab.classList.add('mui-active');
 				}
-			
+
 			})
 			mui(".nav")[0].addEventListener("click", function(e) {
-				var  _left = parseInt(_self.getStyle().left);
+				var _left = parseInt(_self.getStyle().left);
 				if(_left > 0) { //处于显示状态
 					closeMenu();
 				} else {
 					openMenu();
 				}
 			}, false);
-			
+
+			mui(".icon-friendadd")[0].addEventListener('tap', function() {
+				mui.openWindow({
+					id: "account-search-list.html",
+					url: "account-search-list.html",
+					styles: {
+						popGesture: "close"
+					},
+					show: {
+						autoshow: false,
+						aniShow: "slide-in-bottom"
+					},
+					waiting: {
+						autoShow: true
+					}
+				});
+			});
+
 			/**
 			 * 显示侧滑菜单
 			 */
 			function openMenu() {
-				plus.webview.currentWebview().setStyle({mask:'rgba(0,0,0,0.5)'});
-//				mui.createMask
+				plus.webview.currentWebview().setStyle({
+					mask: 'rgba(0,0,0,0.5)'
+				});
+				//				mui.createMask
 				plus.webview.startAnimation({
 						'view': _self,
 						'styles': {
@@ -357,18 +388,17 @@
 						'action': 'show'
 					},
 					function(e) {
-//						console.log(JSON.stringify(e));
+						//						console.log(JSON.stringify(e));
 						if(e.id == _self.id) {
-//							mask.close();//关闭遮罩
+							//							mask.close();//关闭遮罩
 						}
 					}.bind(this)
 				)
 			};
-		
-			
+
 			openNewWindow();
 			atap();
-			
-	</script>
-</body>
+		</script>
+	</body>
+
 </html>

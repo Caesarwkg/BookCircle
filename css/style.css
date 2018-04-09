@@ -215,10 +215,10 @@ li{
 	background-color: #1898dc;
 }*/
 
-.mui-btn-outlined {
+/*.mui-btn-outlined {
 	color: #1898dc;
 	border-color: #1898dc;
-}
+}*/
 
 .white {
 	color: #fff;
@@ -745,7 +745,12 @@ header h1 {
 	width: 100%;
 	z-index: 9;
 }
-
+.flex {
+	display: flex;
+}
+.flex_1 {
+	flex: 1;
+}
 .flex_x {
 	width: 100%;
 	display: flex;

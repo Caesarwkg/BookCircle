@@ -68,14 +68,21 @@
 			a:active {
 				color: #000000;
 			}
+			.flex {
+				display: flex;
+			}
+			u {
+				font-size: 16px;
+			}
 		</style>
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav index-title">
-			<form class="mui-input-row mui-search" onsubmit="return false">
+		<header class="mui-bar mui-bar-nav index-title flex">
+			<form class="mui-input-row mui-search" onsubmit="return false" style="flex: 1;">
 				<input type="search" class="mui-input-clear" placeholder="搜索用户">
 			</form>
+		    <a class="mui-action-back mui-icon mui-pull-right">&nbsp;&nbsp;<u>取消</u></a>
 		</header>
 		<div id="pullrefresh" class="mui-scroll-wrapper mui-content">
 			<div class="mui-scroll discover-section">
