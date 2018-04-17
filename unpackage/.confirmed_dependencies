@@ -1,1 +1,30 @@
-null
+{
+	"login.html": {
+		"refer": [
+			"regist.html",
+			"index.html"
+		]
+	},
+	"index.html": {
+		"resources": [
+			"discover.html"
+		],
+		"refer": [
+			"contact-list.html",
+			"circle-list.html",
+			"book-search-list.html",
+			"index-menu.html",
+			"discover.html"
+		]
+	},
+	"index-menu.html": {
+		"refer": [
+			"account.html"
+		]
+	},
+	"regist.html": {
+		"refer": [
+			"index.html"
+		]
+	}
+}

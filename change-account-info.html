@@ -7,8 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link href="css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link href="css/mui.min.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
 		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
 		<style type="text/css">
 			u {
@@ -16,6 +16,35 @@
 			}
 			.mui-input-group {
 				margin-top: 10px;
+			}
+			.avatar-list {
+				width: 100%;
+				display: flex;
+				flex-wrap: wrap;
+  				align-items: center;
+  				justify-content: space-between;
+			}
+			.avatar-item {
+				box-sizing: border-box;
+				padding: 15px;
+				width: 30%;
+				position: relative;
+				
+			}
+			.avatar-item img {
+				width: 100%;
+			}
+			.avatar-item .mui-icon {
+				display: none;
+				position: absolute;
+				top: 0px;
+				right: 0px;
+				color: #086BD3;
+				font-size: 28px;
+				font-weight: bolder;
+			}
+			.avatar-item:hover .mui-icon {
+				display: block;
 			}
 		</style>
 	</head>
@@ -65,6 +94,45 @@
 											</div>
 										</div>`;
 			    		break;
+		    		case "avatar":
+		    			title.innerHTML = "选择头像";
+		    			body.innerHTML = `<div class="mui-card">
+											<div class="mui-card-header">男</div>
+											<div class="mui-card-content">
+												<div class="mui-card-content-inner">
+													<ul class="avatar-list">
+														<li class="avatar-item"><img src="img/avatar/m_01.png" data-id="mg/avatar/m_01.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/m_02.png" data-id="mg/avatar/m_02.png"/><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/m_03.png" data-id="mg/avatar/m_03.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/m_04.png" data-id="mg/avatar/m_04.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/m_05.png" data-id="mg/avatar/m_05.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/m_06.png" data-id="mg/avatar/m_06.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/m_07.png" data-id="mg/avatar/m_07.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/m_08.png" data-id="mg/avatar/m_08.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/m_09.png" data-id="mg/avatar/m_09.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="mui-card">
+											<div class="mui-card-header">女</div>
+											<div class="mui-card-content">
+												<div class="mui-card-content-inner">
+													<ul class="avatar-list">
+														<li class="avatar-item"><img src="img/avatar/w_01.png" data-id="mg/avatar/w_01.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/w_02.png" data-id="mg/avatar/w_02.png"/><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/w_03.png" data-id="mg/avatar/w_03.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/w_04.png" data-id="mg/avatar/w_04.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/w_05.png" data-id="mg/avatar/w_05.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/w_06.png" data-id="mg/avatar/w_06.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/w_07.png" data-id="mg/avatar/w_07.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/w_08.png" data-id="mg/avatar/w_08.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+														<li class="avatar-item"><img src="img/avatar/w_09.png" data-id="mg/avatar/w_09.png" /><span class="mui-icon iconfont icon-selected"></span></li>
+													</ul>
+												</div>
+											</div>
+										</div>`;
+		    			break;
 			    }
 			    
 			    

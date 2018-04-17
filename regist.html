@@ -39,31 +39,115 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-mobilephone"></span></label>
-						<input type="number" class="mui-input-clear" placeholder="手机号">
+						<input id="phoneNumber" type="number" class="mui-input-clear" placeholder="手机号">
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-account"></span></label>
-						<input type="text" class="mui-input-clear" placeholder="昵称">
+						<input id="nickName" type="text" class="mui-input-clear" placeholder="昵称">
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-password"></span></label>
-						<input type="password" class="mui-input-clear" placeholder="密码">
+						<input id="password" type="password" class="mui-input-clear" placeholder="密码">
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-password"></span></label>
-						<input type="password" class="mui-input-clear" placeholder="确认密码">
+						<input id="password2" type="password" class="mui-input-clear" placeholder="确认密码">
 					</div>
 				</form>
 				<br />
 				<div class="mui-button-row">
-			        <button type="button" class="mui-btn mui-btn-primary mui-btn-block" >立即注册</button>
+			        <button id="registerBtn" type="button" class="mui-btn mui-btn-primary mui-btn-block" data-loading-text="注册中..."  data-locked='unlocked' >立即注册</button>
 			   </div>
 		       
 			</div>
 			
 		</div>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			
+			mui.plusReady(function() {
+				//开启封装的打开新窗口函数
+				openNewWindow();
+				
+				document.getElementById('registerBtn').addEventListener('tap',function () {
+			        var  _this = this;
+					if(_this.dataset.locked == 'locked') {
+						return;
+					}else {
+						_this.dataset.locked = 'locked';
+					}
+					//手机号码
+					var phoneNumber = document.getElementById("phoneNumber").value;
+					//用户名
+					var nickName =document.getElementById("nickName").value;
+					//密码
+					var password = document.getElementById("password").value;
+					//确认密码
+					var password2 = document.getElementById("password2").value;
+					
+					//非空判断
+					if (!(phoneNumber && nickName && password && password2)) {
+						mui.toast("信息请填写完整哦~");
+						_this.dataset.locked = 'unlocked';
+						return;
+					} else {
+						
+						if(!config.phoneReg.test(phoneNumber)) {
+							//手机号验证
+							mui.toast("手机号格式错误~");
+							_this.dataset.locked = 'unlocked';
+							return;
+						} else if(!(password == password2)) {
+							//确认密码
+							mui.toast("两次密码不一致哦~");
+							_this.dataset.locked = 'unlocked';
+							return;
+						} else {
+							
+							var _data = {
+								"phoneNumber": phoneNumber,
+								"password": password,
+								"nickName": nickName
+							}
+							
+							//开始注册
+							mui(_this).button('loading');//切换为loading状态
+							muiPost(api.userRegister, _data, function(data){
+								_this.dataset.locked = 'unlocked';
+								mui(_this).button('reset');//切换为reset状态(即重置为原始的button)
+								
+								//注册成功
+								if(data.errorCode == "0"){
+									var btnArray = ['否', '是'];
+									mui.confirm('是否直接登录？', '注册成功啦！', btnArray, function(e) {
+										//直接登录
+										if (e.index == 1) {
+											muiPost(api.userLogin,{"phoneNumber": phoneNumber,"password": password},function(data){
+												if(data.errorCode == "0"){
+													
+													
+													
+													openWindow("index");
+												}else {
+													mui.alert(data.errorMsg, "登录失败");
+												}
+											})
+										//返回登录页
+										} else {
+											mui.back();
+										}
+									})
+								} else {
+									//注册失败
+									mui.alert(data.errorMsg, "注册失败");
+								}
+								
+							})
+						}
+					}
+					
+				})
+				
+			})
 		</script>
 	</body>
 

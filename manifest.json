@@ -1,7 +1,7 @@
 {
 	"@platforms": ["android", "iPhone", "iPad"],
 	"id": "H5522A02E",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "Bookworm",/*应用名称，程序桌面图标名称*/
+	"name": "BookCircle",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "1.0.0",/*应用版本名称*/
 		"code": "83"
@@ -124,6 +124,88 @@
 					"xxhdpi": ""
 				}
 			}
+		}
+	},
+	"dependencies": {
+		"pages": {
+			"login.html": {
+				"resources": [],
+				"refer": [
+					"regist.html",
+					"index.html"
+				],
+				"priority": 0
+			},
+			"index.html": {
+				"resources": [
+					"discover.html"
+				],
+				"refer": [
+					"contact-list.html",
+					"circle-list.html",
+					"book-search-list.html",
+					"index-menu.html"
+				],
+				"priority": 0
+			},
+			"index-menu.html": {
+				"resources": [],
+				"refer": [
+					"account.html"
+				],
+				"priority": 0
+			},
+			"regist.html": {
+				"resources": [],
+				"refer": [
+					"index.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"js/mui.picker.min.js",
+				"js/public.js",
+				"img/index-banner.png",
+				"img/cebg-index.jpg",
+				"js/swiper.min.js",
+				"js/mui.lazyload.img.js",
+				"img/logo.jpg",
+				"book-list.html",
+				"js/mui.min.js",
+				"account-search-list.html",
+				"js/mui.poppicker.js",
+				"css/iconfont.css",
+				"fonts/iconfont.ttf",
+				"img/index-banner3.png",
+				"css/mui.poppicker.css",
+				"css/mui.picker.min.css",
+				"js/mui.js",
+				"js/city.data.js",
+				"img/tx.png",
+				"account-info.html",
+				"README.md",
+				"book-detail.html",
+				"feedback.html",
+				"img/lazy.jpg",
+				"fonts/mui.ttf",
+				"css/style.css",
+				"js/mui.lazyload.js",
+				"css/mui.css",
+				"followers-list.html",
+				"search.json",
+				"img/index-banner2.png",
+				"following-list.html",
+				"img/book.jpg",
+				"img/mine-bg.png",
+				"doubanlink.html",
+				"css/mui.min.css",
+				"css/swiper.min.css",
+				"img/yuantiao.jpg",
+				"change-account-info.html",
+				"img/logo.png"
+			]
 		}
 	}
 }

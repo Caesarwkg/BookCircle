@@ -1724,6 +1724,7 @@ header .mui-segmented-control .mui-control-item{
 	color: #007AFF
 }
 .login .login_bottom {
+	display: none;
 	width: 100%;
 	position: absolute;
 	bottom: 0;

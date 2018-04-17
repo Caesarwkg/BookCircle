@@ -11,14 +11,17 @@ mui.init({
 });
 
 var config = {
-	url: '', //豆瓣
-	url1: 'http://huishan.05oa.com:55555/mobile/hssfj/', //刘铮清
+	url: 'http://104.194.94.3:3002/bookcircle/',
 	phoneReg: /^1[3|4|5|8][0-9]\d{4,8}$/,
 }
 
-//http://huishan.05oa.com:55555/
-//http://192.168.0.43:88/ 刘镇涛
-//http://192.168.0.48:88/ 刘铮清
+var api = {
+	userRegister : config.url + "user/register",
+	userLogin : config.url + "user/login",
+	userUpdate : config.url + "user/update",
+}
+
+
 // 产生一个随机数
 function getUid() {
 	return Math.floor(Math.random() * 100000000 + 10000000).toString();
@@ -109,7 +112,7 @@ function openNewWindow() {
 		var title = this.getAttribute('data-title');
 		var length = tohref.split("/").length;
 		var urlid = tohref.split("/")[length - 1];
-		console.log("openNewWindow--------" + urlid, tohref);
+		console.log("openNewWindow=====>" + urlid, tohref);
 		mui.openWindow({
 			id: urlid,
 			url: tohref,
@@ -304,30 +307,42 @@ function getDetailById(url, id, callback) {
 		}
 	})
 }
-
-function muiGet(url, callback, type) {
-	
-	var urlget = config.url + url;
-	console.log(urlget);
-	if(type) {
-		type = 'post';
-	} else {
-		type = 'get';
-	}
-	console.log(urlget + "&userId=" + window.localStorage.getItem('userId'));
+//ajax post
+function muiPost(url, data, callback) {
+	console.log("ajax:post====>" + url);	
 	mui.ajax({
-		url: urlget,
-		type: type,
-		data: {
-			//userId:"w8vhr8nqtdpb"
-			userId: window.localStorage.getItem('userId')
-		},
+		url: url,
+		type: 'post',
+		data: data,
 		dataType: 'json',
 		success: function(data) {
-//			console.log(data);
+			console.log(data);
 			if(callback instanceof Function) {
-				var result = data;
-				callback(result);
+				callback(data);
+			}
+		},
+		error: function(err) {
+			mui.toast("访问出错啦")
+		},
+		beforeSend: function() {
+			//			plus.nativeUI.showWaiting('等待中');
+		},
+		complete: function() {
+			//			plus.nativeUI.closeWaiting();
+		}
+	})
+}
+//ajax get
+function muiGet(url, callback) {
+	console.log("ajax:get====>" + url);	
+	mui.ajax({
+		url: url,
+		type: 'get',
+		dataType: 'json',
+		success: function(data) {
+			console.log(data);
+			if(callback instanceof Function) {
+				callback(data);
 			}
 		},
 		error: function(err) {

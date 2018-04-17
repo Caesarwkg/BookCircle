@@ -33,15 +33,15 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-mobilephone"></span></label>
-						<input type="number" class="mui-input-clear" placeholder="手机号">
+						<input id="phoneNumber" type="number" class="mui-input-clear" placeholder="手机号" value="15262757893">
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-password"></span></label>
-						<input type="password" class="mui-input-password" placeholder="密码">
+						<input id="password" type="password" class="mui-input-password" placeholder="密码" value="123">
 					</div>
 				</form>
 				<div class="mui-button-row">
-			        <button type="button" class="mui-btn mui-btn-primary mui-btn-block jumpnew" href='index' >登录</button>
+			        <button id="loginBtn" type="button" class="mui-btn mui-btn-primary mui-btn-block" data-loading-text="登录中..."  data-locked='unlocked' >登录</button>
 			   </div>
 		        <div class="mui-link-row"><a>忘记密码?</a><a href="regist" class="jumpnew" >注册账号</a></div>
 			</div>
@@ -55,7 +55,71 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			openNewWindow();
+			mui.plusReady(function() {
+				//开启封装的打开新窗口函数
+				openNewWindow();
+				
+				//清除缓存
+				window.addEventListener('refresh0', function() {
+					document.getElementById("phoneNumber").value = '';
+					document.getElementById("password").value = '';
+				})
+				
+				document.getElementById("phoneNumber").value;
+				document.getElementById('loginBtn').addEventListener('tap',function () {
+					var  _this = this;
+					if(_this.dataset.locked == 'locked') {
+						return;
+					}else {
+						_this.dataset.locked = 'locked';
+					}
+					//手机号码
+					var phoneNumber = document.getElementById("phoneNumber").value;
+					//密码
+					var password = document.getElementById("password").value;
+					
+					if (!(phoneNumber && password)) {
+						//信息完整验证
+						mui.toast("信息请填写完整哦~");
+						_this.dataset.locked = 'unlocked';
+						return;
+					} else {
+						if (!config.phoneReg.test(phoneNumber)) {
+							//手机号格式验证
+							mui.toast("手机号格式不对哦~");
+							_this.dataset.locked = 'unlocked';
+							return;
+						} else {
+							
+							var _data = {
+								"phoneNumber": phoneNumber,
+								"password": password
+							}
+							console.log(_data);
+							//开始登录
+							mui(_this).button('loading');//切换为loading状态
+							muiPost(api.userLogin, _data, function(data){
+								_this.dataset.locked = 'unlocked';
+								mui(_this).button('reset');//切换为reset状态(即重置为原始的button)
+								
+								//登录成功
+								if(data.errorCode == 0) {
+									//暂存用户信息到本地
+									window.localStorage.setItem("phoneNumber", phoneNumber);
+									window.localStorage.setItem("password", password);
+									
+									//跳转到到主页
+									openWindow("index");
+								} else {
+									mui.alert(data.errorMsg,"登录失败")
+								}
+							})
+						}
+					}
+				})
+				
+				
+			})
 		</script>
 	</body>
 
