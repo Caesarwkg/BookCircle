@@ -64,14 +64,21 @@
 				}
 			});
 			
-			var pageIndex = 1;
-			var totalnum = -1; //列表当前个数
-			var totalall = 0; //列表总个数
+			openBookDetail();
 
+			var pageIndex = 1;
+			var upRefreshFlag = true;//上拉加载标志位。为true则执行刷新
+			var searchValue = "";
+			
 			window.addEventListener('searchBooks', function(event) {
+				
 				document.getElementById("scroll_list").innerHTML = "";
-//				plus.webview.currentWebview().reload(true);
-				console.log(event.detail.searchValue);
+				pageIndex = 1;
+				upRefreshFlag = true;
+				searchValue = event.detail.searchValue;
+				
+				console.log(searchValue);
+				
 				if(mui.os.plus) {
 					mui.plusReady(function() {
 						setTimeout(function() {
@@ -85,22 +92,22 @@
 				}
 			});
 
-			function callback(err, list, isRefresh, result) {
+			function callback(list) {
 				var itemStr = "";
 				list.forEach(function(item) {
-					itemStr += `<li class="mui-table-view-cell mui-media" >
-							<div class="mui-slider-handle">
-								<a href="javascript:;">
-									<img class="mui-media-object mui-pull-left" src="${item.images.large}">
-									<div class="mui-media-body">
-										<div class="book-title mui-ellipsis-2">${item.title}</div>
-										<p>评分：${item.rating.average}</p>
-										<p class="mui-ellipsis-2">${item.author}  ${item.pubdate}  ${item.publisher}</p>
-									</div>
-								</a>
-							</div>
+					itemStr += '<li class="mui-table-view-cell mui-media book-detail" data-key="' + item.isbn + '" >'+
+							'<div class="mui-slider-handle">'+
+								'<a href="javascript:;">'+
+									'<img alt="暂无图片" class="mui-media-object mui-pull-left" src="'+item.images.large+'">'+
+									'<div class="mui-media-body">'+
+										'<div class="book-title mui-ellipsis-2">'+item.title+'</div>'+
+										'<p>评分：'+item.rating+'</p>'+
+							            '<p class="mui-ellipsis-2">'+ item.author +' / '+ item.pubdate +' / '+ item.publisher +'</p>'+
+									'</div>'+
+								'</a>'+
+							'</div>'+
 
-						</li>`;
+						'</li>';
 				});
 
 				document.getElementById("scroll_list").innerHTML += itemStr;
@@ -108,30 +115,33 @@
 
 			function pullupRefresh() {
 				setTimeout(function() {
-					if(totalnum < totalall) {
-						getListByCallindex("search.json", pageIndex, callback, false);
+					if(upRefreshFlag) {
+						getListByCallindex(api.bookSearch, pageIndex, callback);
 					}
 				}, 300);
 			}
 
-			function getListByCallindex(url, pageNo, callback, isRefresh) {
-				var scroll_list = [];
-				var scroll_url = config.url + url;
-				console.log(scroll_url);
-				console.log(scroll_url + "&userId=" + window.localStorage.getItem('userId') + "&start=" + pageNo + "&count=10");
-
+			function getListByCallindex(url, pageNo, callback) {
 				mui.ajax({
-					url: scroll_url,
+					url: url,
 					type: 'get',
 					dataType: 'json',
 					data: {
-						start: pageNo,
-						count: 10,
+						keyWord : searchValue,
+						pageIndex : pageNo
 					},
 					success: function(data) {
 						console.log(data)
+						if(data.errorCode != 0) {
+							mui.alert(data.errorMsg, "出错啦...");
+							return;
+						}
 						if(callback instanceof Function) {
-							callback(null, data.books, isRefresh, data);
+							//当数据少于10条时，结束上拉加载
+							if(data.data.length < 10){
+								upRefreshFlag = false;
+							}
+							callback(data.data);
 							pageIndex++;
 						}
 					},
@@ -140,38 +150,12 @@
 					},
 					beforeSend: function() {},
 					complete: function() {
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh(totalnum == totalall);
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(!upRefreshFlag);
 					}
 				})
 			}
-//			})
-			//			}
 
-			//			window.addEventListener('searchBooks', function(event) {
-			//				console.log(event.detail.searchValue);
-			//				document.getElementById("scroll_list").innerHTML = "";
-			//				pullrefreshInit('search.json', function(err, list, isRefresh, result) {
-			//					var itemStr = "";
-			//					list.forEach(function(item) {
-			//						itemStr += `<li class="mui-table-view-cell mui-media" >
-			//									<div class="mui-slider-handle">
-			//										<a href="javascript:;">
-			//											<img class="mui-media-object mui-pull-left" src="${item.images.large}">
-			//											<div class="mui-media-body">
-			//												<div class="book-title mui-ellipsis-2">${item.title}</div>
-			//												<p>评分：${item.rating.average}</p>
-			//												<p class="mui-ellipsis-2">${item.author}  ${item.pubdate}  ${item.publisher}</p>
-			//											</div>
-			//										</a>
-			//									</div>
-			//
-			//								</li>`;
-			//					});
-			//
-			//					document.getElementById("scroll_list").innerHTML += itemStr;
-			//				});
-			//
-			//			})
+//	})
 		</script>
 	</body>
 

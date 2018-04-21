@@ -33,7 +33,7 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-mobilephone"></span></label>
-						<input id="phoneNumber" type="number" class="mui-input-clear" placeholder="手机号" value="15262757893">
+						<input id="phoneNumber" type="number" class="mui-input-clear" placeholder="手机号" value="15262757899">
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-password"></span></label>
@@ -104,10 +104,11 @@
 								
 								//登录成功
 								if(data.errorCode == 0) {
-									//暂存用户信息到本地
-									window.localStorage.setItem("phoneNumber", phoneNumber);
-									window.localStorage.setItem("password", password);
-									
+									//保存信息至本地
+									localStorage.setItem("phoneNumber",data.data.phoneNumber);
+									localStorage.setItem("password",data.data.password);
+									localStorage.setItem("nickName",data.data.nickName);
+									localStorage.setItem("userId",data.data.id);
 									//跳转到到主页
 									openWindow("index");
 								} else {

@@ -56,7 +56,7 @@
 			#swiper-newbooks .swiper-slide img ,#swiper-hotbooks .swiper-slide img ,.mui-table-view .mui-media-object{
 				border-radius: 3px;
 			}
-			#swiper-newbooks .swiper-slide>div {
+			#swiper-newbooks .swiper-slide>div, #swiper-hotbooks .swiper-slide>div {
 				width: 100%;
 			}
 			.book-title {
@@ -114,7 +114,7 @@
 
 	<body>
 		
-		<div id="refresh" class="mui-scroll-wrapper mui-content">
+		<div id="pullrefresh" class="mui-scroll-wrapper mui-content">
 			<div class="mui-scroll">
 				<!-- Swiper -->
 				<div class="swiper-container" id="swiper-banner">
@@ -128,145 +128,29 @@
 				</div>
 
 				<div class="discover-section">
-					<div class="section-title">新书速递<a class="more-books jumpnew" href="book-list">全部20<span class="mui-icon iconfont icon-more"></span></a></div>
+					<div class="section-title">新书速递<a class="more-books jumpnew" href="book-list" data-key="new">全部<span id="newTotal"></span>本<span class="mui-icon iconfont icon-more"></span></a></div>
 					<!-- Swiper -->
 					<div class="swiper-container" id="swiper-newbooks">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide jumpnew" href='book-detail' data-key="25862578">
-								<div>
-									<img src="https://img3.doubanio.com/lpic/s27264182.jpg" /><br />
-									<div class="book-title mui-ellipsis">解忧杂货店</div>
-									<p>评分：4.7</p>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div>
-									<img src="https://img3.doubanio.com/lpic/s27264183.jpg" /><br />
-									<div class="book-title mui-ellipsis">解忧杂货店</div>
-									<p>评分：4.7</p>
-								</div>
-							</div><div class="swiper-slide">
-								<div>
-									<img src="https://img3.doubanio.com/lpic/s27264181.jpg" /><br />
-									<div class="book-title mui-ellipsis">解忧杂货店</div>
-									<p>评分：4.7</p>
-								</div>
-							</div><div class="swiper-slide">
-								<div>
-									<img src="https://img3.doubanio.com/lpic/s27264181.jpg" /><br />
-									<div class="book-title mui-ellipsis">解忧杂货店</div>
-									<p>评分：4.7</p>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
 				
 				<div class="discover-section">
-					<div class="section-title">热门畅销<a class="more-books jumpnew" href="book-list">全部20<span class="mui-icon iconfont icon-more"></span></a></div>
+					<div class="section-title">热门畅销<a class="more-books jumpnew" href="book-list" data-key="hot">全部<span id="hotTotal"></span>本<span class="mui-icon iconfont icon-more"></span></a></div>
 					<!-- Swiper -->
 					<div class="swiper-container" id="swiper-hotbooks">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<div>
-									<img src="https://img3.doubanio.com/lpic/s27264181.jpg" /><br />
-									<div class="book-title mui-ellipsis">解忧杂货店</div>
-									<p>评分：4.7</p>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div>
-									<img src="https://img3.doubanio.com/lpic/s27264181.jpg" /><br />
-									<div class="book-title mui-ellipsis">解忧杂货店</div>
-									<p>评分：4.7</p>
-								</div>
-							</div><div class="swiper-slide">
-								<div>
-									<img src="https://img3.doubanio.com/lpic/s27264181.jpg" /><br />
-									<div class="book-title mui-ellipsis">解忧杂货店</div>
-									<p>评分：4.7</p>
-								</div>
-							</div><div class="swiper-slide">
-								<div>
-									<img src="https://img3.doubanio.com/lpic/s27264181.jpg" /><br />
-									<div class="book-title mui-ellipsis">解忧杂货店</div>
-									<p>评分：4.7</p>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
 				
 				<div class="discover-section">
 					<div class="section-title">为你推荐</div>
-					<ul class="mui-table-view" id="OA_task">
-						
-					    <li class="mui-table-view-cell mui-media">
-					    	<div class="mui-slider-right mui-disabled">
-								<a class="mui-btn mui-btn-red">不感兴趣</a>
-							</div>
-					    	<div class="mui-slider-handle">
-						        <a href="javascript:;">
-						            <img class="mui-media-object mui-pull-left" src="https://img3.doubanio.com/lpic/s27264181.jpg">
-						            <div class="mui-media-body">
-						               <div class="book-title mui-ellipsis-2">解忧杂货店</div>
-						                <p>评分：4.7</p>
-						                <p class="mui-ellipsis-2">[日] 东野圭吾 / 2014-5 / 南海出版公司</p>
-						                <!--<p class="book-summary">现代人内心流失的东西，这家杂货店能帮你找回——<br>僻静的街道旁有一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答。<br>因男友身患绝症，年轻女孩静子在爱情与梦想间徘徊；克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……\n他们将困惑写成信投进杂货店，随即奇妙的事情竟不断发生。\n生命中的一次偶然交会，将如何演绎出截然不同的人生？\n如今回顾写作过程，我发现自己始终在思考一个问题：站在人生的岔路口，人究竟应该怎么做？我希望读者能在掩卷时喃喃自语：我从未读过这样的小说。——东野圭吾</p>-->
-						            </div>
-						        </a>
-					        </div>
-					        
-					    </li>
-					    
-					    <li class="mui-table-view-cell mui-media">
-					    	<div class="mui-slider-right mui-disabled">
-								<a class="mui-btn mui-btn-red">不感兴趣</a>
-							</div>
-					    	<div class="mui-slider-handle">
-						        <a href="javascript:;">
-						            <img class="mui-media-object mui-pull-left" src="https://img3.doubanio.com/lpic/s27264182.jpg">
-						            <div class="mui-media-body">
-						               <div class="book-title mui-ellipsis-2">解忧杂货店</div>
-						                <p>评分：4.7</p>
-						                <p class="mui-ellipsis-2">[日] 东野圭吾 / 2014-5 / 南海出版公司</p>
-						            </div>
-						        </a>
-					        </div>
-					        
-					    </li>
-					    <li class="mui-table-view-cell mui-media">
-					    	<div class="mui-slider-right mui-disabled">
-								<a class="mui-btn mui-btn-red">不感兴趣</a>
-							</div>
-					    	<div class="mui-slider-handle">
-						        <a href="javascript:;">
-						            <img class="mui-media-object mui-pull-left" src="https://img3.doubanio.com/lpic/s27264183.jpg">
-						            <div class="mui-media-body">
-						               <div class="book-title mui-ellipsis-2">解忧杂货店</div>
-						                <p>评分：4.7</p>
-						                <p class="mui-ellipsis-2">[日] 东野圭吾 / 2014-5 / 南海出版公司</p>
-						            </div>
-						        </a>
-					        </div>
-					        
-					    </li>
-					    <li class="mui-table-view-cell mui-media">
-					    	<div class="mui-slider-right mui-disabled">
-								<a class="mui-btn mui-btn-red">不感兴趣</a>
-							</div>
-					    	<div class="mui-slider-handle">
-						        <a href="javascript:;">
-						            <img class="mui-media-object mui-pull-left" src="https://img3.doubanio.com/lpic/s27264184.jpg">
-						            <div class="mui-media-body">
-						               <div class="book-title mui-ellipsis-2">解忧杂货店</div>
-						                <p>评分：4.7</p>
-						                <p class="mui-ellipsis-2">[日] 东野圭吾 / 2014-5 / 南海出版公司</p>
-						            </div>
-						        </a>
-					        </div>
-					        
-					    </li>
+					<ul class="mui-table-view"  id="scroll_list">
+									    
 					</ul>
 				</div>
 
@@ -277,16 +161,79 @@
 		<script src="js/public.js"></script>
 		<script>
 			openNewWindow();
+			openBookDetail();
 			
 			mui.init({
 				statusBarBackground: '#f1f1ed'
 			})
-			//为你推荐的懒加载图片初始化
-//			mui(document).imageLazyload({
-//				placeholder: 'img/lazy.jpg'
-//			});
 			
-			//初始化三个swiper
+			//获取新书速递图书
+			muiGet(api.bookNew_home, function(data) {
+				document.getElementById("newTotal").innerHTML = data.totalCount;
+				var newBookStr = "";
+				var bookList = data.data;
+				bookList.forEach(function(e, i){
+					newBookStr += 	'<div class="swiper-slide book-detail" data-key="' + e.isbn + '">'+
+										'<div>'+
+											'<img src="' + e.images.large + '" /><br />'+
+											'<div class="book-title mui-ellipsis">' + e.title + '</div>'+
+											'<p>评分：' + e.rating + '</p>'+
+										'</div>'+
+									'</div>';
+				})
+				//初始化的时候距离左边15px，优化样式。。
+				var initWrapper = document.getElementById("swiper-newbooks").getElementsByClassName("swiper-wrapper")[0];
+				initWrapper.innerHTML = newBookStr;
+				
+				//初始化swiper
+				new Swiper('#swiper-newbooks', {
+				    slidesPerView: 3,
+				    spaceBetween: 15,
+				    freeMode: true,
+				    on: {
+					    init: function () {
+						    initWrapper.style.transform = "translate3d(15px, 0px, 0px)";
+					    }
+				  	},
+	    		});
+				
+			})
+			
+			//获取热门畅销图书
+			muiGet(api.bookHot_home, function(data) {
+				document.getElementById("hotTotal").innerHTML = data.totalCount;
+				var hotBookStr = "";
+				var bookList = data.data;
+				bookList.forEach(function(e, i){
+					hotBookStr += 	'<div class="swiper-slide book-detail" data-key="' + e.isbn + '">'+
+										'<div>'+
+											'<img src="' + e.images.large + '" /><br />'+
+											'<div class="book-title mui-ellipsis">' + e.title + '</div>'+
+											'<p>评分：' + e.rating + '</p>'+
+										'</div>'+
+									'</div>';
+								
+				});
+				//初始化的时候距离左边15px，优化样式。。
+				var initWrapper = document.getElementById("swiper-hotbooks").getElementsByClassName("swiper-wrapper")[0];
+				initWrapper.innerHTML = hotBookStr;
+				
+				//初始化swiper
+	    		new Swiper('#swiper-hotbooks', {
+				    slidesPerView: 3,
+				    spaceBetween: 15,
+				    freeMode: true,
+				    on: {
+					    init: function () {
+					    	//初始化的时候距离左边15px，优化样式。。
+					    	var initWrapper = document.getElementById("swiper-hotbooks").getElementsByClassName("swiper-wrapper")[0];
+					    	initWrapper.style.transform = "translate3d(15px, 0px, 0px)";
+					    }
+				  	},
+	    		});
+			})
+			
+			//初始化banner
 			new Swiper('#swiper-banner', {
 				centeredSlides: true,
 				loop: true,
@@ -299,33 +246,45 @@
 					clickable: true,
 				}
 			});
-			new Swiper('#swiper-newbooks', {
-			    slidesPerView: 3,
-			    spaceBetween: 15,
-			    freeMode: true,
-			    on: {
-				    init: function () {
-				    	//初始化的时候距离左边15px，优化样式。。
-				    	var initWrapper = document.getElementById("swiper-newbooks").getElementsByClassName("swiper-wrapper")[0];
-				    	initWrapper.style.transform = "translate3d(15px, 0px, 0px)";
-				    }
-			  	},
-    		});
-    		new Swiper('#swiper-hotbooks', {
-			    slidesPerView: 3,
-			    spaceBetween: 15,
-			    freeMode: true,
-			    on: {
-				    init: function () {
-				    	//初始化的时候距离左边15px，优化样式。。
-				    	var initWrapper = document.getElementById("swiper-hotbooks").getElementsByClassName("swiper-wrapper")[0];
-				    	initWrapper.style.transform = "translate3d(15px, 0px, 0px)";
-				    }
-			  	},
-    		});
+		
+			
+			//获取推荐图书
+			
+			//初始化上拉加载组件
+			pullrefreshInit(api.bookRecommend + "?userId=" + window.localStorage.getItem("userId"), function(list, isRefresh) {
+				// 渲染模版
+				var temp = '';
+				if(isRefresh) {
+					document.getElementById('scroll_list').innerHTML = temp;
+				}
+				list.forEach(function(e) {
+					temp += '<li class="mui-table-view-cell mui-media book-detail" data-key="' + e.isbn + '">'+
+						    	'<div class="mui-slider-right mui-disabled">'+
+									'<a class="mui-btn mui-btn-red">不感兴趣</a>'+
+								'</div>'+
+						    	'<div class="mui-slider-handle">'+
+							        '<a href="javascript:;">'+
+							            '<img class="mui-media-object mui-pull-left" src="'+ e.images.large +'">'+
+							            '<div class="mui-media-body">'+
+							               '<div class="book-title mui-ellipsis-2">'+ e.title +'</div>'+
+							                '<p>评分：'+ e.rating +'</p>'+
+							                '<p class="mui-ellipsis-2">'+ e.author +' / '+ e.pubdate +' / '+ e.publisher +'</p>'+
+							            '</div>'+
+							        '</a>'+
+						        '</div>'+
+						        
+						    '</li>';
+				})
+				
+				document.getElementById("scroll_list").innerHTML += temp;
+
+			}, 1);
+			
+			
+			
 			
 			//不感兴趣
-    		mui('#OA_task').on('tap', '.mui-btn', function(event) {
+    		mui('#scroll_list').on('tap', '.mui-btn', function(event) {
 				var elem = this;
 				var li = elem.parentNode.parentNode;
 				var opacity = 10;
@@ -335,20 +294,16 @@
 					if(opacity <= 0) {
 						clearInterval(timmer);
 						li.parentNode.removeChild(li);
+						
+						//预留接口
+						
+						
 					}
 				},10)
 						
 			});
 			
-//			document.getElementById("refresh").addEventListener('tap',function(e) {
-//				console.log(e.target.tagName.toUpperCase() == 'PRE');
-//				var moreInfo = e.target;
-//				if(moreInfo.className == 'book-summary') {
-//					moreInfo.className = 'book-summary-all';
-//				}else if(moreInfo.className == 'book-summary-all'){
-//					moreInfo.className = 'book-summary';
-//				}
-//			})
+			
 		</script>
 	</body>
 

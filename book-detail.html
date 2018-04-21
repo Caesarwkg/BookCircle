@@ -115,8 +115,8 @@
 			<h1 class="mui-title">图书</h1>
 			<a class="mui-icon iconfont icon-edit mui-pull-right"></a>
 		</header>
-		<div class="mui-content">
-		    <div class="head-bg">
+		<div class="mui-content" id="content">
+		    <!--<div class="head-bg">
 		    	<img src="https://img3.doubanio.com/lpic/s27264181.jpg"/>
 		    </div>
 		    
@@ -128,14 +128,6 @@
 		    		出版社：南海出版社<br />
 		    		出版时间：2014-5</p>
 		    	</div>
-		    	<!--<div class="mui-card book-rate" style="width: 80px;height:80px;">
-		    		<div>
-		    			<p>评分</p>
-		    			<h3>4.7</h3>
-		    		</div>
-		    	</div>-->
-		    	<!--<div class="book-favorite">
-		    	</div>-->
 		    	<h3>
 		    		<span class="mui-icon iconfont book-favorite icon-favorite"></span>
 		    		<span class="mui-icon iconfont book-favorite icon-favoritesfilling"></span>
@@ -154,7 +146,7 @@
             <p class="mui-table-view-cell">
 	    		<a href="doubanlink" data-key="https://read.douban.com/ebook/36103930/"  class="jumpnew mui-navigate-right"><span class="mui-icon iconfont icon-cart"></span> 在线阅读或购买</a>
             </p>
-		    <div style="height: 30px;"></div>	
+		    <div style="height: 30px;"></div>	-->
 	    	
 		</div>
 		
@@ -163,51 +155,72 @@
 		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			
-			
-			var summary = '现代人内心流失的东西，这家杂货店能帮你找回——\n僻静的街道旁有一家杂货店，只要写下烦恼投进卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答。\n因男友身患绝症，年轻女孩静子在爱情与梦想间徘徊；克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……\n他们将困惑写成信投进杂货店，随即奇妙的事情竟不断发生。\n生命中的一次偶然交会，将如何演绎出截然不同的人生？\n如今回顾写作过程，我发现自己始终在思考一个问题：站在人生的岔路口，人究竟应该怎么做？我希望读者能在掩卷时喃喃自语：我从未读过这样的小说。——东野圭吾';
-			var catalog = '第一章 回答在牛奶箱里\n第二章 深夜的口琴声\n第三章 在思域车上等到天亮\n第四章 听着披头士默祷\n第五章 来自天上的祈祷';
-			var author = "东野圭吾 日本著名作家。 1985年，《放学后》获第31届江户川乱步奖，开始专职写作； 1999年，《秘密》获第52届日本推理作家协会奖； 2005年出版的《嫌疑人X的献身》史无前例地同时获得第134届直木奖、第6届本格推理小说大奖，以及年度三大推理小说排行榜第1名； 2008年，《流星之绊》获第43届新风奖； 2009年出版的《新参者》获两大推理小说排行榜年度第1名； 2012年，《解忧杂货店》获第7届中央公论文艺奖。 2014年，《祈りの幕が下りる時》（暂译《祈祷落幕时》）获第48届吉川英治文学奖。";
-			
-			var subStr=/\n/ig;//直接量法创建正则表达式对象,不区分大小写,全局查找
-			var result=summary.replace(subStr,"<br><br>");//把'\n'替换为<br><br>
-			var resutl2=author.replace(subStr,"<br><br>");//把'\n'替换为<br><br>
-			console.log(result);//th all there
-			
-			document.getElementById("summary").innerHTML = result;
-			document.getElementById("author").innerHTML = author;
 			window.addEventListener('tap',function(e) {
 				var moreInfo = e.target;
 				if(moreInfo.className == 'book-summary') {
 					moreInfo.className = 'book-summary-all';
 				}
-//				else if(moreInfo.className == 'book-summary-all'){
-//					moreInfo.className = 'book-summary';
-//				}
 			})
 			
 			openNewWindow()
 			
-//			var bookId = '25862578';
-//			var urlget = 'https://api.douban.com/v2/book/' + bookId;
-//			console.log();
-//		
-//			mui.ajax({
-//				url: urlget,
-//				type: 'get',
-//				dataType: 'json',
-//				success: function(data) {
-//					console.log(data);
-//				},
-//				error: function(err) {
-//					mui.toast("访问出错啦")
-//				},
-//				beforeSend: function() {
-////									plus.nativeUI.showWaiting('等待中');
-//				},
-//				complete: function() {
-////									plus.nativeUI.closeWaiting();
-//				}
-//			})
+			mui.plusReady(function() {
+				var _self = plus.webview.currentWebview();
+				var _isbn = _self.key;
+				var subStr = /\n/ig;//直接量法创建正则表达式对象,不区分大小写,全局查找
+				
+				muiGet(api.bookIsbn + "?isbn=" + _isbn, function(data) {
+					if(data.errorCode != 0) {
+						mui.alert(data.errorMsg, "出错啦...");
+						return;
+					}
+					var detail = data.data;
+					
+					if(!detail){
+						return;
+					}
+					
+					var temp = '<div class="head-bg">'+
+							    	'<img src="'+ detail.images.large +'"/>'+
+							   '</div>'+ 
+							    '<div class="pd14 flex">'+
+							    	'<div class="book-info" style="flex: 1;">'+
+							    		'<h3>'+ detail.title +'</h3>'+
+							    		'<p>作者：'+ detail.author +'<br />'+
+							    		'评分：'+ detail.rating +'<br />'+
+							    		'出版社：'+ detail.publisher +'<br />'+
+							    		'出版时间：'+ detail.pubdate +'</p>'+
+							    	'</div>'+
+							    	'<h3>'+
+							    		'<span class="mui-icon iconfont book-favorite icon-favorite"></span>'+
+							    		'<span class="mui-icon iconfont book-favorite icon-favoritesfilling"></span>'+
+							    	'</h3>'+
+							    '</div>'+
+							   ' <div class="book-detail-section">'+
+						    		'<p>简介</p>'+
+						    		'<div class="book-summary" id="summary">'+ detail.summary.replace(subStr,'<br><br>') +'</div>'+	
+						    	'</div>'+
+						    	'<div class="book-detail-section">'+
+						    		'<p>作者</p>'+
+						    		'<div class="book-summary" id="author">'+ detail.authorIntro.replace(subStr,'<br><br>') +'</div>'+	
+						    	'</div>';
+					
+					if(detail.ebookUrl) {
+						temp +=  '<p class="mui-table-view-cell">'+
+						    		'<a href="doubanlink" data-key="'+ detail.ebookUrl +'"  class="jumpnew mui-navigate-right"><span class="mui-icon iconfont icon-cart"></span> 在线阅读或购买</a>'+
+					            '</p>';
+					}
+					temp += '<div style="height: 30px;"></div>';	
+					document.getElementById("content").innerHTML = temp;
+					
+					
+				})
+				
+				
+				
+				
+			})
+			
 		</script>
 	</body>
 

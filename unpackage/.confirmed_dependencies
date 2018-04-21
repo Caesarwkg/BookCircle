@@ -26,5 +26,15 @@
 		"refer": [
 			"index.html"
 		]
+	},
+	"account.html": {
+		"refer": [
+			"account-info.html"
+		]
+	},
+	"account-info.html": {
+		"refer": [
+			"change-account-info.html"
+		]
 	}
 }

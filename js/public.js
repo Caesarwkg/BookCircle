@@ -12,6 +12,7 @@ mui.init({
 
 var config = {
 	url: 'http://104.194.94.3:3002/bookcircle/',
+	proxy: 'http://104.194.94.3:3003/bookcircle/',
 	phoneReg: /^1[3|4|5|8][0-9]\d{4,8}$/,
 }
 
@@ -19,6 +20,13 @@ var api = {
 	userRegister : config.url + "user/register",
 	userLogin : config.url + "user/login",
 	userUpdate : config.url + "user/update",
+	bookSearch : config.proxy + "book/search",
+	bookIsbn : config.url + "book/isbn",
+	bookNew_home: config.url + "book/new?pageIndex=1",
+	bookHot_home: config.url + "book/hot?pageIndex=1",
+	bookRecommend: config.url + "book/recommend",
+	bookNew: config.url + "book/new",
+	bookHot: config.url + "book/hot",
 }
 
 
@@ -80,7 +88,6 @@ function atap() {
 			var length = tohref.split("/").length;
 			var urlid = tohref.split("/")[length - 1];
 			var temp = plus.webview.getWebviewById(urlid);
-			console.log("哈哈哈" + urlid + temp);
 			if(temp != null) {
 				plus.webview.show(temp, "slide-in-right", 300);
 				if(this.getAttribute('data-refresh')) {
@@ -134,6 +141,7 @@ function openNewWindow() {
 	});
 }
 
+//打开新窗口
 function openWindow(href, attr) {
 	var aniShow = "slide-in-right"; //默认slide-in-right,pop-in
 	var tohref = href + ".html";
@@ -154,39 +162,87 @@ function openWindow(href, attr) {
 	});
 }
 
-//下拉刷新 上拉加载
-function pullrefreshInit(url, callback) { 
-	
-	mui.init({
-		pullRefresh: {
-			container: '#pullrefresh',
-			down: {
-				contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-				contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-				contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-				callback: pulldownRefresh
+//点击打开新窗口
+function openBookDetail() {
+	mui('body').on('tap', ".book-detail", function(e) {
+		var tohref = "book-detail.html";
+		var key = this.getAttribute('data-key');
+		var length = tohref.split("/").length;
+		var urlid = tohref.split("/")[length - 1];
+		console.log("openBookDetail=====>" + urlid, tohref);
+		mui.openWindow({
+			id: urlid,
+			url: tohref,
+			styles: {
+				popGesture: "close"
 			},
-			up: {
-				auto: false, //可选,默认false.自动上拉加载一次
-				contentrefresh: '正在刷新...',
-				contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-				callback: pullupRefresh
+			show: {
+				autoshow: false,
+				aniShow: "slide-in-right"
+			},
+			extras: {
+				key: key
+			},
+			waiting: {
+				autoShow: true
 			}
-		}
+		});
 	});
+}
+
+
+//下拉刷新 上拉加载
+function pullrefreshInit(url, callback, flag) { 
+	
+	switch (flag){
+		//0 表示上拉加载和下拉刷新都需要初始化
+		case 0:
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "加载中...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: pulldownRefresh
+					},
+					up: {
+						auto: false, //可选,默认false.自动上拉加载一次
+						contentrefresh: '加载中...',
+						contentnomore: '我也是有底线的', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: pullupRefresh
+					}
+				}
+			});
+			break;
+		//1 表示只初始化上拉加载
+		case 1:
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						auto: false, //可选,默认false.自动上拉加载一次
+						contentrefresh: '加载中...',
+						contentnomore: '我也是有底线的', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: pullupRefresh
+					}
+				}
+			});
+			break;
+		
+	}
+	
+	
+	
 	
 	//初始化翻页参数
-//	var pageIndex = 1;
-	var pageIndex = 0;
-	var totalnum = -1; //列表当前个数
-	var totalall = 0; //列表总个数
+	var pageIndex = 1;
+	var upRefreshFlag = true;//上拉加载标志位。为true则执行刷新
 	/**
 	 * 下拉刷新具体业务实现
 	 */
 	function pulldownRefresh() {
-		//		mui.toast("正在更新数据");
-//		pageIndex = 1;
-		pageIndex = 0;
+		pageIndex = 1;
 		setTimeout(function() {
 			mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 			mui('#pullrefresh').pullRefresh().refresh(true);
@@ -199,7 +255,7 @@ function pullrefreshInit(url, callback) {
 	 */
 	function pullupRefresh() {
 		setTimeout(function() {
-			if(totalnum < totalall) {
+			if(upRefreshFlag) {
 				getListByCallindex(url, pageIndex, callback, false);
 			}
 		}, 300);
@@ -219,54 +275,37 @@ function pullrefreshInit(url, callback) {
 	//请求列表接口
 
 	function getListByCallindex(url, pageNo, callback, isRefresh) { 
-		var scroll_list = [];
-		var scroll_url = config.url + url;
-		console.log(scroll_url);
-//		console.log(scroll_url+"userId="+window.localStorage.getItem('userId')+"&pageNo="+pageNo+"&pageSize=10");
-		console.log(scroll_url+"&userId="+window.localStorage.getItem('userId')+"&start="+pageNo+"&count=10");
-//		var self = plus.webview.currentWebview();
-//		var id = self.key;
-//		if(id) {
-//			scroll_url=scroll_url+"id=" + id;
-//		}
 		mui.ajax({
-			url: scroll_url,
+			url: url,
 			type: 'get',
 			dataType: 'json',
 			data: {
-				//				userId:"w8vhr8nqtdpb",
-//				pageNo: pageNo,
-//				pageSize: 10,
-				start:pageNo,
-				count:10,
-//				userId: window.localStorage.getItem('userId')
+				pageIndex : pageNo,
 			},
 			success: function(data) {
 				console.log(data)
+				if(data.errorCode != 0) {
+					mui.alert(data.errorMsg, "出错啦...");
+					return;
+				}
+				
 				if(callback instanceof Function) {
-					callback(null, data.books, isRefresh,data);
+					
+					//当数据少于10条时，结束上拉加载
+					if(data.data.length < 10){
+						upRefreshFlag = false;
+					}
+					callback(data.data, isRefresh);
 					pageIndex++;
 				}
-//				if(data.success) {
-//					var data = data.result;
-//					totalall = data.total;
-//					scroll_list = data.list;
-//					totalnum = (pageNo - 1) * 10 + scroll_list.length;
-//					if(callback instanceof Function) {
-//						callback(null, scroll_list, isRefresh);
-//						pageIndex++;
-//					}
-//				} else {
-//					//接口报错
-//					callback("接口出错啦~");
-//				}
+
 			},
 			error: function(err) {
 				mui.toast("访问出错啦")
 			},
 			beforeSend: function() {},
 			complete: function() {
-				mui('#pullrefresh').pullRefresh().endPullupToRefresh(totalnum == totalall);
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(!upRefreshFlag);
 			}
 		})
 	}
@@ -317,6 +356,10 @@ function muiPost(url, data, callback) {
 		dataType: 'json',
 		success: function(data) {
 			console.log(data);
+			if(data.errorCode != 0) {
+				mui.alert(data.errorMsg, "出错了...");
+				return;
+			}
 			if(callback instanceof Function) {
 				callback(data);
 			}
@@ -341,6 +384,10 @@ function muiGet(url, callback) {
 		dataType: 'json',
 		success: function(data) {
 			console.log(data);
+			if(data.errorCode != 0) {
+				mui.alert(data.errorMsg, "出错了...");
+				return;
+			}
 			if(callback instanceof Function) {
 				callback(data);
 			}

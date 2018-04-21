@@ -66,27 +66,27 @@
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right avatar_a jumpnew" href="change-account-info" data-key="avatar">
-						<font>头像</font><span><img src="img/avatar/m_09.png" class="avatar" alt="" /></span>
+						<font>头像</font><span><img id="headIcon" src="img/avatar/m_09.png" class="avatar" alt="" /></span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right jumpnew" href="change-account-info" data-key="username">
-						昵称<span>胸毛当地毯</span>
+						昵称<span id="nickName">胸毛当地毯</span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" id="showSexPicker">
-						性别<span>男</span>
+						性别<span id="sex">未填</span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" id='pickDateBtn'>
-						生日<span>1996-02-10</span>
+						生日<span id="birthday">未填</span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" id="showCityPicker">
-						地区<span>江苏 无锡</span>
+						地区<span id="location">未填</span>
 					</a>
 				</li>
 			</ul>
@@ -94,10 +94,10 @@
 				<div class="mui-card-header">介绍</div>
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
-						<textarea maxlength="140" placeholder="个人介绍..."></textarea>
+						<textarea id="introduction" maxlength="140" placeholder="个人介绍..."></textarea>
 					</div>
 				</div>
-				<div class="mui-card-footer">140</div>
+				<div id="desc-number" class="mui-card-footer">140</div>
 			</div>
 			<ul class="mui-table-view" style="margin-top: 10px;">
 		        <li class="mui-table-view-cell">
@@ -116,7 +116,19 @@
 		<script>
 			openNewWindow();
 			
-			var birthday = "未填";
+			var headIcon_loc = window.localStorage.getItem("headIcon");
+			var nickName_loc = window.localStorage.getItem("nickName");
+			var sex_loc = window.localStorage.getItem("sex");
+			var birthday_loc = window.localStorage.getItem("birthday");
+			var location_loc = window.localStorage.getItem("location_loc");
+			
+			
+			
+			var phoneNumber = window.localStorage.getItem("phoneNumber");
+			
+			
+			
+//			var birthday = "未填";
 			//生日picker
 			document.getElementById("pickDateBtn").addEventListener('tap', function() {
 				var dDate = new Date();
@@ -124,16 +136,26 @@
 				var minDate = new Date();
 				minDate.setFullYear(1920, 0, 1);
 				var maxDate = new Date();
-//				maxDate.setFullYear(2016, 11, 31);
 				plus.nativeUI.pickDate(function(e) {
 					var d = e.date;
-//					info.innerText = '您选择的日期是:' + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-					birthday = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-					mui.alert(birthday);
+					var birthday = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+					var _data = {
+						phoneNumber: phoneNumber,
+						birthday: birthday
+					}
+					muiPost(api.userUpdate, _data, function(data) {
+						if (data.errorCode != 0) {
+							mui.alert(data.errorMsg, "更新失败了π_π");
+						} else {
+							document.getElementById("birthday").innerHTML = birthday;
+						}
+					})
+					
+					
 				}, function(e) {
 //					info.innerText = "您没有选择日期";
 				}, {
-					title: "请选择日期",
+					title: "请选择您的出生日期",
 					date: dDate,
 					minDate: minDate,
 					maxDate: maxDate
@@ -141,26 +163,37 @@
 			})
 			
 			//性别picker
-			var sex = "未填";
+//			var sex = "未填";
 			var sexPicker = new mui.PopPicker();
 			sexPicker.setData([{
-				value: '男',
+				value: 1,
 				text: '男'
 			}, {
-				value: '女',
+				value: 0,
 				text: '女'
 			}]);
 			document.getElementById('showSexPicker').addEventListener('tap', function(event) {
 				sexPicker.show(function(items) {
-					sex = JSON.stringify(items[0]);
-					mui.alert(sex);
+					var sex = JSON.stringify(items[0].value);
+					var _data = {
+						phoneNumber: phoneNumber,
+						sex: sex
+					}
+					muiPost(api.userUpdate, _data, function(data) {
+						if (data.errorCode != 0) {
+							mui.alert(data.errorMsg, "更新失败了π_π");
+						} else {
+							document.getElementById("sex").innerHTML = sex;
+						}
+					})
+					
 					//返回 false 可以阻止选择框的关闭
 					//return false;
 				});
 			}, false);
 			
 			//地区picker
-			var city = "未填";
+//			var locatioin = "未填";
 			var cityPicker = new mui.PopPicker({
 				layer: 2
 			});
@@ -168,12 +201,30 @@
 			var showCityPickerButton = document.getElementById('showCityPicker');
 			showCityPickerButton.addEventListener('tap', function(event) {
 				cityPicker.show(function(items) {
-					city = "你选择的城市是:" + items[0].text + " " + items[1].text;
-					mui.alert(city);
+					var provinceName = items[0].text;
+					var cityName = items[1].text;
+					var _data = {
+						phoneNumber: phoneNumber,
+						provinceName: provinceName,
+						cityName: cityName
+					}
+					muiPost(api.userUpdate, _data, function(data) {
+						if (data.errorCode != 0) {
+							mui.alert(data.errorMsg, "更新失败了π_π");
+						} else {
+							document.getElementById("location").innerHTML = provinceName + " " + cityName;
+						}
+					})
+//					mui.alert(locatioin);
 					//返回 false 可以阻止选择框的关闭
 					//return false;
 				});
 			}, false);
+			
+			//介绍introduction
+			document.getElementById('introduction').addEventListener('keyup',function () {
+			        document.getElementById("desc-number").innerHTML = 140 - this.value.length;
+			})
 		</script>
 	</body>
 

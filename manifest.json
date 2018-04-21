@@ -161,6 +161,20 @@
 					"index.html"
 				],
 				"priority": 0
+			},
+			"account.html": {
+				"resources": [],
+				"refer": [
+					"account-info.html"
+				],
+				"priority": 0
+			},
+			"account-info.html": {
+				"resources": [],
+				"refer": [
+					"change-account-info.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -184,7 +198,6 @@
 				"js/mui.js",
 				"js/city.data.js",
 				"img/tx.png",
-				"account-info.html",
 				"README.md",
 				"book-detail.html",
 				"feedback.html",
@@ -203,7 +216,6 @@
 				"css/mui.min.css",
 				"css/swiper.min.css",
 				"img/yuantiao.jpg",
-				"change-account-info.html",
 				"img/logo.png"
 			]
 		}
