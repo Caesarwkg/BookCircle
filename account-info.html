@@ -66,12 +66,12 @@
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right avatar_a jumpnew" href="change-account-info" data-key="avatar">
-						<font>头像</font><span><img id="headIcon" src="img/avatar/m_09.png" class="avatar" alt="" /></span>
+						<font>头像</font><span><img id="headIcon" src="img/avatar/m_01.png" class="avatar" alt="" /></span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right jumpnew" href="change-account-info" data-key="username">
-						昵称<span id="nickName">胸毛当地毯</span>
+						昵称<span id="nickName"></span>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -116,16 +116,26 @@
 		<script>
 			openNewWindow();
 			
-			var headIcon_loc = window.localStorage.getItem("headIcon");
-			var nickName_loc = window.localStorage.getItem("nickName");
-			var sex_loc = window.localStorage.getItem("sex");
-			var birthday_loc = window.localStorage.getItem("birthday");
-			var location_loc = window.localStorage.getItem("location_loc");
-			
-			
-			
 			var phoneNumber = window.localStorage.getItem("phoneNumber");
+			var _userId = window.localStorage.getItem("userId");
+//			_userId = "11b964c046f311e8ba486f0fa03dc930";
 			
+			
+			//获取用户基本信息
+			muiGet(api.userGet + "?userId=" + _userId, function(data) {
+				if(data.errorCode != 0) {
+					mui.alert("出错了...");
+					return;
+				}
+				var info = data.data;
+				document.getElementById("headIcon").src = "img/avatar/" + info.headIcon + ".png";
+				document.getElementById("nickName").innerHTML = info.nickName;	
+				document.getElementById("sex").innerHTML = (info.sex || info.sex==0 ? (info.sex == 0 ? '男' : '女') : '未填');
+				document.getElementById("birthday").innerHTML = info.birthday ? info.birthday : "未填";
+				document.getElementById("location").innerHTML = (info.provinceName && info.cityName ? info.provinceName + " " + info.cityName  : "未填");
+				document.getElementById("introduction").innerHTML = info.description ? info.description : "";
+				
+			}) 
 			
 			
 //			var birthday = "未填";
@@ -140,7 +150,7 @@
 					var d = e.date;
 					var birthday = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 					var _data = {
-						phoneNumber: phoneNumber,
+						userId: localStorage.getItem("userId"),
 						birthday: birthday
 					}
 					muiPost(api.userUpdate, _data, function(data) {
@@ -176,7 +186,7 @@
 				sexPicker.show(function(items) {
 					var sex = JSON.stringify(items[0].value);
 					var _data = {
-						phoneNumber: phoneNumber,
+						userId: localStorage.getItem("userId"),
 						sex: sex
 					}
 					muiPost(api.userUpdate, _data, function(data) {
@@ -204,7 +214,7 @@
 					var provinceName = items[0].text;
 					var cityName = items[1].text;
 					var _data = {
-						phoneNumber: phoneNumber,
+						userId: localStorage.getItem("userId"),
 						provinceName: provinceName,
 						cityName: cityName
 					}
@@ -224,6 +234,17 @@
 			//介绍introduction
 			document.getElementById('introduction').addEventListener('keyup',function () {
 			        document.getElementById("desc-number").innerHTML = 140 - this.value.length;
+			})
+			document.getElementById('introduction').addEventListener('blur',function () {
+			    if(this.value){
+			    	var _data = {
+						userId: localStorage.getItem("userId"),
+						description: this.value
+					}
+					muiPost(api.userUpdate, _data, function(data) {})
+			    }else{
+			    	return false;
+			    }
 			})
 		</script>
 	</body>

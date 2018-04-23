@@ -167,9 +167,11 @@
 			mui.plusReady(function() {
 				var _self = plus.webview.currentWebview();
 				var _isbn = _self.key;
+				var _userId = localStorage.getItem("userId");
 				var subStr = /\n/ig;//直接量法创建正则表达式对象,不区分大小写,全局查找
 				
-				muiGet(api.bookIsbn + "?isbn=" + _isbn, function(data) {
+				console.log(api.bookIsbn + "?isbn=" + _isbn);
+				muiGet(api.bookIsbn + "?isbn=" + _isbn + "&userId=" + _userId, function(data) {
 					if(data.errorCode != 0) {
 						mui.alert(data.errorMsg, "出错啦...");
 						return;
@@ -177,7 +179,16 @@
 					var detail = data.data;
 					
 					if(!detail){
+						mui.alert("暂无具体信息 π_π", "抱歉", "", function() {
+							mui.back();
+						});
 						return;
+					}
+					
+					if(data.hasStored) {
+						var storedClass = "icon-favoritesfilling";
+					} else {
+						var storedClass = "icon-favorite";
 					}
 					
 					var temp = '<div class="head-bg">'+
@@ -192,8 +203,7 @@
 							    		'出版时间：'+ detail.pubdate +'</p>'+
 							    	'</div>'+
 							    	'<h3>'+
-							    		'<span class="mui-icon iconfont book-favorite icon-favorite"></span>'+
-							    		'<span class="mui-icon iconfont book-favorite icon-favoritesfilling"></span>'+
+							    		'<span id="store" class="mui-icon iconfont book-favorite ' + storedClass + '"></span>'+
 							    	'</h3>'+
 							    '</div>'+
 							   ' <div class="book-detail-section">'+
@@ -214,7 +224,40 @@
 					document.getElementById("content").innerHTML = temp;
 					
 					
+					document.getElementById('store').addEventListener('tap',function (e) {
+						var _cList = this.classList;
+						var storeClass = _cList[_cList.length - 1];
+						var _this = this;
+						
+						var _data = {
+							userId: localStorage.getItem("userId"),
+							isbn: _isbn
+						}
+						
+						//已经添加到书架
+						if(storeClass == "icon-favoritesfilling") {
+//							muiPost(api.bookStoreup, _data, function(data) {
+//								if(data.errorCode == 0){
+//									mui.alert("已添加到书架~","OK");
+//									_this.className  = "mui-icon iconfont book-favorite icon-favorite"
+//								}
+//							})
+						
+						//还未添加到书架
+						} else if (storeClass == "icon-favorite"){
+							muiPost(api.bookStoreup, _data, function(data) {
+								if(data.errorCode == 0){
+									mui.alert("已添加到书架~","OK");
+									_this.className  = "mui-icon iconfont book-favorite icon-favoritesfilling"
+								}
+							})
+						}
+						
+					})
+					
+					
 				})
+				
 				
 				
 				

@@ -42,6 +42,13 @@
 			.iconfont {
 				font-size: 20px;
 			}
+			#headIcon{
+				width: 80px;
+				height: 80px;
+				border: 2px solid #fefefe;
+				border-radius: 50%;
+				overflow: hidden;
+			}
 		</style>
 	</head>
 
@@ -50,7 +57,7 @@
 			<div class="tophead relative">
 				<img src="img/cebg-index.jpg" alt="" width="100%"  class="cebg"/>
 				<div class="flexcenter">
-					<img src="img/tx.png" alt="" href="account" class="jumpnew" />
+					<img id="headIcon" alt="暂无头像"  class="account-detail" data-key="" />
 					<span class="white" id="yhm"></span>
 				</div>
 			</div>
@@ -90,6 +97,12 @@
 		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/update.js"></script>
 		<script type="text/javascript" charset="utf-8">
+			
+			var headIcon = localStorage.getItem("headIcon");
+			document.getElementById("headIcon").src = "img/avatar/" + headIcon +".png";
+			var userId = localStorage.getItem("userId");
+			document.getElementById("headIcon").dataset.key = userId;
+			
 			var aniShow = "slide-in-right";
 			var subWebview = null,
 				template = null,
@@ -101,6 +114,8 @@
 				
 				//跳转
 				openNewWindow();
+				openAccountDetail();
+				
 				//获得主页面webview引用；
 				index = plus.webview.currentWebview().opener();
 				var _self = plus.webview.currentWebview();

@@ -101,7 +101,10 @@
 							muiPost(api.userLogin, _data, function(data){
 								_this.dataset.locked = 'unlocked';
 								mui(_this).button('reset');//切换为reset状态(即重置为原始的button)
-								
+								if(data.errorCode != 0) {
+									mui.alert(data.errorMsg, "出错了...");
+									return;
+								}
 								//登录成功
 								if(data.errorCode == 0) {
 									//保存信息至本地
@@ -109,6 +112,7 @@
 									localStorage.setItem("password",data.data.password);
 									localStorage.setItem("nickName",data.data.nickName);
 									localStorage.setItem("userId",data.data.id);
+									localStorage.setItem("headIcon",data.data.headIcon);
 									//跳转到到主页
 									openWindow("index");
 								} else {

@@ -96,14 +96,19 @@
 			}
 			.book-list li {
 				width: 30%;
+				height: 130px;
 				float: left;
 				padding: 11px;
+				object-fit: cover;
+				
 			}
 			.book-list li:nth-child(3n - 1), .book-list li:nth-child(3n - 3){
 				margin-left: 5%;
 			}
 			.book-list li img{
 				border-radius: 3px;
+				width: 100% !important;
+				height: 100% !important;;
 			}
 			.mui-table-view-cell:last-child:after, .mui-table-view-cell:last-child:before{
 				height: 1px;
@@ -163,6 +168,11 @@
 			.mui-card-link {
 				min-width: 60px;
 			}
+			.no-book {
+				line-height: 60px;
+				text-align: center;
+				width: 100%;
+			}
 		</style>
 	</head>
 
@@ -173,60 +183,44 @@
 					<div class="mui-bar mui-bar-nav">
 					    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 					</div>
-					<img src="img/tx.png" class="txboder" />
-					<div class="username" id="username">胸毛当地毯</div>
-					<div type="button" class="mui-btn mui-btn-outlined jumpnew" href="account-info"><span class="mui-icon iconfont icon-edit"></span> 编辑</div>
-					<!--<div class="mui-btn mui-btn-outlined follow">-->
-						<!--<div>
-							<span class="mui-icon iconfont icon-add"></span> 关注
+					<img src="img/avatar/m_01.png" class="txboder" id="headIcon" />
+					<div class="username" id="username"></div>
+					<div id="relationship">
+						<!--<div type="button" class="mui-btn mui-btn-outlined jumpnew" href="account-info"><span class="mui-icon iconfont icon-edit"></span> 编辑</div>-->
+						<!--<div class="mui-btn mui-btn-outlined follow">
+							<div>
+								<span class="mui-icon iconfont icon-add"></span> 关注
+							</div>-->
+							<!--<div>
+								<span class="mui-icon iconfont icon-selected"></span> 已关注
+							</div>
+							<div>
+								<span class="mui-icon iconfont icon-trust"></span> 相互关注
+							</div>-->
+							<!--<div>
+								<span class="mui-icon iconfont icon-email"></span>
+							</div>
 						</div>-->
-						<!--<div>
-							<span class="mui-icon iconfont icon-selected"></span> 已关注
-						</div>-->
-						<!--<div>
-							<span class="mui-icon iconfont icon-trust"></span> 相互关注
-						</div>
-						<div>
-							<span class="mui-icon iconfont icon-email"></span>
-						</div>
-					</div>-->
+					</div>
 					<div class="time">
 						<div href="following-list" class="jumpnew">
-							<div id="fwtime">关注</div><u>20</u></div>
+							<div id="fwtime">关注</div><u id="followersNum">0</u></div>
 						<div href="followers-list" class="jumpnew">
-							<div id="xxtime">粉丝</div><u>60</u></div>
+							<div id="xxtime">粉丝</div><u id="followingNum">0</u></div>
 					</div>
 				</div>
 				<div class="mui-slider">
 				    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-				        <a class="mui-control-item" href="#item1">书架 <span class="mui-badge mui-badge-inverted">23</span></a>
-				        <a class="mui-control-item" href="#item2">动态 <span class="mui-badge mui-badge-inverted">2</span></a>
-				        <a class="mui-control-item" href="#item3">关于 <span class="mui-badge mui-badge-inverted">4</span></a>
+				        <a class="mui-control-item" href="#item1">书架 <span id="book-list-number" class="mui-badge mui-badge-inverted"></span></a>
+				        <a class="mui-control-item" href="#item2">动态 <span class="mui-badge mui-badge-inverted"></span></a>
+				        <a class="mui-control-item" href="#item3">关于 <span class="mui-badge mui-badge-inverted"></span></a>
 				    </div>
 				    <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
 				    <div class="mui-slider-group">
 				        <div id="item1" class="mui-slider-item mui-control-content mui-active">
-				            <ul class="mui-table-view book-list">
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li><li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                <li class="mui-table-view-cell"><img src="img/book.jpg" /></li>
-				                	                
+				            <ul id="book-list" class="mui-table-view book-list">
+				                <!--<li class="mui-table-view-cell"><img src="img/book.jpg" /></li>-->
+				               
 				                
 				            </ul>
 				        </div>
@@ -308,7 +302,7 @@
 							</ul>
 				        </div>
 				        <div id="item3" class="mui-slider-item mui-control-content">
-				            <div class="account-info-section">
+				            <!--<div class="account-info-section">
 				            	<div class="account-info-title">个人信息</div>
 				            	<ul>
 				            		<li>
@@ -328,7 +322,7 @@
 				            <div class="account-info-section">
 				            	<div class="account-info-title">个人介绍</div>
 				            	<p>大家好我是xxx</p>
-				            </div>
+				            </div>-->
 				        </div>
 				    </div>
 				</div>
@@ -339,14 +333,172 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/public.js"></script>
 		<script>
-			mui.init({
-//				statusBarBackground: '#086bd3'
-			})
+		
 			openNewWindow();
+			openBookDetail();
 			mui.plusReady(function() {
 				//index页关闭侧滑菜单
 				plus.webview.getWebviewById("index.html").evalJS("closeMenu();plus.webview.currentWebview().setStyle({mask:'none'})")
+			
+				var _self = plus.webview.currentWebview();
+				var _userId = _self.key;
+//				var _userId = "1d86038045d611e89c9f7d30a1d1dd13";
+				var _selfUserId = window.localStorage.getItem("userId");
+				
+				if(_userId == _selfUserId) {
+					document.getElementById("relationship").innerHTML = '<div type="button" class="mui-btn mui-btn-outlined jumpnew" href="account-info"><span class="mui-icon iconfont icon-edit"></span> 编辑</div>';
+				}else {
+					//获取用户之间的关系
+					muiGet(api.relationship + "?userId=" + _selfUserId + "&friendId=" + _userId, function(data) {
+						if(data.errorCode != 0 ) {
+							mui.alert(data.errorMsg, "出错了");
+							return;
+						}
+						//0,  互不关注
+						//-1,  已被关注 
+						//1,  已关注
+						//2  互相关注
+						var relStr = "";
+						switch (data.data){
+							case 0:
+								relStr = '<div class="mui-btn mui-btn-outlined follow">'+
+													'<div>'+
+														'<span class="mui-icon iconfont icon-add"></span> 关注'+
+													'</div>'+
+														'<span class="mui-icon iconfont icon-email"></span>'+
+													'</div>'+
+												'</div>';	
+								break;
+							case -1:
+								relStr = '<div class="mui-btn mui-btn-outlined follow">'+
+												'<div>'+
+													'<span class="mui-icon iconfont icon-add"></span> 关注'+
+												'</div>'+
+												'<div>'+
+													'<span class="mui-icon iconfont icon-email"></span>'+
+												'</div>'+
+											'</div>';
+								break;
+							case 1:
+								relStr = '<div class="mui-btn mui-btn-outlined follow">'+
+												'<div>'+
+													'<span class="mui-icon iconfont icon-selected"></span> 已关注'+
+												'</div>'+
+												'<div>'+
+													'<span class="mui-icon iconfont icon-email"></span>'+
+												'</div>'+
+											'</div>';
+								break;
+							case 2:
+								relStr = '<div class="mui-btn mui-btn-outlined follow">'+
+												'<div>'+
+													'<span class="mui-icon iconfont icon-trust"></span> 相互关注'+
+												'</div>'+
+												'<div>'+
+													'<span class="mui-icon iconfont icon-email"></span>'+
+												'</div>'+
+											'</div>';
+								break;
+						}
+						document.getElementById("relationship").innerHTML = relStr;
+					})
+				}
+				
+				
+				//关注
+				muiGet(api.followers + "?userId=" + _userId, function(data) {
+					if(data.errorCode != 0){
+						return;
+					}
+					followersNum = data.data.length ? data.data.length : 0;
+					document.getElementById("followersNum").innerHTML = followersNum;
+				})
+				//粉丝
+				muiGet(api.following + "?userId=" + _userId, function(data) {
+					if(data.errorCode != 0){
+						return;
+					}
+					followingNum = data.data.length ? data.data.length : 0;
+					document.getElementById("followingNum").innerHTML = followingNum;
+				})
+				
+				//获取用户基本信息
+				muiGet(api.userGet + "?userId=" + _userId, function(data) {
+					if(data.errorCode != 0) {
+						mui.alert("出错了...");
+						return;
+					}
+					var info = data.data;
+					var infoItemStr = "";
+					
+					if(info.sex == 0){
+						var sexIcon = ' <span class="mui-icon iconfont icon-nv"></span>';
+						
+					}else if(info.sex == 1) {
+						var sexIcon = ' <span class="mui-icon iconfont icon-nan"></span>';
+						
+					}else {
+						var sexIcon = '';
+					}
+					document.getElementById("username").innerHTML = info.nickName + sexIcon;
+					document.getElementById("headIcon").src = "img/avatar/" + info.headIcon + ".png"
+					
+					
+					infoItemStr =   '<div class="account-info-section">' +
+						            	'<div class="account-info-title">个人信息</div>' +
+						            	'<ul>' +
+						            		'<li>' +
+						            			'<p>昵称：</p><p>' + info.nickName + '</p>' +
+						            		'</li>' +
+						            		'<li>' +
+						            			(info.sex || info.sex==0 ? (info.sex == 0 ? '<p>性别：</p><p>男</p>' : '<p>性别：</p><p>女</p>') : "") +
+						            		'</li>' +
+						            		'<li>' +
+						            			(info.birthday ? '<p>年龄：</p><p>' + ((new Date().getFullYear()) - (new Date(info.birthday).getFullYear())) + '</p>'  : "") +
+						            		'</li>' +
+						            		'<li>' +
+						            			(info.provinceName && info.cityName ? '<p>地区：</p><p>' + info.provinceName + " " + info.cityName + '</p>' : "") +
+						            		'</li>' +
+						            	'</ul>' +
+						            '</div>' +
+						           	'<div class="account-info-section">' +
+						            	'<div class="account-info-title">个人介绍</div>' +
+						            	(info.description ? '<p>' + info.description + '</p>' : '<p>好像还没有介绍自己</p>') +
+						            '</div>';
+						            
+					document.getElementById("item3").innerHTML = infoItemStr;
+					
+				})
+				
+				
+				
+				
+				
+				
+				
+				//获取用户的书架
+				muiGet(api.bookStoreList + "?userId=" + _userId, function(data) {
+					if(data.errorCode != 0) {
+						mui.alert("出错了...");
+						return;
+					}
+					var books = data.data;
+					var bookItemStr = "";
+					
+					books.forEach(function(item, i) {
+						bookItemStr += '<li class="mui-table-view-cell book-detail" data-key="' + item.isbn + '"><img src="' + item.images.large + '" alt="图片缺失" /></li>'
+					})
+					
+					document.getElementById("book-list-number").innerHTML = books.length;
+					document.getElementById("book-list").innerHTML += bookItemStr ? bookItemStr : "<p class='no-book'>这个书架空空如也~</p>";
+				})
+			
+			
+			
 			})
+			
+			
+			
 		</script>
 	</body>
 

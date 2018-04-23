@@ -59,11 +59,11 @@
 					container: '#pullrefresh',
 					up: {
 						contentrefresh: '正在加载...',
+						contentnomore:'',
 						callback: pullupRefresh
 					}
 				}
 			});
-			
 			openBookDetail();
 
 			var pageIndex = 1;
@@ -75,7 +75,7 @@
 				document.getElementById("scroll_list").innerHTML = "";
 				pageIndex = 1;
 				upRefreshFlag = true;
-				searchValue = event.detail.searchValue;
+				searchValue = event.detail.searchValue.trim();
 				
 				console.log(searchValue);
 				
@@ -122,6 +122,11 @@
 			}
 
 			function getListByCallindex(url, pageNo, callback) {
+				console.log(url);
+				if(!searchValue){
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+					return;
+				}
 				mui.ajax({
 					url: url,
 					type: 'get',

@@ -113,7 +113,9 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/public.js"></script>
 		<script>
-			
+				
+				openBookDetail();
+				
 				//图书简介
 				document.getElementById("pullrefresh").addEventListener('tap',function(e) {
 					console.log(e.target.tagName.toUpperCase() == 'PRE');
@@ -150,7 +152,7 @@
 					}
 					list.forEach(function(e) {
 						
-						temp += '<li class="mui-table-view">'+
+						temp += '<li class="mui-table-view book-detail" data-key="' + e.isbn + '">'+
 								    '<div class="mui-table-view-cell mui-media mui-card">'+
 								       '<a href="javascript:;">'+
 								            '<img alt="暂无图片" class="mui-media-object mui-pull-left" src="'+ e.images.large +'">'+

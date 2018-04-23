@@ -53,7 +53,7 @@
 			<header class="mui-bar mui-bar-nav">
 			    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			    <h1 class="mui-title" id="title"></h1>
-			    <a class="mui-icon mui-pull-right"><u>提交</u></a>
+			    <a class="mui-icon mui-pull-right" id="commit"><u>提交</u></a>
 			</header>
 		<div class="mui-content" id="body">
 			
@@ -62,10 +62,9 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script>
-//			mui.plusReady(function () {
-//			    var self = plus.webview.currentWebview();
-//			    var param = self.key;
-			    param = "avatar";
+			mui.plusReady(function () {
+			    var self = plus.webview.currentWebview();
+			    var param = self.key;
 			    var body = document.getElementById("body");
 			    var title = document.getElementById("title");
 			    switch (param){
@@ -74,15 +73,15 @@
 			    		body.innerHTML = '<div class="mui-input-group">'+
 										    '<div class="mui-input-row">'+
 										        '<label>当前密码</label>'+
-										        '<input type="password" class="mui-input-clear">'+
+										        '<input id="pwd-now" type="password" class="mui-input-clear">'+
 										    '</div>'+
 										   	'<div class="mui-input-row">'+
 										        '<label>新密码</label>'+
-										        '<input type="password" class="mui-input-clear">'+
+										        '<input id="pwd-new" type="password" class="mui-input-clear">'+
 										   	'</div>'+
 										    '<div class="mui-input-row">'+
 										        '<label>确认密码</label>'+
-										        '<input type="password" class="mui-input-clear">'+
+										        '<input id="pwd-confirm" type="password" class="mui-input-clear">'+
 										    '</div>'+
 										'</div>';
 			    		break;
@@ -91,7 +90,7 @@
 			    		body.innerHTML = '<div class="mui-input-group">'+
 										    '<div class="mui-input-row">'+
 												'<label>昵称</label>'+
-												'<input type="text" class="mui-input-clear">'+
+												'<input id="nickName" maxlength="12" type="text" class="mui-input-clear">'+
 											'</div>'+
 										'</div>';
 			    		break;
@@ -102,15 +101,15 @@
 											'<div class="mui-card-content">'+
 												'<div class="mui-card-content-inner">'+
 													'<ul class="avatar-list">'+
-														'<li class="avatar-item"><img src="img/avatar/m_01.png" data-id="mg/avatar/m_01.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/m_02.png" data-id="mg/avatar/m_02.png"/><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/m_03.png" data-id="mg/avatar/m_03.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/m_04.png" data-id="mg/avatar/m_04.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/m_05.png" data-id="mg/avatar/m_05.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/m_06.png" data-id="mg/avatar/m_06.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/m_07.png" data-id="mg/avatar/m_07.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/m_08.png" data-id="mg/avatar/m_08.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/m_09.png" data-id="mg/avatar/m_09.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/m_01.png" data-id="m_01" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/m_02.png" data-id="m_02"/><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/m_03.png" data-id="m_03" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/m_04.png" data-id="m_04" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/m_05.png" data-id="m_05" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/m_06.png" data-id="m_06" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/m_07.png" data-id="m_07" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/m_08.png" data-id="m_08" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/m_09.png" data-id="m_09" /><span class="mui-icon iconfont icon-selected"></span></li>'+
 													'</ul>'+
 												'</div>'+
 											'</div>'+
@@ -120,15 +119,15 @@
 											'<div class="mui-card-content">'+
 												'<div class="mui-card-content-inner">'+
 													'<ul class="avatar-list">'+
-														'<li class="avatar-item"><img src="img/avatar/w_01.png" data-id="mg/avatar/w_01.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/w_02.png" data-id="mg/avatar/w_02.png"/><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/w_03.png" data-id="mg/avatar/w_03.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/w_04.png" data-id="mg/avatar/w_04.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/w_05.png" data-id="mg/avatar/w_05.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/w_06.png" data-id="mg/avatar/w_06.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/w_07.png" data-id="mg/avatar/w_07.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/w_08.png" data-id="mg/avatar/w_08.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
-														'<li class="avatar-item"><img src="img/avatar/w_09.png" data-id="mg/avatar/w_09.png" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/w_01.png" data-id="w_01" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/w_02.png" data-id="w_02"/><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/w_03.png" data-id="w_03" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/w_04.png" data-id="w_04" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/w_05.png" data-id="w_05" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/w_06.png" data-id="w_06" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/w_07.png" data-id="w_07" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/w_08.png" data-id="w_08" /><span class="mui-icon iconfont icon-selected"></span></li>'+
+														'<li class="avatar-item"><img src="img/avatar/w_09.png" data-id="w_09" /><span class="mui-icon iconfont icon-selected"></span></li>'+
 													'</ul>'+
 												'</div>'+
 											'</div>'+
@@ -144,16 +143,82 @@
 								return;
 							}
 							headIcon = _target.dataset.id
-							console.log(headIcon);
 						})
 						
 		    			break;
 			    }
 			    
+			    document.getElementById("commit").addEventListener('tap', function() {
+			    	var _data = {
+			    		userId: localStorage.getItem("userId")
+			    	};
+			    	switch (param){
+			    		case "pwd":
+			    		
+			    			var nowPwd = document.getElementById("pwd-now").value;
+			    			var newPwd = document.getElementById("pwd-new").value;
+			    			var conPwd = document.getElementById("pwd-confirm").value;
+			    			
+			    			if(!(nowPwd && newPwd && conPwd)){
+			    				mui.alert("信息填写完整");
+			    				return;
+			    			}else{
+			    				if(newPwd != conPwd){
+			    					mui.alert("两次密码不一致");
+			    					return;
+			    				}
+			    			}
+			    			
+			    			_data.password = newPwd;
+			    		
+			    		
+			    			break;
+			    		case "username":
+			    		
+			    			var nickName = document.getElementById("nickName").value;
+			    			if(!nickName){
+			    				return;
+			    			}else{
+			    				_data.nickName = nickName;
+								localStorage.setItem("nickName",nickName);
+			    				
+			    			}
+			    		
+			    		
+			    			break;
+			    		case "avatar":
+			    			if(headIcon){
+			    				_data.headIcon = headIcon;
+			    				localStorage.setItem("headIcon", headIcon);
+			    			}else{
+			    				return;
+			    			}
+			    			break;
+			    	}
+			    	
+			    	commit(_data);
+			    })
 			    
 			    
 			    
-//			})
+			    function commit(_data) {
+					
+			    	muiPost(api.userUpdate, _data, function(data) {
+			    		console.log(data.errorMsg);
+			    		if(data.errorCode != 0) {
+			    			mui.alert("更新失败..");
+			    			return;
+			    		}
+						plus.webview.getWebviewById('account-info.html').reload();
+						setTimeout(function(){
+							mui.back();
+						},100);
+			    	})
+			    	
+			    }
+			    
+			    
+			})
 		</script>
 	</body>
 

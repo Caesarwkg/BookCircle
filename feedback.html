@@ -34,17 +34,17 @@
 			<header class="mui-bar mui-bar-nav">
 			    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			    <h1 class="mui-title">意见反馈</h1>
-			    <a class="mui-action-back mui-icon mui-pull-right"><u>提交</u></a>
+			    <a class="mui-action-back mui-icon mui-pull-right" id="commit"><u>提交</u></a>
 			</header>
 		<div class="mui-content ">
 			<!--<textarea name="" rows="8" cols="" placeholder="请输入您的反馈意见" style="border: none;" ></textarea>-->
 			<div class="mui-card">
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
-						<textarea maxlength="200" placeholder="请输入您的反馈意见"></textarea>
+						<textarea id="feedback" maxlength="200" placeholder="请输入您的反馈意见"></textarea>
 					</div>
 				</div>
-				<div class="mui-card-footer">200</div>
+				<div class="mui-card-footer" id="feedback-number">200</div>
 			</div>
 		
 		
@@ -53,7 +53,28 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script>
+			//介绍introduction
+			document.getElementById('feedback').addEventListener('keyup',function () {
+			        document.getElementById("feedback-number").innerHTML = 200 - this.value.length;
+			})
 			
+			//提交意见
+			document.getElementById("commit").addEventListener("tap", function() {
+				var content = document.getElementById('feedback').value.trim();
+				if(!content){
+					return false;
+				}
+				
+				muiPost(api.feekback, function(data) {
+					if(data.errorCode != 0){
+						mui.alert("提交失败..");
+						return;
+					}
+					mui.alert("感谢您提出的意见，我们会继续完善","","",function(){
+						mui.back();
+					})
+				})
+			})
 		</script>
 	</body>
 

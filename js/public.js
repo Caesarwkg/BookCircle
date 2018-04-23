@@ -13,20 +13,29 @@ mui.init({
 var config = {
 	url: 'http://104.194.94.3:3002/bookcircle/',
 	proxy: 'http://104.194.94.3:3003/bookcircle/',
+	url2 : "http://172.20.10.3:3002/bookcircle/",
 	phoneReg: /^1[3|4|5|8][0-9]\d{4,8}$/,
 }
 
 var api = {
-	userRegister : config.url + "user/register",
-	userLogin : config.url + "user/login",
-	userUpdate : config.url + "user/update",
-	bookSearch : config.proxy + "book/search",
-	bookIsbn : config.url + "book/isbn",
+	userRegister: config.url + "user/register",
+	userLogin: config.url + "user/login",
+	userUpdate: config.url + "user/update",
+	userSearch: config.url + "user/search",
+	userGet: config.url + "user/get",
+	bookSearch: config.proxy + "book/search",
+	bookIsbn: config.url + "book/isbn",
 	bookNew_home: config.url + "book/new?pageIndex=1",
 	bookHot_home: config.url + "book/hot?pageIndex=1",
 	bookRecommend: config.url + "book/recommend",
 	bookNew: config.url + "book/new",
 	bookHot: config.url + "book/hot",
+	bookStoreup: config.url + "userbook/storeup",
+	bookStoreList: config.url + "userbook/mybooks",
+	followers: config.url + "friend/fans",
+	following: config.url + "friend/friends",
+	relationship: config.url + "friend/relationship",
+	feekback: config.url + "feedback/publish"
 }
 
 
@@ -191,6 +200,34 @@ function openBookDetail() {
 }
 
 
+//点击打开新窗口
+function openAccountDetail() {
+	mui('body').on('tap', ".account-detail", function(e) {
+		var tohref = "account.html";
+		var key = this.getAttribute('data-key');
+		var length = tohref.split("/").length;
+		var urlid = tohref.split("/")[length - 1];
+		console.log("openAccountDetail=====>" + urlid, tohref);
+		mui.openWindow({
+			id: urlid,
+			url: tohref,
+			styles: {
+				popGesture: "close"
+			},
+			show: {
+				autoshow: false,
+				aniShow: "slide-in-right"
+			},
+			extras: {
+				key: key
+			},
+			waiting: {
+				autoShow: true
+			}
+		});
+	});
+}
+
 //下拉刷新 上拉加载
 function pullrefreshInit(url, callback, flag) { 
 	
@@ -275,6 +312,7 @@ function pullrefreshInit(url, callback, flag) {
 	//请求列表接口
 
 	function getListByCallindex(url, pageNo, callback, isRefresh) { 
+		console.log(url+"&pageIndex="+pageNo);
 		mui.ajax({
 			url: url,
 			type: 'get',
@@ -325,7 +363,7 @@ function getDetailById(url, id, callback) {
 			userId: window.localStorage.getItem('userId')
 		},
 		success: function(data) {
-			console.log(data)
+			console.log(JSON.stringify(data));
 			if(data.success) {
 				detail = data.result;
 				if(callback instanceof Function) {
@@ -349,17 +387,14 @@ function getDetailById(url, id, callback) {
 //ajax post
 function muiPost(url, data, callback) {
 	console.log("ajax:post====>" + url);	
+	console.log(JSON.stringify(data));
 	mui.ajax({
 		url: url,
 		type: 'post',
 		data: data,
 		dataType: 'json',
 		success: function(data) {
-			console.log(data);
-			if(data.errorCode != 0) {
-				mui.alert(data.errorMsg, "出错了...");
-				return;
-			}
+			console.log(JSON.stringify(data));
 			if(callback instanceof Function) {
 				callback(data);
 			}
@@ -383,11 +418,7 @@ function muiGet(url, callback) {
 		type: 'get',
 		dataType: 'json',
 		success: function(data) {
-			console.log(data);
-			if(data.errorCode != 0) {
-				mui.alert(data.errorMsg, "出错了...");
-				return;
-			}
+			console.log(JSON.stringify(data));
 			if(callback instanceof Function) {
 				callback(data);
 			}

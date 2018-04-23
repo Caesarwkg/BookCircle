@@ -1,3 +1,4 @@
+
 @font-face {font-family: "iconfont";
     src:url('../fonts/iconfont.ttf') format('truetype'); /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
 }
@@ -310,6 +311,10 @@
 .icon-customs-clearance:before { content: "\e863"; }
 
 .icon-good-filling:before { content: "\e866"; }
+
+.icon-nan:before { content: "\e6ef"; }
+
+.icon-nv:before { content: "\e6f0"; }
 
 .icon-camera:before { content: "\e86e"; }
 

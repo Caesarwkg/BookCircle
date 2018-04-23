@@ -10,6 +10,7 @@
 
 		<link rel="stylesheet" href="css/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
 		<style>
 			html,
 			body {
@@ -48,6 +49,7 @@
 			
 			.oa-contact-name {
 				margin-right: 20px;
+				width: 100%;
 			}
 			
 			.oa-contact-name,
@@ -74,20 +76,31 @@
 			u {
 				font-size: 16px;
 			}
+			.icon-nan {
+				color: #0091FF;
+			}
+			.icon-nv {
+				color: #FF4D94;
+			}
+			.headIcon {
+				width: 80px;
+				height: 80px;
+				overflow: hidden;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav index-title flex">
-			<form class="mui-input-row mui-search" onsubmit="return false" style="flex: 1;">
-				<input type="search" class="mui-input-clear" placeholder="搜索用户">
+			<form id="search-form" class="mui-input-row mui-search" onsubmit="return false" style="flex: 1;">
+				<input id="search-input" type="search" class="mui-input-clear" placeholder="搜索用户" value="">
 			</form>
 		    <a class="mui-action-back mui-icon mui-pull-right">&nbsp;&nbsp;<u>取消</u></a>
 		</header>
 		<div id="pullrefresh" class="mui-scroll-wrapper mui-content">
 			<div class="mui-scroll discover-section">
 				<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="scroll_list">
-					<li class="mui-table-view-cell">
+					<!--<li class="mui-table-view-cell">
 						<div class="mui-slider-cell">
 							<div class="oa-contact-cell mui-table">
 								<div class="oa-contact-avatar mui-table-cell">
@@ -95,7 +108,7 @@
 								</div>
 								<div class="oa-contact-content mui-table-cell">
 									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
+										<h4 class="oa-contact-name mui-ellipsis">周猛 <span class="mui-icon iconfont icon-nan"></span></h4>
 									</div>
 									<p class="oa-contact-email mui-h6 mui-ellipsis">
 										yewenjie@sina.com
@@ -103,194 +116,8 @@
 								</div>
 							</div>
 						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="mui-table-view-cell">
-						<div class="mui-slider-cell">
-							<div class="oa-contact-cell mui-table">
-								<div class="oa-contact-avatar mui-table-cell">
-									<img src="img/tx.png" />
-								</div>
-								<div class="oa-contact-content mui-table-cell">
-									<div class="mui-clearfix">
-										<h4 class="oa-contact-name">周猛</h4>
-									</div>
-									<p class="oa-contact-email mui-h6 mui-ellipsis">
-										yewenjie@sina.com
-									</p>
-								</div>
-							</div>
-						</div>
-					</li>
+					</li>-->
+					
 				</ul>
 			</div>
 		</div>
@@ -298,25 +125,32 @@
 		<script src="js/public.js"></script>
 		<script>
 			//			mui.plusReady(function() {
-
+			
 			mui.init({
 				pullRefresh: {
 					container: '#pullrefresh',
 					up: {
 						contentrefresh: '正在加载...',
+						contentnomore: '',
 						callback: pullupRefresh
 					}
 				}
 			});
 
-			var pageIndex = 1;
-			var totalnum = -1; //列表当前个数
-			var totalall = 0; //列表总个数
+			openAccountDetail();
 
-			window.addEventListener('searchBooks', function(event) {
+			var pageIndex = 1;
+			var upRefreshFlag = true;//上拉加载标志位。为true则执行刷新
+			var searchValue = "";
+			document.getElementById('search-form').addEventListener('submit',function () {
+			        
 				document.getElementById("scroll_list").innerHTML = "";
-				//				plus.webview.currentWebview().reload(true);
-				console.log(event.detail.searchValue);
+				pageIndex = 1;
+				upRefreshFlag = true;
+				searchValue = document.getElementById("search-input").value.trim();
+				document.getElementById("search-input").blur();
+				console.log(searchValue);
+				
 				if(mui.os.plus) {
 					mui.plusReady(function() {
 						setTimeout(function() {
@@ -330,22 +164,36 @@
 				}
 			});
 
-			function callback(err, list, isRefresh, result) {
+			function callback(list) {
 				var itemStr = "";
 				list.forEach(function(item) {
-					itemStr += `<li class="mui-table-view-cell mui-media" >
-							<div class="mui-slider-handle">
-								<a href="javascript:;">
-									<img class="mui-media-object mui-pull-left" src="${item.images.large}">
-									<div class="mui-media-body">
-										<div class="book-title mui-ellipsis-2">${item.title}</div>
-										<p>评分：${item.rating.average}</p>
-										<p class="mui-ellipsis-2">${item.author}  ${item.pubdate}  ${item.publisher}</p>
-									</div>
-								</a>
-							</div>
+					
+					if(item.sex == 0){
+						var sexIcon = ' <span class="mui-icon iconfont icon-nv"></span>';
+						
+					}else if(item.sex == 1) {
+						var sexIcon = ' <span class="mui-icon iconfont icon-nan"></span>';
+						
+					}else {
+						var sexIcon = '';
+					}
 
-						</li>`;
+					itemStr += '<li class="mui-table-view-cell account-detail" data-key="' + item.id + '">'+
+									'<div class="mui-slider-cell">'+
+										'<div class="oa-contact-cell mui-table">'+
+											'<div class="oa-contact-avatar mui-table-cell">'+
+												'<img src="img/avatar/'+ item.headIcon +'.png" class="headIcon" />'+
+											'</div>'+
+											'<div class="oa-contact-content mui-table-cell">'+
+												'<div class="mui-clearfix">'+
+													'<h4 class="oa-contact-name">'+ item.nickName + sexIcon + '</span></h4>'+
+												'</div>'+
+												'<p class="oa-contact-email mui-h6 mui-ellipsis">' + (!!item.description ? item.description : '') +
+												'</p>'+
+											'</div>'+
+										'</div>'+
+									'</div>'+
+								'</li>';
 				});
 
 				document.getElementById("scroll_list").innerHTML += itemStr;
@@ -353,30 +201,38 @@
 
 			function pullupRefresh() {
 				setTimeout(function() {
-					if(totalnum < totalall) {
-						getListByCallindex("search.json", pageIndex, callback, false);
+					if(upRefreshFlag) {
+						getListByCallindex(api.userSearch, pageIndex, callback);
 					}
 				}, 300);
 			}
 
-			function getListByCallindex(url, pageNo, callback, isRefresh) {
-				var scroll_list = [];
-				var scroll_url = config.url + url;
-				console.log(scroll_url);
-				console.log(scroll_url + "&userId=" + window.localStorage.getItem('userId') + "&start=" + pageNo + "&count=10");
-
+			function getListByCallindex(url, pageNo, callback) {
+				console.log(url);
+				if(!searchValue){
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+					return;
+				}
 				mui.ajax({
-					url: scroll_url,
+					url: url,
 					type: 'get',
 					dataType: 'json',
 					data: {
-						start: pageNo,
-						count: 10,
+						keyWord : searchValue,
+						pageIndex: pageNo
 					},
 					success: function(data) {
 						console.log(data)
+						if(data.errorCode != 0) {
+							mui.alert(data.errorMsg, "出错啦...");
+							return;
+						}
 						if(callback instanceof Function) {
-							callback(null, data.books, isRefresh, data);
+							//当数据少于10条时，结束上拉加载
+							if(data.data.length < 10){
+								upRefreshFlag = false;
+							}
+							callback(data.data);
 							pageIndex++;
 						}
 					},
@@ -385,38 +241,11 @@
 					},
 					beforeSend: function() {},
 					complete: function() {
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh(totalnum == totalall);
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(!upRefreshFlag);
 					}
 				})
 			}
-			//			})
-			//			}
-
-			//			window.addEventListener('searchBooks', function(event) {
-			//				console.log(event.detail.searchValue);
-			//				document.getElementById("scroll_list").innerHTML = "";
-			//				pullrefreshInit('search.json', function(err, list, isRefresh, result) {
-			//					var itemStr = "";
-			//					list.forEach(function(item) {
-			//						itemStr += `<li class="mui-table-view-cell mui-media" >
-			//									<div class="mui-slider-handle">
-			//										<a href="javascript:;">
-			//											<img class="mui-media-object mui-pull-left" src="${item.images.large}">
-			//											<div class="mui-media-body">
-			//												<div class="book-title mui-ellipsis-2">${item.title}</div>
-			//												<p>评分：${item.rating.average}</p>
-			//												<p class="mui-ellipsis-2">${item.author}  ${item.pubdate}  ${item.publisher}</p>
-			//											</div>
-			//										</a>
-			//									</div>
-			//
-			//								</li>`;
-			//					});
-			//
-			//					document.getElementById("scroll_list").innerHTML += itemStr;
-			//				});
-			//
-			//			})
+			
 		</script>
 	</body>
 

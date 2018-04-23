@@ -169,6 +169,11 @@
 			
 			//获取新书速递图书
 			muiGet(api.bookNew_home, function(data) {
+				if(data.errorCode != 0) {
+					mui.alert(data.errorMsg, "出错了...");
+					return;
+				}
+				
 				document.getElementById("newTotal").innerHTML = data.totalCount;
 				var newBookStr = "";
 				var bookList = data.data;
@@ -201,6 +206,12 @@
 			
 			//获取热门畅销图书
 			muiGet(api.bookHot_home, function(data) {
+				
+				if(data.errorCode != 0) {
+					mui.alert(data.errorMsg, "出错了...");
+					return;
+				}
+				
 				document.getElementById("hotTotal").innerHTML = data.totalCount;
 				var hotBookStr = "";
 				var bookList = data.data;
