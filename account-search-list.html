@@ -222,7 +222,7 @@
 						pageIndex: pageNo
 					},
 					success: function(data) {
-						console.log(data)
+						console.log(JSON.stringify(data));
 						if(data.errorCode != 0) {
 							mui.alert(data.errorMsg, "出错啦...");
 							return;

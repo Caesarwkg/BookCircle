@@ -113,7 +113,7 @@
 		<header id="header" class="mui-bar mui-bar-transparent" data-top='0' data-offset='340' data-duration='16'>
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">图书</h1>
-			<a class="mui-icon iconfont icon-edit mui-pull-right"></a>
+			<a id="comment" class="mui-icon iconfont icon-edit mui-pull-right jumpnew" href="comment-publish"></a>
 		</header>
 		<div class="mui-content" id="content">
 		    <!--<div class="head-bg">
@@ -184,6 +184,14 @@
 						});
 						return;
 					}
+					var publishInfo = {
+						isbn : detail.isbn,
+						author : detail.author,
+						title : detail.title,
+						image : detail.images.large
+					}
+					document.getElementById("comment").dataset.key = JSON.stringify(publishInfo);
+					
 					
 					if(data.hasStored) {
 						var storedClass = "icon-favoritesfilling";
@@ -236,12 +244,12 @@
 						
 						//已经添加到书架
 						if(storeClass == "icon-favoritesfilling") {
-//							muiPost(api.bookStoreup, _data, function(data) {
-//								if(data.errorCode == 0){
-//									mui.alert("已添加到书架~","OK");
-//									_this.className  = "mui-icon iconfont book-favorite icon-favorite"
-//								}
-//							})
+							muiPost(api.bookUnstore, _data, function(data) {
+								if(data.errorCode == 0){
+									mui.alert("移除成功~","OK");
+									_this.className  = "mui-icon iconfont book-favorite icon-favorite"
+								}
+							})
 						
 						//还未添加到书架
 						} else if (storeClass == "icon-favorite"){

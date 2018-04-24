@@ -79,9 +79,9 @@
 			</div>
 			<div class="index-title hide">
 				<h1 class="mui-title">
-		    	<div class="mui-btn mui-btn-outlined mui-active">公共</div><div  class="mui-btn mui-btn-outlined">关注</div>
+		    	<div class="mui-btn mui-btn-outlined mui-active" id="circle-all">公共</div><div id="circle-care" class="mui-btn mui-btn-outlined">关注</div>
 		    </h1>
-				<a class="mui-icon iconfont icon-edit mui-pull-right"></a>
+				<a class="mui-icon iconfont icon-edit mui-pull-right jumpnew" href="comment-publish"></a>
 			</div>
 			<div class="index-title hide">
 				<a class="mui-icon iconfont icon-friendadd mui-pull-left"></a>
@@ -111,6 +111,7 @@
 
 		<script src="js/mui.min.js"></script>
 		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init({
 				statusBarBackground: '#f1f1ed'
@@ -330,7 +331,28 @@
 					}
 				});
 			});
-
+			
+//			document.getElementById("circle-all").addEventListener('tap', function() {	
+//			})
+			$("#circle-all").on('click', function() {
+				if($(this).hasClass("mui-active")) {
+					return;
+				}else{
+					$("#circle-care").removeClass("mui-active");
+					$(this).addClass("mui-active");
+					mui.fire(plus.webview.getWebviewById("circle-list.html"), "toggleList");
+				}
+			})
+			$("#circle-care").on('click', function() {
+				if($(this).hasClass("mui-active")) {
+					return;
+				}else{
+					$("#circle-all").removeClass("mui-active");
+					$(this).addClass("mui-active");
+					mui.fire(plus.webview.getWebviewById("circle-list.html"), "toggleList");
+				}
+			})
+			
 			/**
 			 * 显示侧滑菜单
 			 */

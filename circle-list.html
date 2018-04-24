@@ -24,9 +24,10 @@
 				color: inherit;
 			}
 			.mui-media-object {
+				max-width: 50px !important;
 				width: 50px;
-				height: 70px;
-				margin-right: 10px;
+				height: 70px !important;
+				margin-right: 10px ;
 			}
 			.ref-book-info {
 				padding-top: 0;
@@ -34,13 +35,64 @@
 			.mui-card-link {
 				min-width: 60px;
 			}
+			.mui-content {
+				height: 100%;
+				overflow: hidden;
+			}
+			.mui-scroll-wrapper {
+				height: 100%;
+			}
+			/*#all, #care {
+				height: 100%;
+			}*/
+			#circle-all, #circle-care {
+				height: 100%;
+				overflow: scroll;
+			}
+			.mui-content>.mui-table-view:first-child {
+			    margin-top: 0 !important;
+			}
 		</style>
 	</head>
 
 	<body>
 		<div class="mui-content">
-			<ul>
+		
+			<ul id="circle-all" class="mui-table-view mui-table-view-chevron">
+				
+				<!--<li class="mui-card">
+					<div class="mui-card-header mui-card-media">
+						<img src="img/tx.png" />
+						<div class="mui-media-body">
+							周猛
+							<p>2016-06-30 15:30</p>
+						</div>
 
+					</div>
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner">
+							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+						</div>
+						<div class="mui-card-content-inner ref-book-info flex">
+				            <img class="mui-media-object" src="https://img3.doubanio.com/lpic/s27264181.jpg">
+				            <div class="flex_1">
+				               <div class="book-title mui-ellipsis-2">解忧杂货店</div>
+				                <p class="mui-ellipsis-2">[日] 东野圭吾<br />
+				                介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍</p>
+				            </div>
+						</div>
+					</div>
+					<div class="mui-card-footer">
+						<a class="mui-card-link"></a>
+						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
+						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 999</span></a>
+					</div>
+				</li>-->
+				
+			</ul>
+			
+			
+			<ul id="circle-care" class="mui-table-view mui-table-view-chevron hide">
 				<li class="mui-card">
 					<div class="mui-card-header mui-card-media">
 						<img src="img/tx.png" />
@@ -91,200 +143,94 @@
 					</div>
 				</li>
 				
-				<li class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="img/tx.png" />
-						<div class="mui-media-body">
-							周猛
-							<p>2016-06-30 15:30</p>
-						</div>
-
-					</div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link"></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-					</div>
-				</li>
 				
-				<li class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="img/tx.png" />
-						<div class="mui-media-body">
-							周猛
-							<p>2016-06-30 15:30</p>
-						</div>
-
-					</div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link"></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-					</div>
-				</li>
-				
-				<li class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="img/tx.png" />
-						<div class="mui-media-body">
-							周猛
-							<p>2016-06-30 15:30</p>
-						</div>
-
-					</div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link"></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-					</div>
-				</li>
-				
-				<li class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="img/tx.png" />
-						<div class="mui-media-body">
-							周猛
-							<p>2016-06-30 15:30</p>
-						</div>
-
-					</div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link"></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-					</div>
-				</li>
-				
-				<li class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="img/tx.png" />
-						<div class="mui-media-body">
-							周猛
-							<p>2016-06-30 15:30</p>
-						</div>
-
-					</div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link"></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-					</div>
-				</li>
-				
-				<li class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="img/tx.png" />
-						<div class="mui-media-body">
-							周猛
-							<p>2016-06-30 15:30</p>
-						</div>
-
-					</div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link"></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-					</div>
-				</li>
-				
-				<li class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="img/tx.png" />
-						<div class="mui-media-body">
-							周猛
-							<p>2016-06-30 15:30</p>
-						</div>
-
-					</div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link"></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-					</div>
-				</li>
-				
-				<li class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="img/tx.png" />
-						<div class="mui-media-body">
-							周猛
-							<p>2016-06-30 15:30</p>
-						</div>
-
-					</div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link"></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-					</div>
-				</li>
-				
-				<li class="mui-card">
-					<div class="mui-card-header mui-card-media">
-						<img src="img/tx.png" />
-						<div class="mui-media-body">
-							周猛
-							<p>2016-06-30 15:30</p>
-						</div>
-
-					</div>
-					<div class="mui-card-content">
-						<div class="mui-card-content-inner">
-							内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-						</div>
-					</div>
-					<div class="mui-card-footer">
-						<a class="mui-card-link"></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-					</div>
-				</li>
 			</ul>
+						
+				
+		
 		</div>
-
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/mui.min.js"></script>
 		<script src="js/public.js"></script>
+		
 		<script>
+			
+			openAccountDetail();
+			
+				window.addEventListener("toggleList", function() {
+					if(!$("#circle-all").hasClass("hide")){
+						$("#circle-all").addClass("hide");
+						$("#circle-care").removeClass("hide");
+					}else{
+						$("#circle-care").addClass("hide");
+						$("#circle-all").removeClass("hide");
+					}
+			})
+			
+			
+			muiGet(api.dynamicAll + "?pageIndex=1",function(data) {
+				
+				var list = data.data;
+				var itemStr = "";
+				list.forEach(function(it) {
+					var item = it.data;
+					itemStr += '<li class="mui-card ">' +
+									'<div class="mui-card-header mui-card-media account-detail" data-key="'+ item.user.id +'">' +
+										'<img src="img/avatar/' + item.user.headIcon +'.png" />' +
+										'<div class="mui-media-body">' + item.user.nickName +
+											'<p>' + item.createTime + '</p>' +
+										'</div>' +
+				
+									'</div>' +
+									'<div class="mui-card-content">' +
+										'<div class="mui-card-content-inner">' + item.content + '</div>';
+									if(!!item.book){
+										itemStr += '<div class="mui-card-content-inner ref-book-info flex">' +
+											            '<img class="mui-media-object" src="'+item.book.images.large+'">' +
+											            '<div class="flex_1">' +
+											               '<div class="book-title mui-ellipsis-2">'+item.book.title+'</div>' +
+											                '<p class="mui-ellipsis-2">'+item.book.author+'<br />' +
+											                item.book.summary +'</p>' +
+											            '</div>' +
+													'</div>';
+									}
+									itemStr += '</div>' +
+									'<div class="mui-card-footer">' +
+										'<a class="mui-card-link"></a>' +
+										'<a class="mui-card-link" data-key="'+item.id+'"><span class="mui-icon iconfont icon-comments"> '+item.commentCount+'</span></a>' +
+										'<a class="mui-card-link zan" data-status="true" data-id="'+item.id+'"><span class="mui-icon iconfont icon-good"> <span class="like-count">'+item.likeCount+'</span></span></a>' +
+									'</div>' +
+								'</li>';
+				})
+				
+				document.getElementById("circle-all").innerHTML = itemStr;
+				
+				
+			})
+			
+			
+			mui('body').on('tap', '.zan', function(e) {
+				if(this.style.color == "rgb(246, 113, 5)") {
+					return false;
+				}
+				this.style.color = "rgb(246, 113, 5)";
+				var _id = this.dataset.id;
+				var count = $(this).find(".like-count").text();
+				$(this).find(".like-count").text(parseInt(count) + 1);
+				
+				var _data = {
+					userId : localStorage.getItem("userId"),
+					dynamicId :_id
+				}
+				muiPost(api.dynamicLike, _data, function(data){})
+				
+			})
+			
+			
+
+			
+			
+			
 		</script>
 	</body>
 

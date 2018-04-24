@@ -224,10 +224,10 @@
 				                
 				            </ul>
 				        </div>
-				        <div id="item2" class="mui-slider-item mui-control-content">
-				            <ul>
+				        <div id="item2" class="mui-slider-item mui-control-content mui-scroll-wrapper" >
+				            <ul id="circle-self">
 
-								<li class="mui-card">
+								<!--<li class="mui-card">
 									<div class="mui-card-header mui-card-media">
 										<img src="img/tx.png" />
 										<div class="mui-media-body">
@@ -275,28 +275,8 @@
 										<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> </span></a>
 										<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> </span></a>
 									</div>
-								</li>
+								</li>-->
 								
-								<li class="mui-card">
-									<div class="mui-card-header mui-card-media">
-										<img src="img/tx.png" />
-										<div class="mui-media-body">
-											周猛
-											<p>2016-06-30 15:30</p>
-										</div>
-				
-									</div>
-									<div class="mui-card-content">
-										<div class="mui-card-content-inner">
-											内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-										</div>
-									</div>
-									<div class="mui-card-footer">
-										<a class="mui-card-link"></a>
-										<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-										<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 123</span></a>
-									</div>
-								</li>
 								
 								
 							</ul>
@@ -336,14 +316,21 @@
 		
 			openNewWindow();
 			openBookDetail();
+			
 			mui.plusReady(function() {
 				//index页关闭侧滑菜单
 				plus.webview.getWebviewById("index.html").evalJS("closeMenu();plus.webview.currentWebview().setStyle({mask:'none'})")
 			
 				var _self = plus.webview.currentWebview();
 				var _userId = _self.key;
-//				var _userId = "1d86038045d611e89c9f7d30a1d1dd13";
+				
 				var _selfUserId = window.localStorage.getItem("userId");
+				var _data = {
+					userId : _selfUserId,
+					friendId : _userId
+				}
+				var _relationship = 0;
+				
 				
 				if(_userId == _selfUserId) {
 					document.getElementById("relationship").innerHTML = '<div type="button" class="mui-btn mui-btn-outlined jumpnew" href="account-info"><span class="mui-icon iconfont icon-edit"></span> 编辑</div>';
@@ -359,10 +346,11 @@
 						//1,  已关注
 						//2  互相关注
 						var relStr = "";
+						_relationship = data.data;
 						switch (data.data){
 							case 0:
 								relStr = '<div class="mui-btn mui-btn-outlined follow">'+
-													'<div>'+
+													'<div >'+
 														'<span class="mui-icon iconfont icon-add"></span> 关注'+
 													'</div>'+
 														'<span class="mui-icon iconfont icon-email"></span>'+
@@ -371,7 +359,7 @@
 								break;
 							case -1:
 								relStr = '<div class="mui-btn mui-btn-outlined follow">'+
-												'<div>'+
+												'<div >'+
 													'<span class="mui-icon iconfont icon-add"></span> 关注'+
 												'</div>'+
 												'<div>'+
@@ -381,7 +369,7 @@
 								break;
 							case 1:
 								relStr = '<div class="mui-btn mui-btn-outlined follow">'+
-												'<div>'+
+												'<div >'+
 													'<span class="mui-icon iconfont icon-selected"></span> 已关注'+
 												'</div>'+
 												'<div>'+
@@ -391,7 +379,7 @@
 								break;
 							case 2:
 								relStr = '<div class="mui-btn mui-btn-outlined follow">'+
-												'<div>'+
+												'<div >'+
 													'<span class="mui-icon iconfont icon-trust"></span> 相互关注'+
 												'</div>'+
 												'<div>'+
@@ -451,7 +439,7 @@
 						            			'<p>昵称：</p><p>' + info.nickName + '</p>' +
 						            		'</li>' +
 						            		'<li>' +
-						            			(info.sex || info.sex==0 ? (info.sex == 0 ? '<p>性别：</p><p>男</p>' : '<p>性别：</p><p>女</p>') : "") +
+						            			(info.sex || info.sex==0 ? (info.sex == 0 ? '<p>性别：</p><p>女</p>' : '<p>性别：</p><p>男</p>') : "") +
 						            		'</li>' +
 						            		'<li>' +
 						            			(info.birthday ? '<p>年龄：</p><p>' + ((new Date().getFullYear()) - (new Date(info.birthday).getFullYear())) + '</p>'  : "") +
@@ -492,8 +480,127 @@
 					document.getElementById("book-list-number").innerHTML = books.length;
 					document.getElementById("book-list").innerHTML += bookItemStr ? bookItemStr : "<p class='no-book'>这个书架空空如也~</p>";
 				})
+				
+				
+				//获取用户动态
+				muiGet(api.dynamicAll + "?pageIndex=1",function(data) {
+				
+					var list = data.data;
+					var itemStr = "";
+					list.forEach(function(it) {
+						var item = it.data;
+						itemStr += '<li class="mui-card ">' +
+										'<div class="mui-card-header mui-card-media account-detail" data-key="'+ item.user.id +'">' +
+											'<img src="img/avatar/' + item.user.headIcon +'.png" />' +
+											'<div class="mui-media-body">' + item.user.nickName +
+												'<p>' + item.createTime + '</p>' +
+											'</div>' +
+					
+										'</div>' +
+										'<div class="mui-card-content">' +
+											'<div class="mui-card-content-inner">' + item.content + '</div>';
+										if(!!item.book){
+											itemStr += '<div class="mui-card-content-inner ref-book-info flex">' +
+												            '<img class="mui-media-object" src="'+item.book.images.large+'">' +
+												            '<div class="flex_1">' +
+												               '<div class="book-title mui-ellipsis-2">'+item.book.title+'</div>' +
+												                '<p class="mui-ellipsis-2">'+item.book.author+'<br />' +
+												                item.book.summary +'</p>' +
+												            '</div>' +
+														'</div>';
+										}
+										itemStr += '</div>' +
+										'<div class="mui-card-footer">' +
+											'<a class="mui-card-link"></a>' +
+											'<a class="mui-card-link" data-key="'+item.id+'"><span class="mui-icon iconfont icon-comments"> '+item.commentCount+'</span></a>' +
+											'<a class="mui-card-link zan" data-status="true" data-id="'+item.id+'"><span class="mui-icon iconfont icon-good"> <span class="like-count">'+item.likeCount+'</span></span></a>' +
+										'</div>' +
+									'</li>';
+					})
+					
+					document.getElementById("circle-self").innerHTML = itemStr;
+					
+					
+				})
+				
+				
 			
-			
+						//0,  互不关注
+						//-1,  已被关注 
+						//1,  已关注
+						//2,  互相关注
+				document.getElementById("relationship").addEventListener('tap', function() {
+					
+					//关注
+					if(_relationship == 0 || _relationship == -1) {
+						muiPost(api.follow, _data, function(data) {
+							if(data.errorCode != 0){
+								mui.alert("出错了");
+								console.log(data.errorMsg);
+								return;
+							}
+							if(_relationship == 0){
+								var relStr = '<div class="mui-btn mui-btn-outlined follow">'+
+												'<div >'+
+													'<span class="mui-icon iconfont icon-selected"></span> 已关注'+
+												'</div>'+
+												'<div>'+
+													'<span class="mui-icon iconfont icon-email"></span>'+
+												'</div>'+
+											'</div>';
+								document.getElementById("relationship").innerHTML = relStr;
+								_relationship = 1;
+							}else{
+								relStr = '<div class="mui-btn mui-btn-outlined follow">'+
+												'<div >'+
+													'<span class="mui-icon iconfont icon-trust"></span> 相互关注'+
+												'</div>'+
+												'<div>'+
+													'<span class="mui-icon iconfont icon-email"></span>'+
+												'</div>'+
+											'</div>';
+											document.getElementById("relationship").innerHTML = relStr;
+								_relationship = 2;
+							}
+							
+						})
+					
+					//取消关注
+					}else if(_relationship == 1 || _relationship == 2) {
+						muiPost(api.unfollow, _data, function(data) {
+							if(data.errorCode != 0){
+								mui.alert("出错了");
+								console.log(data.errorMsg);
+								return;
+							}
+							var relStr = '<div class="mui-btn mui-btn-outlined follow">'+
+												'<div >'+
+													'<span class="mui-icon iconfont icon-add"></span> 关注'+
+												'</div>'+
+												'<div>'+
+													'<span class="mui-icon iconfont icon-email"></span>'+
+												'</div>'+
+											'</div>';
+							
+							document.getElementById("relationship").innerHTML = relStr;
+							
+							if(_relationship == 1) {
+								_relationship = 0;
+							}else if(_relationship == 2) {
+								_relationship = -1;
+							}
+							
+						})
+					}
+					
+					
+					
+					
+				})
+				
+				
+				
+				
 			
 			})
 			

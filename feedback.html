@@ -34,7 +34,7 @@
 			<header class="mui-bar mui-bar-nav">
 			    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			    <h1 class="mui-title">意见反馈</h1>
-			    <a class="mui-action-back mui-icon mui-pull-right" id="commit"><u>提交</u></a>
+			    <a class="mui-icon mui-pull-right" id="commit"><u>提交</u></a>
 			</header>
 		<div class="mui-content ">
 			<!--<textarea name="" rows="8" cols="" placeholder="请输入您的反馈意见" style="border: none;" ></textarea>-->
@@ -53,6 +53,12 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
 		<script>
+			
+			mui.plusReady(function() {
+					//index页关闭侧滑菜单
+				plus.webview.getWebviewById("index.html").evalJS("closeMenu();plus.webview.currentWebview().setStyle({mask:'none'})")
+			})
+			
 			//介绍introduction
 			document.getElementById('feedback').addEventListener('keyup',function () {
 			        document.getElementById("feedback-number").innerHTML = 200 - this.value.length;
@@ -64,13 +70,18 @@
 				if(!content){
 					return false;
 				}
+				var _data = {
+					userId : window.localStorage.getItem("userId"),
+					content : content
+				}
 				
-				muiPost(api.feekback, function(data) {
+				
+				muiPost(api.feekback, _data, function(data) {
 					if(data.errorCode != 0){
 						mui.alert("提交失败..");
 						return;
 					}
-					mui.alert("感谢您提出的意见，我们会继续完善","","",function(){
+					mui.alert("感谢您提出的意见，我们会继续完善","谢谢","",function(){					
 						mui.back();
 					})
 				})

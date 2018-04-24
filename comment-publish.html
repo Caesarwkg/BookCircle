@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="utf-8">
+		<title></title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="HandheldFriendly" content="true">
+		<meta name="renderer" content="webkit">
+		<link rel="stylesheet" type="text/css" href="css/mui.css" />
+		<link type="text/css" href="css/style.css" rel="stylesheet">
+		<style type="text/css">
+			body {
+				min-height: 100%;
+			}
+			
+			textarea {
+				font-size: 14px;
+			}
+			
+			.upload-imgs {
+				object-fit: cover;
+				width: 90px;
+				height: 90px;
+			}
+			.upload-top {
+			    padding: 11px 15px;
+			}
+			.sqzp {
+			    width: 90px;
+			    height: 90px;
+			    margin-right: 15px;
+			    color: #8f8f94;
+			}
+			#public {
+				font-size: 18px;
+    			line-height: 26px;
+    			color: #0091FF
+			}
+			.mui-media {
+				height: 80px;
+				padding: 10px;
+				margin-bottom: 10px;
+				background-color: #F1F1ED;
+				display: none;
+			}
+			.mui-media-object {
+				width: 44px;
+				height: 60px;
+			}
+			.mui-media-body {
+				margin-left: 54px;
+			}
+			.book-title {
+				margin-bottom: 10px;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+
+	<body class="">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">发表文字</h1>
+			<a class="mui-icon mui-pull-right" id="public">&nbsp;&nbsp;<u>发送</u></a>
+		</header>
+
+		<div class="mui-content">
+			<div class="upload-top bgwhite mb10">
+				<textarea rows="6" placeholder="这一刻的想法..." id="content" style="font-size: 16px;"></textarea>
+				
+				<div class="mui-media" id="book-info">
+					<img alt="暂无图片" class="mui-media-object mui-pull-left" src="https://img3.doubanio.com/view/subject/l/public/s27264181.jpg">
+					<div class="mui-media-body">
+						<div class="book-title mui-ellipsis">解忧杂货店</div>
+			            <p class="mui-ellipsis">东野圭吾</p>
+					</div>
+				</div>
+				
+				<p>不超过3张照片哦~</p>
+				<div id="files">
+					<button type="button" class="mui-btn sqzp" id="picture-btn"><div class="mui-icon mui-icon-camera" style="font-size: 32px;"></div><br />上传照片</button>
+					<!--<div class="upload-imgs" >
+					<img src="../img/learn-temp.png" width="90" height="90" /><span class="delete">—</span>
+					</div>
+					-->
+				</div>
+				<!--<button type="button" class="mui-btn mui-btn-yellow mui-btn-block fbbtn mt10" id="public">发布</button>-->
+			</div>
+
+		</div>
+
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/public.js"></script>
+		<script src="js/mui.zoom.js"></script>
+		<script src="js/mui.previewimage.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				var files = [];
+				var self = plus.webview.currentWebview();
+				var isbn = "";
+				var bookInfo = self.key;
+				if(bookInfo){
+					var book = JSON.parse(bookInfo);
+					isbn = book.isbn;
+					document.getElementById("book-info").innerHTML = '<img alt="暂无图片" class="mui-media-object mui-pull-left" src="'+book.image+'">'+
+																		'<div class="mui-media-body">'+
+																			'<div class="book-title mui-ellipsis">'+book.title+'</div>'+
+																            '<p class="mui-ellipsis">'+book.author+'</p>'+
+																		'</div>';
+					document.getElementById("book-info").style.display = 'block';
+				}
+				
+				
+				
+//				var server = config.url + "jzyj/project/uploadPic.jsp";
+				
+				//图片服务器。
+				var server = "";
+				
+				var index = 0;
+				mui.previewImage();
+				// 拍照添加文件
+				function appendByCamera() {
+					plus.camera.getCamera().captureImage(function(p) {
+						var pys="_doc/1"+p.split("/")[1];
+						plus.zip.compressImage({
+								src:p,
+								dst:pys,
+								quality:15
+							},
+							function() {
+								files.push({
+									path: pys,
+									name: 'file' + index
+								});
+								index++;
+								upload();
+							},function(error) {
+								files.push({
+									path: p,
+									name: 'file' + index
+								});
+								index++;
+								upload();
+						})
+						
+					});
+				}
+				
+				// 从相册添加文件
+				function appendByGallery() {
+					plus.gallery.pick(function(p) {
+						files.push({
+							path: p,
+							name: 'file' + index
+						});
+						index++;
+						upload();
+					}, function(e) {
+						outSet("取消选择图片");
+					}, {
+						filter: "image"
+					});
+				}
+				mui("body").on("tap", "#public", function() {
+					
+					var content = document.getElementById("content").value.trim();
+					if(!content){
+						return false;
+					}
+					var _data = {
+						userId : localStorage.getItem("userId"),
+						content : content
+					}
+					if(!!isbn) {
+						_data.isbn = isbn;
+					}
+					muiPost(api.dynamicPublish, _data, function(data) {
+						if(data.errorCode != 0) {
+							mui.alert("出错了..");
+							console.log(data.errorMsg);
+							return;
+						}
+						mui.back();
+						
+					})
+//					var id = self.key;
+//					var content=mui("#content")[0].value;
+//					var icon='';
+//					var imgs = document.querySelectorAll(".slt");
+//					if(imgs.length==0){
+//						mui.alert("您还没有上传照片哦！");
+//						return
+//					}
+//					if(imgs&&imgs.length>0){
+//						for(var i=0;i<imgs.length;i++){
+//							icon+= "/web" + imgs[i].src.split("web")[1]+",";
+//						}
+//						icon=icon.slice(0,-1);
+//					}
+//					muiGet("jzyj/project/savePic.jsp?icon="+icon+"&content="+content+"&id="+id,function(data){
+//						console.log(JSON.stringify(data))
+//						if(data.success){
+//							mui.alert("发布成功！",function(){
+//								mui.back();
+//							});
+//						}else{
+//							mui.alert("发布失败！请重试！");
+//						}
+//					})
+				})
+				mui("body").on("tap", "#picture-btn", function() {
+					if(files.length == 3) {
+						plus.nativeUI.alert("最多不超过3张哦~");
+						return;
+					}
+					var btnArray = [{
+						title: "立即拍照"
+					}, {
+						title: "选择现有照片"
+					}];
+//					var btnArray = [{
+//						title: "立即拍照"
+//					}];
+					plus.nativeUI.actionSheet({
+//						title: "上传照片",
+						cancel: "取消",
+						buttons: btnArray
+					}, function(e) {
+						var index = e.index;
+						switch(index) {
+							case 0:
+								//	取消
+								break;
+							case 1:
+								//  拍照
+								appendByCamera()
+								break;
+							case 2:
+								//  相册
+								appendByGallery()
+								break;
+						}
+					});
+				})
+
+				// 上传文件
+				function upload() {
+//					if(files.length <= 0) {
+//						plus.nativeUI.alert("没有添加上传文件！");
+//						return;
+//					}
+					var wt = plus.nativeUI.showWaiting();
+					var task = plus.uploader.createUpload(server, {
+							method: "POST"
+						},
+						function(t, status) { //上传完成
+							if(status == 200) {
+								console.log("aaaa"+JSON.stringify(t))
+								var src0 = eval("(" + t.responseText + ")");
+								//var src = src0.filepath.replace(/\\/g, "");
+								appendFile(src0.result.path);
+								wt.close();
+							} else {
+								mui.toast("上传失败：" + status);
+								wt.close();
+							}
+						}
+					);
+					for(var i = 0; i < files.length; i++) {
+						var f = files[i];
+						task.addFile(f.path, {
+							key: f.name
+						});
+					}
+					task.start();
+				}
+				// 添加节点图片
+
+				function appendFile(p) {
+					var imgn = '<div class="upload-imgs"><img src="' + p + '" width="90" height="90" class="slt" data-preview-src="" data-preview-group="1" /><span class="delete" data-rand='+getUid() +'>—</span></div>';
+					document.getElementById("files").innerHTML += imgn;
+				}
+				
+//				mui("body").on("tap", ".delete", function() {
+//					var box = this.parentNode;
+//					var rand=this.dataset.rand;
+//					var imgsrc = "/web" + box.getElementsByTagName("img")[0].src.split("web")[1];
+//					muiGet("jzyj/project/delPic.jsp?icon=" + imgsrc, function() {
+//					})
+//					var imgs = document.querySelectorAll(".delete");
+//					for(var i=0;i<imgs.length;i++){
+////						console.log("以下拉"+imgs[i].dataset.rand);
+//						if(imgs[i].dataset.rand==rand){
+//							var sy=i;
+//							break
+//						}
+//					}
+//					if(sy){
+//						files.splice(sy,1);
+////						console.log(JSON.stringify(files));
+//					}
+//					mui("#files")[0].removeChild(box); 
+//				})
+			})
+		</script>
+	</body>
+
+</html>

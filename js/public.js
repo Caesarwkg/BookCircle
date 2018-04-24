@@ -31,11 +31,18 @@ var api = {
 	bookNew: config.url + "book/new",
 	bookHot: config.url + "book/hot",
 	bookStoreup: config.url + "userbook/storeup",
+	bookUnstore: config.url + "userbook/unstore",
 	bookStoreList: config.url + "userbook/mybooks",
 	followers: config.url + "friend/fans",
 	following: config.url + "friend/friends",
 	relationship: config.url + "friend/relationship",
-	feekback: config.url + "feedback/publish"
+	feekback: config.url + "feedback/publish",
+	follow:config.url + "friend/follow",
+	unfollow:config.url + "friend/unfollow",
+	dynamicPublish:config.url + "dynamic/publish",
+	dynamicInfos:config.url + "dynamic/infos",
+	dynamicAll:config.url + "dynamic/all",
+	dynamicLike:config.url + "dynamic/like",
 }
 
 
@@ -71,7 +78,7 @@ mui.plusReady(function() {
 	//		});
 	//	}
 
-	console.log("窗口标识: " + ws.id);
+//	console.log("窗口标识: " + ws.id);
 	document.addEventListener("netchange", function() {
 		var network = plus.networkinfo.getCurrentType();
 		if(network == plus.networkinfo.CONNECTION_NONE) {

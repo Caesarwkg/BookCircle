@@ -33,11 +33,11 @@
 				<form class="mui-input-group">
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-mobilephone"></span></label>
-						<input id="phoneNumber" type="number" class="mui-input-clear" placeholder="手机号" value="15262757899">
+						<input id="phoneNumber" type="number" class="mui-input-clear" placeholder="手机号" >
 					</div>
 					<div class="mui-input-row">
 						<label><span class="mui-icon iconfont icon-password"></span></label>
-						<input id="password" type="password" class="mui-input-password" placeholder="密码" value="123">
+						<input id="password" type="password" class="mui-input-password" placeholder="密码" >
 					</div>
 				</form>
 				<div class="mui-button-row">
@@ -64,6 +64,9 @@
 					document.getElementById("phoneNumber").value = '';
 					document.getElementById("password").value = '';
 				})
+				
+				document.getElementById("phoneNumber").value = !!localStorage.getItem("phoneNumber") ? localStorage.getItem("phoneNumber") : "";
+				document.getElementById("password").value = localStorage.getItem("password") != "undefined" && localStorage.getItem("password") ? localStorage.getItem("password") : "";
 				
 				document.getElementById("phoneNumber").value;
 				document.getElementById('loginBtn').addEventListener('tap',function () {
