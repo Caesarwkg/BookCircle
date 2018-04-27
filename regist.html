@@ -130,10 +130,12 @@
 												if(data.errorCode == "0"){
 													//保存信息至本地
 													localStorage.setItem("phoneNumber",data.data.phoneNumber);
-													localStorage.setItem("password",data.data.password);
+													localStorage.setItem("password",document.getElementById("password").value);
 													localStorage.setItem("nickName",data.data.nickName);
 													localStorage.setItem("userId",data.data.id);
 													localStorage.setItem("headIcon",data.data.headIcon);
+													
+													document.getElementById("password2").blur();
 													
 													//跳转
 													openWindow("index");

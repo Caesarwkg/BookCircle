@@ -228,6 +228,7 @@ function openAccountDetail() {
 			extras: {
 				key: key
 			},
+			createNew:true,
 			waiting: {
 				autoShow: true
 			}

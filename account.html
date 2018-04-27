@@ -204,9 +204,9 @@
 					</div>
 					<div class="time">
 						<div href="following-list" class="jumpnew">
-							<div id="fwtime">关注</div><u id="followersNum">0</u></div>
+							<div id="fwtime">关注</div><u id="followingNum">0</u></div>
 						<div href="followers-list" class="jumpnew">
-							<div id="xxtime">粉丝</div><u id="followingNum">0</u></div>
+							<div id="xxtime">粉丝</div><u id="followersNum">0</u></div>
 					</div>
 				</div>
 				<div class="mui-slider">
@@ -393,7 +393,7 @@
 				}
 				
 				
-				//关注
+				//粉丝
 				muiGet(api.followers + "?userId=" + _userId, function(data) {
 					if(data.errorCode != 0){
 						return;
@@ -401,7 +401,7 @@
 					followersNum = data.data.length ? data.data.length : 0;
 					document.getElementById("followersNum").innerHTML = followersNum;
 				})
-				//粉丝
+				//关注
 				muiGet(api.following + "?userId=" + _userId, function(data) {
 					if(data.errorCode != 0){
 						return;
@@ -483,12 +483,14 @@
 				
 				
 				//获取用户动态
-				muiGet(api.dynamicAll + "?pageIndex=1",function(data) {
+				muiGet(api.dynamicInfos + "?userId=" + _userId + "&pageIndex=1",function(data) {
 				
 					var list = data.data;
 					var itemStr = "";
-					list.forEach(function(it) {
-						var item = it.data;
+					list.forEach(function(item) {
+//						var item = it.data;
+//						console.log("=======================================");
+//						console.log(JSON.stringify(it));
 						itemStr += '<li class="mui-card ">' +
 										'<div class="mui-card-header mui-card-media account-detail" data-key="'+ item.user.id +'">' +
 											'<img src="img/avatar/' + item.user.headIcon +'.png" />' +
@@ -517,8 +519,7 @@
 										'</div>' +
 									'</li>';
 					})
-					
-					document.getElementById("circle-self").innerHTML = itemStr;
+					document.getElementById("circle-self").innerHTML += itemStr ? itemStr : "<p class='no-book'>还没有任何动态~</p>";
 					
 					
 				})
