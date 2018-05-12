@@ -43,6 +43,8 @@ var api = {
 	dynamicInfos:config.url + "dynamic/infos",
 	dynamicAll:config.url + "dynamic/all",
 	dynamicLike:config.url + "dynamic/like",
+	commentInfos:config.url + "comment/infos",
+	commentPublish:config.url + "comment/publish"
 }
 
 
@@ -236,6 +238,62 @@ function openAccountDetail() {
 	});
 }
 
+//点击打开新窗口
+function openCircleDetail() {
+	mui('body').on('tap', ".circle-detail", function(e) {
+		var tohref = "circle-detail.html";
+		var key = this.getAttribute('data-key');
+		var length = tohref.split("/").length;
+		var urlid = tohref.split("/")[length - 1];
+		console.log("openCircleDetail=====>" + urlid, tohref);
+		mui.openWindow({
+			id: urlid,
+			url: tohref,
+			styles: {
+				popGesture: "close"
+			},
+			show: {
+				autoshow: false,
+				aniShow: "zoom-fade-out"
+			},
+			extras: {
+				key: key
+			},
+			waiting: {
+				autoShow: true
+			}
+		});
+	});
+}
+
+function rate(rating) {
+	if(!rating){
+		return '<i class="mui-icon mui-icon-star"></i><i class="mui-icon mui-icon-star"></i><i class="mui-icon mui-icon-star"></i><i class="mui-icon mui-icon-star"></i><i class="mui-icon mui-icon-star"></i>';
+	}
+	var renderHTML = "";
+	var str = rating / 2 + "";
+	var arr = str.split('.');
+	//int
+	if(arr.length == 1) {
+		for(var i = 0; i < parseInt(arr[0]); i++) {
+			renderHTML += '<i class="mui-icon mui-icon-star-filled"></i>';
+		}
+		for(var j = 0; j < 5 - parseInt(arr[0]); j++) {
+			renderHTML += '<i class="mui-icon mui-icon-star"></i>';
+		}
+		renderHTML  = renderHTML + rating + ".0";
+	}else if(arr.length == 2){
+		for(var i = 0; i < parseInt(arr[0]); i++) {
+			renderHTML += '<i class="mui-icon mui-icon-star-filled"></i>';
+		}
+			renderHTML += '<i class="mui-icon mui-icon-starhalf"></i>';
+		for(var m = 0; m < 4 - i; m++) {
+			renderHTML += '<i class="mui-icon mui-icon-star"></i>';
+		}
+		renderHTML = renderHTML + " "+ rating; 
+	}
+	return renderHTML;
+}
 //下拉刷新 上拉加载
 function pullrefreshInit(url, callback, flag) { 
 	

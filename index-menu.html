@@ -103,6 +103,7 @@
 			var userId = localStorage.getItem("userId");
 			document.getElementById("headIcon").dataset.key = userId;
 			
+			
 			var aniShow = "slide-in-right";
 			var subWebview = null,
 				template = null,
@@ -163,6 +164,12 @@
 					},300);
 					mui.fire(plus.webview.getLaunchWebview(), "refresh0");
 				})
+				mui("body").on("tap", "#checkversion", function() {
+					// 版本更新....待续...
+					plus.nativeUI.toast("已是最新版本^-^");
+				})
+				
+				
 			})
 
 			/**

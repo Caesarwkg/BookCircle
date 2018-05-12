@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style>
+			html, body, .mui-content {
+				min-height: 100%;
+				background-color: #fff;
+			}
+			.mui-content {
+				padding: 11px 15px;
+			}
+			.tag-box {
+				text-align: center;
+			}
+			#selected {
+				position: relative;
+			    width: 160px;
+			    left: 50%;
+			    margin-left: -80px;
+			    bottom: 15%;
+			    padding: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" style="background-color: #fff;">
+			<div style="overflow: hidden;">
+				<a class="mui-btn  mui-btn-outlined mui-pull-right" id="close">跳过</a>
+			</div>
+			<br />
+		    <div>选择你的专属标签:</div>
+		    <br />
+		    <div class="tag-box">
+		    	<button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" data-key="小说">小说</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" data-key="文学">文学</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-success  mui-btn-outlined" data-key="南派三叔">南派三叔</button>
+		    </div>
+		    <br />
+		    <div class="tag-box">
+		    	<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined" data-key="青春">青春</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" data-key="爱情">爱情</button>&nbsp;&nbsp;
+		    </div>
+		    <br />
+		    <div class="tag-box">
+		    	<button type="button" class="mui-btn mui-btn-royal  mui-btn-outlined" data-key="悬疑">悬疑</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" data-key="散文">散文</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-royal  mui-btn-outlined" data-key="治愈">治愈</button>
+		    			    	<button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" data-key="东野圭吾">东野圭吾</button>
+		    </div>
+		    <br />
+		    <div class="tag-box">
+		    	<button type="button" class="mui-btn mui-btn-yellow mui-btn-outlined" data-key="外国文学">外国文学</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined" data-key="经典 ">经典</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-green mui-btn-outlined" data-key="活着">活着</button>
+		    </div>
+		     <br />
+		    <div class="tag-box">
+		    	<button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" data-key="明朝那些事儿">明朝那些事儿</button>
+		    </div> <br />
+		    <div class="tag-box">
+		    	<button type="button" class="mui-btn mui-btn-green mui-btn-outlined" data-key="人性">人性</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-yellow mui-btn-outlined" data-key="飘">飘</button>
+		    </div>
+		    <br />
+		     <div class="tag-box">
+		    	<button type="button" class="mui-btn mui-btn-royal mui-btn-outlined" data-key="村上春树">村上春树</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-red mui-btn-outlined" data-key="亲情">亲情</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" data-key="杂文">杂文</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-yellow mui-btn-outlined" data-key="校园">校园</button>
+		    </div>
+		    <br />
+		     <div class="tag-box">
+		    	<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" data-key="言情">言情</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-yellow mui-btn-outlined" data-key="励志">励志</button>&nbsp;&nbsp;
+		    	<button type="button" class="mui-btn mui-btn-royal mui-btn-outlined" data-key="战争">战争</button>
+		    </div>
+		    <br />
+		    <br />
+		    <div>
+		    	<button type="button" class="mui-btn mui-btn-outlined" id="selected">选好了</button>
+		    </div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			mui.back = function() {};
+			mui.plusReady(function() {
+				if(mui.os.ios){
+					plus.navigator.setFullscreen(true);
+				}
+				plus.navigator.closeSplashscreen();
+			});
+			//跳过按钮点击事件
+			document.getElementById("close").addEventListener('tap', function(event) {
+				plus.navigator.setFullscreen(false);
+				openWindow("index");
+			}, false);
+			document.getElementById("selected").addEventListener('tap', function(event) {
+				
+				//.........提交标签
+				plus.navigator.setFullscreen(false);
+				openWindow("index");
+			}, false);
+			
+			$(function(){
+				$("button").click(function() {
+					if($(this).hasClass("mui-btn-outlined")) {
+						$(this).removeClass("mui-btn-outlined")
+					}else {
+						$(this).addClass("mui-btn-outlined")
+					}
+				})
+				
+			})
+		</script>
+	</body>
+
+</html>

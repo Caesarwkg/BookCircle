@@ -23,6 +23,10 @@
 			a:active {
 				color: #000000;
 			}
+			.mui-icon-star, .mui-icon-star-filled, .mui-icon-starhalf {
+				font-size: 16px;
+				color: orange
+			}
 		</style>
 	</head>
 
@@ -101,7 +105,7 @@
 									'<img alt="暂无图片" class="mui-media-object mui-pull-left" src="'+item.images.large+'">'+
 									'<div class="mui-media-body">'+
 										'<div class="book-title mui-ellipsis-2">'+item.title+'</div>'+
-										'<p>评分：'+item.rating+'</p>'+
+										'<p>评分：'+rate(item.rating)+'</p>'+
 							            '<p class="mui-ellipsis-2">'+ item.author +' / '+ item.pubdate +' / '+ item.publisher +'</p>'+
 									'</div>'+
 								'</a>'+

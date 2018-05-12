@@ -93,7 +93,7 @@
 			
 			
 			<ul id="circle-care" class="mui-table-view mui-table-view-chevron hide">
-				<li class="mui-card">
+				<!--<li class="mui-card">
 					<div class="mui-card-header mui-card-media">
 						<img src="img/tx.png" />
 						<div class="mui-media-body">
@@ -141,7 +141,7 @@
 						<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> </span></a>
 						<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> </span></a>
 					</div>
-				</li>
+				</li>-->
 				
 				
 			</ul>
@@ -156,7 +156,7 @@
 		<script>
 			
 			openAccountDetail();
-			
+			openCircleDetail();
 				window.addEventListener("toggleList", function() {
 					if(!$("#circle-all").hasClass("hide")){
 						$("#circle-all").addClass("hide");
@@ -197,7 +197,7 @@
 									itemStr += '</div>' +
 									'<div class="mui-card-footer">' +
 										'<a class="mui-card-link"></a>' +
-										"<a class='mui-card-link' data-key='"+item+"'><span class='mui-icon iconfont icon-comments'> "+item.commentCount+"</span></a>" +
+										"<a class='mui-card-link circle-detail' data-key='"+JSON.stringify(item)+"'><span class='mui-icon iconfont icon-comments'> "+item.commentCount+"</span></a>" +
 										'<a class="mui-card-link zan" data-status="true" data-id="'+item.id+'"><span class="mui-icon iconfont icon-good"> <span class="like-count">'+item.likeCount+'</span></span></a>' +
 									'</div>' +
 								'</li>';
@@ -207,6 +207,50 @@
 				
 				
 			})
+			
+			
+			muiGet(api.dynamicAll + "?pageIndex=1",function(data) {
+				
+				var list = data.data;
+				var itemStr = "";
+				list.forEach(function(it) {
+					var item = it.data;
+					itemStr += '<li class="mui-card ">' +
+									'<div class="mui-card-header mui-card-media account-detail" data-key="'+ item.user.id +'">' +
+										'<img src="img/avatar/' + item.user.headIcon +'.png" />' +
+										'<div class="mui-media-body">' + item.user.nickName +
+											'<p>' + item.createTime + '</p>' +
+										'</div>' +
+				
+									'</div>' +
+									'<div class="mui-card-content">' +
+										'<div class="mui-card-content-inner">' + item.content + '</div>';
+									if(!!item.book){
+										itemStr += '<div class="mui-card-content-inner ref-book-info flex">' +
+											            '<img class="mui-media-object" src="'+item.book.images.large+'">' +
+											            '<div class="flex_1">' +
+											               '<div class="book-title mui-ellipsis-2">'+item.book.title+'</div>' +
+											                '<p class="mui-ellipsis-2">'+item.book.author+'<br />' +
+											                item.book.summary +'</p>' +
+											            '</div>' +
+													'</div>';
+									}
+									itemStr += '</div>' +
+									'<div class="mui-card-footer">' +
+										'<a class="mui-card-link"></a>' +
+										"<a class='mui-card-link circle-detail' data-key='"+JSON.stringify(item)+"'><span class='mui-icon iconfont icon-comments'> "+item.commentCount+"</span></a>" +
+										'<a class="mui-card-link zan" data-status="true" data-id="'+item.id+'"><span class="mui-icon iconfont icon-good"> <span class="like-count">'+item.likeCount+'</span></span></a>' +
+									'</div>' +
+								'</li>';
+				})
+				
+				document.getElementById("circle-care").innerHTML = itemStr;
+				
+				
+			})
+			
+			
+			
 			
 			
 			mui('body').on('tap', '.zan', function(e) {

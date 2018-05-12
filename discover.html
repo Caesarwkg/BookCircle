@@ -109,6 +109,10 @@
 			    margin: 10px 0;
 			    padding: 0 10px;
 			}
+			.mui-icon-star, .mui-icon-star-filled, .mui-icon-starhalf {
+				font-size: 16px;
+				color: orange
+			}
 		</style>
 	</head>
 
@@ -182,7 +186,7 @@
 										'<div>'+
 											'<img src="' + e.images.large + '" /><br />'+
 											'<div class="book-title mui-ellipsis">' + e.title + '</div>'+
-											'<p>评分：' + e.rating + '</p>'+
+											'<p>' + rate(e.rating) + '</p>'+
 										'</div>'+
 									'</div>';
 				})
@@ -220,7 +224,7 @@
 										'<div>'+
 											'<img src="' + e.images.large + '" /><br />'+
 											'<div class="book-title mui-ellipsis">' + e.title + '</div>'+
-											'<p>评分：' + e.rating + '</p>'+
+											'<p>' + rate(e.rating) + '</p>'+
 										'</div>'+
 									'</div>';
 								
@@ -278,7 +282,7 @@
 							            '<img class="mui-media-object mui-pull-left" src="'+ e.images.large +'">'+
 							            '<div class="mui-media-body">'+
 							               '<div class="book-title mui-ellipsis-2">'+ e.title +'</div>'+
-							                '<p>评分：'+ e.rating +'</p>'+
+							                '<p>评分：'+ rate(e.rating) +'</p>'+
 							                '<p class="mui-ellipsis-2">'+ e.author +' / '+ e.pubdate +' / '+ e.publisher +'</p>'+
 							            '</div>'+
 							        '</a>'+

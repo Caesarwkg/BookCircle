@@ -23,12 +23,10 @@
 	</head>
 
 	<body class="login bgwhite">
-		<div class="mui-content">
-			<!--logo-->
-			<div class="login_logo bgwhite">
+		<div class="mui-content" id="content">
+			<!--<div class="login_logo bgwhite">
 				<img src="img/logo.jpg" class="book-logo" alt="logo" />
 			</div>
-			<!--input-->
 			<div class="login_input">
 				<form class="mui-input-group">
 					<div class="mui-input-row">
@@ -45,90 +43,149 @@
 			   </div>
 		        <div class="mui-link-row"><a>忘记密码?</a><a href="regist" class="jumpnew" >注册账号</a></div>
 			</div>
-			<!--bottom-->
 			<div class="login_bottom">
 				<div class="text-center">其他方式登录</div>
 				<div class="text-center otherways">
 					<span class="mui-icon mui-icon-qq"></span>
 					<span class="mui-icon mui-icon-weixin"></span>
 				</div>
-			</div>
+			</div>-->
 		</div>
 		<script type="text/javascript">
 			mui.plusReady(function() {
-				//开启封装的打开新窗口函数
-				openNewWindow();
 				
-				//清除缓存
-				window.addEventListener('refresh0', function() {
-					document.getElementById("phoneNumber").value = '';
-					document.getElementById("password").value = '';
-				})
-				
-				document.getElementById("phoneNumber").value = !!localStorage.getItem("phoneNumber") ? localStorage.getItem("phoneNumber") : "";
-				document.getElementById("password").value = localStorage.getItem("password") != "undefined" && localStorage.getItem("password") ? localStorage.getItem("password") : "";
-				
-				document.getElementById("phoneNumber").value;
-				document.getElementById('loginBtn').addEventListener('tap',function () {
-					var  _this = this;
-					if(_this.dataset.locked == 'locked') {
-						return;
-					}else {
-						_this.dataset.locked = 'locked';
-					}
-					//手机号码
-					var phoneNumber = document.getElementById("phoneNumber").value;
-					//密码
-					var password = document.getElementById("password").value;
+				//读取本地存储，检查是否为首次启动
+				var showGuide = plus.storage.getItem("lauchFlag");
+				//仅支持竖屏显示
+				plus.screen.lockOrientation("portrait-primary");
+				if(showGuide) {
+					//有值，说明已经显示过了，无需显示；
+					//关闭splash页面；
+					plus.navigator.closeSplashscreen();
+					plus.navigator.setFullscreen(false);
 					
-					if (!(phoneNumber && password)) {
-						//信息完整验证
-						mui.toast("信息请填写完整哦~");
-						_this.dataset.locked = 'unlocked';
-						return;
-					} else {
-						if (!config.phoneReg.test(phoneNumber)) {
-							//手机号格式验证
-							mui.toast("手机号格式不对哦~");
+				} else {
+					//显示启动导航
+					mui.openWindow({
+						id: 'guide',
+						url: 'guide.html',
+						styles: {
+							popGesture: "none"
+						},
+						show: {
+							aniShow: 'none'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}
+				
+				// 为了体验效果更佳。用setTimeout。
+				setTimeout(function(){
+					document.getElementById("content").innerHTML =  '<div class="login_logo bgwhite">' +
+																		'<img src="img/logo.jpg" class="book-logo" alt="logo" />' +
+																	'</div>' +
+																	'<div class="login_input">' +
+																		'<form class="mui-input-group">' +
+																			'<div class="mui-input-row">' +
+																				'<label><span class="mui-icon iconfont icon-mobilephone"></span></label>' +
+																				'<input id="phoneNumber" type="number" class="mui-input-clear" placeholder="手机号" >' +
+																			'</div>' +
+																			'<div class="mui-input-row">' +
+																				'<label><span class="mui-icon iconfont icon-password"></span></label>' +
+																				'<input id="password" type="password" class="mui-input-password" placeholder="密码" >' +
+																			'</div>' +
+																		'</form>' +
+																		'<div class="mui-button-row">' +
+																	       	'<button id="loginBtn" type="button" class="mui-btn mui-btn-primary mui-btn-block" data-loading-text="登录中..."  data-locked="unlocked" >登录</button>' +
+																	   '</div>' +
+																        '<div class="mui-link-row"><a>忘记密码?</a><a href="regist" class="jumpnew" >注册账号</a></div>' +
+																	'</div>' +
+																	'<div class="login_bottom">' +
+																		'<div class="text-center">其他方式登录</div>' +
+																		'<div class="text-center otherways">' +
+																			'<span class="mui-icon mui-icon-qq"></span>' +
+																			'<span class="mui-icon mui-icon-weixin"></span>' +
+																		'</div>' +
+																	'</div>';
+						
+						
+					
+					
+					//开启封装的打开新窗口函数
+					openNewWindow();
+					
+					//清除缓存
+					window.addEventListener('refresh0', function() {
+						document.getElementById("phoneNumber").value = '';
+						document.getElementById("password").value = '';
+					})
+					
+					document.getElementById("phoneNumber").value = !!localStorage.getItem("phoneNumber") ? localStorage.getItem("phoneNumber") : "";
+					document.getElementById("password").value = localStorage.getItem("password") != "undefined" && localStorage.getItem("password") ? localStorage.getItem("password") : "";
+					
+					document.getElementById("phoneNumber").value;
+					document.getElementById('loginBtn').addEventListener('tap',function () {
+						var  _this = this;
+						if(_this.dataset.locked == 'locked') {
+							return;
+						}else {
+							_this.dataset.locked = 'locked';
+						}
+						//手机号码
+						var phoneNumber = document.getElementById("phoneNumber").value;
+						//密码
+						var password = document.getElementById("password").value;
+						
+						if (!(phoneNumber && password)) {
+							//信息完整验证
+							mui.toast("信息请填写完整哦~");
 							_this.dataset.locked = 'unlocked';
 							return;
 						} else {
-							
-							var _data = {
-								"phoneNumber": phoneNumber,
-								"password": password
-							}
-							console.log(_data);
-							//开始登录
-							mui(_this).button('loading');//切换为loading状态
-							muiPost(api.userLogin, _data, function(data){
+							if (!config.phoneReg.test(phoneNumber)) {
+								//手机号格式验证
+								mui.toast("手机号格式不对哦~");
 								_this.dataset.locked = 'unlocked';
-								mui(_this).button('reset');//切换为reset状态(即重置为原始的button)
-								if(data.errorCode != 0) {
-									mui.alert(data.errorMsg, "出错了...");
-									return;
+								return;
+							} else {
+								
+								var _data = {
+									"phoneNumber": phoneNumber,
+									"password": password
 								}
-								//登录成功
-								if(data.errorCode == 0) {
-									//保存信息至本地
-									localStorage.setItem("phoneNumber",data.data.phoneNumber);
-									localStorage.setItem("password",document.getElementById("password").value);
-									localStorage.setItem("nickName",data.data.nickName);
-									localStorage.setItem("userId",data.data.id);
-									localStorage.setItem("headIcon",data.data.headIcon);
-									
-									document.getElementById("password").blur();
-									//跳转到到主页
-									openWindow("index");
-								} else {
-									mui.alert(data.errorMsg,"登录失败")
-								}
-							})
+								console.log(_data);
+								//开始登录
+								mui(_this).button('loading');//切换为loading状态
+								muiPost(api.userLogin, _data, function(data){
+									_this.dataset.locked = 'unlocked';
+									mui(_this).button('reset');//切换为reset状态(即重置为原始的button)
+									if(data.errorCode != 0) {
+										mui.alert(data.errorMsg, "出错了...");
+										return;
+									}
+									//登录成功
+									if(data.errorCode == 0) {
+										//保存信息至本地
+										localStorage.setItem("phoneNumber",data.data.phoneNumber);
+										localStorage.setItem("password",document.getElementById("password").value);
+										localStorage.setItem("nickName",data.data.nickName);
+										localStorage.setItem("userId",data.data.id);
+										localStorage.setItem("headIcon",data.data.headIcon);
+										
+										document.getElementById("password").blur();
+										//跳转到到主页
+										openWindow("index");
+									} else {
+										mui.alert(data.errorMsg,"登录失败")
+									}
+								})
+							}
 						}
-					}
-				})
+					})
 				
-				
+				},100)
 			})
 		</script>
 	</body>

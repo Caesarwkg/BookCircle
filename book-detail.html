@@ -116,6 +116,7 @@
 			.mui-card {
 				margin-left: 0px;
 				margin-right: 0px;
+				box-shadow: 0 0px 1px rgba(0,0,0,.3);
 			}
 			
 			.mui-card-header img {
@@ -145,6 +146,10 @@
 			}
 			.mui-card-link {
 				min-width: 60px;
+			}
+			.mui-icon-star, .mui-icon-star-filled, .mui-icon-starhalf {
+				font-size: 16px;
+				color: orange
 			}
 		</style>
 	</head>
@@ -186,11 +191,53 @@
             <p class="mui-table-view-cell">
 	    		<a href="doubanlink" data-key="https://read.douban.com/ebook/36103930/"  class="jumpnew mui-navigate-right"><span class="mui-icon iconfont icon-cart"></span> 在线阅读或购买</a>
             </p>
-            <div style="height: 30px;"></div>-->
-	    	<!--<div class="book-detail-section">
+            <div style="height: 30px;"></div>
+	    	<div class="book-detail-section">
 	    		<p>最近书评</p>
 	    		<ul id="circle-all" class="mui-table-view mui-table-view-chevron">
-					<li class="mui-card">
+					<li class="mui-card" style="background-color: #EFEFF4;">
+						<div class="mui-card-header mui-card-media">
+							<img src="img/tx.png" />
+							<div class="mui-media-body">
+								周猛
+								<p>2016-06-30 15:30</p>
+							</div>
+	
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-card-content-inner">
+								内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+							</div>
+						</div>
+						<div class="mui-card-footer">
+							<a class="mui-card-link"></a>
+							<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
+							<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 999</span></a>
+						</div>
+					</li>
+					
+					<li class="mui-card" style="background-color: #EFEFF4;">
+						<div class="mui-card-header mui-card-media">
+							<img src="img/tx.png" />
+							<div class="mui-media-body">
+								周猛
+								<p>2016-06-30 15:30</p>
+							</div>
+	
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-card-content-inner">
+								内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+							</div>
+						</div>
+						<div class="mui-card-footer">
+							<a class="mui-card-link"></a>
+							<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
+							<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 999</span></a>
+						</div>
+					</li>
+					
+					<li class="mui-card" style="background-color: #EFEFF4;">
 						<div class="mui-card-header mui-card-media">
 							<img src="img/tx.png" />
 							<div class="mui-media-body">
@@ -273,7 +320,7 @@
 							    	'<div class="book-info" style="flex: 1;">'+
 							    		'<h3>'+ detail.title +'</h3>'+
 							    		'<p>作者：'+ detail.author +'<br />'+
-							    		'评分：'+ detail.rating +'<br />'+
+							    		'评分：'+ rate(detail.rating) +'<br />'+
 							    		'出版社：'+ detail.publisher +'<br />'+
 							    		'出版时间：'+ detail.pubdate +'</p>'+
 							    	'</div>'+

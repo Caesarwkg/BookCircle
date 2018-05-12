@@ -15,7 +15,9 @@
 				margin-left: 0px;
 				margin-right: 0px;
 			}
-			
+			.mui-content>.mui-card:first-child {
+			    margin-top: 0;
+			}
 			.mui-card-header img {
 				border-radius: 50%;
 			}
@@ -66,27 +68,36 @@
 				left: 0;
 				background-color: #fff;
 				padding: 5px 15px;
+				display: flex;
 			}
 			.bottom .bottom-input {
 				background-color: #efeff4;
-				width: 100%;
 				/*min-height: 100%;*/
+				flex: 1;
 				height: 40px;
 				max-height: 80px;
 				border-radius: 15px;
 				margin: 0;
+				border: 1px solid #BEBEBE
 			}
 			#comment {
 				margin-bottom: 40px;
+			}
+			.send-btn {
+				color: #0091FF;		
+				line-height: 40px;
+				margin-left: 5px;
+				padding-left: 10px;
+				font-weight: bold;
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class="mui-content">
+		<div class="mui-content" id="body">
 		
 				
-			<div class="mui-card">
+			<!--<div class="mui-card">
 				<div class="mui-card-header mui-card-media">
 					<img src="img/tx.png" />
 					<div class="mui-media-body">
@@ -108,11 +119,6 @@
 			            </div>
 					</div>
 				</div>
-				<div class="mui-card-footer">
-					<a class="mui-card-link"></a>
-					<a class="mui-card-link"><span class="mui-icon iconfont icon-comments"> 20</span></a>
-					<a class="mui-card-link"><span class="mui-icon iconfont icon-good"> 999</span></a>
-				</div>
 			</div>
 			<ul class="mui-table-view" id="comment">
 			    <li class="mui-table-view-cell mui-media">
@@ -122,6 +128,7 @@
 			                幸福
 			                <p class="mui-ellipsis-4">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
 			            </div>
+			            <p>2017-10-20</p>
 			        </a>
 			    </li>
 			    <li class="mui-table-view-cell mui-media">
@@ -142,8 +149,8 @@
 			            </div>
 			        </a>
 			    </li>
-			</ul>	
-		<form class="bottom"><textarea class="bottom-input" placeholder="此刻的想法..."></textarea></form>
+			</ul>	-->
+		<!--<form class="bottom"><textarea class="bottom-input" placeholder="此刻的想法..."></textarea><div class="send-btn">发送</div></form>-->
 		</div>
 		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/mui.min.js"></script>
@@ -152,6 +159,8 @@
 		<script>
 			
 			openAccountDetail();
+			openBookDetail();
+			
 			
 			mui('body').on('tap', '.zan', function(e) {
 				if(this.style.color == "rgb(246, 113, 5)") {
@@ -171,7 +180,113 @@
 			})
 			
 			
+			mui.plusReady(function() {
+				
+				var _data = {
+					userId : localStorage.getItem("userId")
+				}
+				
+				var _self = plus.webview.currentWebview();
+				var self = JSON.parse(_self.key);
 
+				_data.dynamicId = self.id;
+				
+				var dynamicStr = '<div class="mui-card">' +
+								'<div class="mui-card-header mui-card-media account-detail" data-key="'+self.user.id+'">' +
+									'<img src="img/avatar/'+ self.user.headIcon +'.png" />' +
+									'<div class="mui-media-body">' +
+										self.user.nickName +
+										'<p>' + self.createTime +'</p>' +
+									'</div>' +
+				
+								'</div>' +
+								'<div class="mui-card-content">' +
+									'<div class="mui-card-content-inner">' +
+										self.content +
+									'</div>' +
+									'<div class="mui-card-content-inner ref-book-info flex book-detail" data-key="' + self.book.isbn+'">' +
+							            '<img class="mui-media-object" src="'+ self.book.images.large+'">' +
+							            '<div class="flex_1">' +
+							               '<div class="book-title mui-ellipsis-2">'+ self.book.title+'</div>' +
+							                '<p class="mui-ellipsis-2">'+ self.book.author+'<br />' +
+							                	self.book.summary+'</p>' +
+							            '</div>' +
+									'</div>' +
+								'</div>' +
+							'</div>';
+				
+				var publishStr = '<div class="bottom"><textarea id="comment-content" class="bottom-input" placeholder="此刻的想法..."></textarea><div class="send-btn" id="send-btn">发送</div></div>';
+				
+				var promise = new Promise(function(resolve, reject) {
+					muiGet(api.commentInfos + "?dynamicId=" + self.id + "&pageIndex=1",function(data){
+						resolve(data);
+					})
+				});
+				
+				promise.then(function(value) {
+					var comments = value.data;
+					var commentStr = "";
+					if(comments){
+						comments.forEach(function(item) {
+							commentStr += '<li class="mui-table-view-cell mui-media">' +
+									        '<a href="javascript:;">' +
+									            '<img class="mui-media-object mui-pull-left account-detail" data-key="'+item.userId+'" src="img/avatar/'+item.headIcon+'.png">' +
+									            '<div class="mui-media-body">' +
+									                item.nickName +
+									                '<p class="mui-ellipsis-4">'+item.content+'</p>' +
+									            '</div>' +
+									            '<p>'+item.createTime+'</p>' +
+									        '</a>' +
+									    '</li>';
+						})
+						
+						commentStr = '<ul class="mui-table-view" id="comment">'+commentStr+'</ul>'
+					}
+					document.getElementById("body").innerHTML = dynamicStr + commentStr + publishStr;
+					
+				
+
+					//提交评论模块
+					document.getElementById('send-btn').addEventListener('tap',function () {
+						
+						var cContent = document.getElementById("comment-content");
+						console.log(cContent.value.trim());
+						
+						if(cContent.value.trim() == "") {
+							return false;
+						}
+						
+						_data.content = cContent.value.trim();
+						
+						
+						var promise = new Promise(function(resolve, reject) {
+							muiPost(api.commentPublish, _data, function(data){
+								resolve(data);
+							})
+							
+						});
+						
+						promise.then(function(data) {
+							if(data.errorCode != 0) {
+								mui.alert(data.errorMsg, "出错了...");
+							}
+							cContent.blur();
+							
+							plus.webview.currentWebview().reload();
+							
+						});
+						
+						
+						
+					});
+					
+				});
+				
+			})
+			
+			
+			
+			
 			
 			
 			

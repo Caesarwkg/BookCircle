@@ -95,6 +95,10 @@
 			    border-top: 0.5px solid #f1f1ed;
 			    margin: 0 10px;
 			}
+			.mui-icon-star, .mui-icon-star-filled, .mui-icon-starhalf {
+				font-size: 16px;
+				color: orange
+			}
 		</style>
 	</head>
 
@@ -152,13 +156,13 @@
 					}
 					list.forEach(function(e) {
 						
-						temp += '<li class="mui-table-view book-detail" data-key="' + e.isbn + '">'+
-								    '<div class="mui-table-view-cell mui-media mui-card">'+
+						temp += '<li class="mui-table-view">'+
+								    '<div class="mui-table-view-cell mui-media mui-card book-detail" data-key="' + e.isbn + '">'+
 								       '<a href="javascript:;">'+
 								            '<img alt="暂无图片" class="mui-media-object mui-pull-left" src="'+ e.images.large +'">'+
 								            '<div class="mui-media-body">'+
 								               '<div class="book-title mui-ellipsis-2">'+ e.title +'</div>'+
-								                '<p>评分：'+ e.rating +'</p>'+
+								                '<p>评分：'+ rate(e.rating) +'</p>'+
 								                '<p class="mui-ellipsis-3">'+ e.author +' / '+ e.pubdate +' / '+ e.publisher +'</p>'+
 								            '</div>'+
 								        '</a>'+
