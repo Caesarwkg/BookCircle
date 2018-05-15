@@ -162,6 +162,7 @@
 			
 			openAccountDetail();
 			openCircleDetail();
+			openBookDetail();
 				window.addEventListener("toggleList", function() {
 					if(!$("#circle-all").hasClass("hide")){
 						$("#circle-all").addClass("hide");
@@ -190,7 +191,7 @@
 									'<div class="mui-card-content">' +
 										'<div class="mui-card-content-inner">' + item.content + '</div>';
 									if(!!item.book){
-										itemStr += '<div class="mui-card-content-inner ref-book-info flex">' +
+										itemStr += '<div class="mui-card-content-inner ref-book-info flex book-detail" data-key="'+item.book.isbn+'">' +
 											            '<img class="mui-media-object" src="'+item.book.images.large+'">' +
 											            '<div class="flex_1">' +
 											               '<div class="book-title mui-ellipsis-2">'+item.book.title+'</div>' +
@@ -230,7 +231,7 @@
 									'<div class="mui-card-content">' +
 										'<div class="mui-card-content-inner">' + item.content + '</div>';
 									if(!!item.book){
-										itemStr += '<div class="mui-card-content-inner ref-book-info flex">' +
+										itemStr += '<div class="mui-card-content-inner ref-book-info flex book-detail" data-key="'+item.book.isbn+'">' +
 											            '<img class="mui-media-object" src="'+item.book.images.large+'">' +
 											            '<div class="flex_1">' +
 											               '<div class="book-title mui-ellipsis-2">'+item.book.title+'</div>' +
