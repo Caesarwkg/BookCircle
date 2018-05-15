@@ -56,6 +56,12 @@
 				height: 80px;
 				overflow: hidden;
 			}
+			.no-book {
+				line-height: 60px;
+				text-align: center;
+				width: 100%;
+				background-color: #efeff4;
+			}
 		</style>
 	</head>
 
@@ -66,6 +72,7 @@
 		</header>
 		<div class="mui-content">
 			<ul id="account-list" class="mui-table-view mui-table-view-striped mui-table-view-condensed" >
+				<p class='no-book'>空空如也~</p>
 				<!--<li class="mui-table-view-cell">
 					<div class="mui-slider-cell">
 						<div class="oa-contact-cell mui-table">
@@ -126,7 +133,9 @@
 							'</li>';
 			});
 			
-			document.getElementById("account-list").innerHTML += itemStr;
+			if(itemStr){
+				document.getElementById("account-list").innerHTML = itemStr;
+			}
 		})
 	</script>
 </html>

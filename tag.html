@@ -108,8 +108,21 @@
 			document.getElementById("selected").addEventListener('tap', function(event) {
 				
 				//.........提交标签
-				plus.navigator.setFullscreen(false);
-				openWindow("index");
+				
+				
+				var _data = {
+					userId:window.localStorage.getItem("userId")
+				};
+				var hobbies = [];
+				var tags = $(".tag-box .mui-btn").not(".mui-btn-outlined");
+				tags.each(function(i, e) {
+					hobbies.push($(this).data("key"));
+				})
+				_data.hobbies = JSON.stringify(hobbies);
+				muiPost(api.userUpdate, _data, function(data) {
+					plus.navigator.setFullscreen(false);
+					openWindow("index");
+				})
 			}, false);
 			
 			$(function(){

@@ -151,6 +151,9 @@
 				font-size: 16px;
 				color: orange
 			}
+			#circle-all {
+				background-color: #efeff4;
+			}
 		</style>
 	</head>
 
@@ -276,8 +279,8 @@
 				}
 			})
 			
-			openNewWindow()
-			
+			openNewWindow();
+			openCircleDetail();
 			mui.plusReady(function() {
 				var _self = plus.webview.currentWebview();
 				var _isbn = _self.key;
@@ -342,9 +345,9 @@
 						    		'<a href="doubanlink" data-key="'+ detail.ebookUrl +'"  class="jumpnew mui-navigate-right"><span class="mui-icon iconfont icon-cart"></span> 在线阅读或购买</a>'+
 					            '</p>';
 					}
-					temp += '<div style="height: 30px;"></div>' + 	
+					temp += '<div style="height: 30px;"></div>';	
 					
-							'<div class="book-detail-section">' +
+							/*'<div class="book-detail-section">' +
 					    		'<p>最近书评</p>' +
 					    		'<ul id="circle-all" class="mui-table-view mui-table-view-chevron">' +
 									'<li class="mui-card">' +
@@ -368,12 +371,72 @@
 										'</div>' +
 									'</li>' +
 								'</ul>' +
-					    	'</div>';
+					    	'</div>';*/
 					
 					
 				document.getElementById("content").innerHTML = temp;
 					
+					
+					
+				muiGet(api.commentBook+ "?isbn=" + _isbn, function(data) {
+					if(data.errorCode != 0) {
+						mui.alert("出错了");
+						return;
+					}
+					var commentStr =  '<div class="book-detail-section">' +
+					    		'<p>最近书评</p>' +
+					    		'<ul id="circle-all" class="mui-table-view mui-table-view-chevron">';
+					var list = data.data;
+					list.forEach(function(item) {
 						
+						commentStr +=
+									'<li class="mui-card">' +
+										'<div class="mui-card-header mui-card-media">' +
+											'<img src="img/avatar/'+ item.user.headIcon +'.png" />' +
+											'<div class="mui-media-body">' +
+												item.user.nickName +
+												'<br><span style="color:#999">' + item.createTime +'</span>' +
+											'</div>' +
+					
+										'</div>' +
+										'<div class="mui-card-content">' +
+											'<div class="mui-card-content-inner">' +
+												item.content +
+											'</div>' +
+										'</div>' +
+										'<div class="mui-card-footer">' +
+											'<a class="mui-card-link"></a>' +
+											"<a class='mui-card-link circle-detail' data-key='"+JSON.stringify(item)+"'><span class='mui-icon iconfont icon-comments'> "+item.commentCount+"</span></a>" +
+											'<a class="mui-card-link zan" data-status="true" data-id="'+item.id+'"><span class="mui-icon iconfont icon-good"> <span class="like-count">'+item.likeCount+'</span></span></a>' +
+										'</div>' +
+									'</li>';
+								
+						
+						
+						
+					})
+					commentStr += '</ul>' +
+					    	'</div>';
+					
+					if(list.length > 0) {
+						document.getElementById("content").innerHTML += commentStr;
+					}
+					
+					
+				})
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				
+				//点赞
 				mui('body').on('tap', '.zan', function(e) {
 					if(this.style.color == "rgb(246, 113, 5)") {
 						return false;
@@ -393,46 +456,46 @@
 					
 					
 					
+				//添加收藏
+				document.getElementById('store').addEventListener('tap',function (e) {
+					var _cList = this.classList;
+					var storeClass = _cList[_cList.length - 1];
+					var _this = this;
 					
-					document.getElementById('store').addEventListener('tap',function (e) {
-						var _cList = this.classList;
-						var storeClass = _cList[_cList.length - 1];
-						var _this = this;
-						
-						var _data = {
-							userId: localStorage.getItem("userId"),
-							isbn: _isbn
-						}
-						
-						//已经添加到书架
-						if(storeClass == "icon-favoritesfilling") {
-							muiPost(api.bookUnstore, _data, function(data) {
-								if(data.errorCode == 0){
-									mui.alert("移除成功~","OK");
-									_this.className  = "mui-icon iconfont book-favorite icon-favorite"
-								}
-							})
-						
-						//还未添加到书架
-						} else if (storeClass == "icon-favorite"){
-							muiPost(api.bookStoreup, _data, function(data) {
-								if(data.errorCode == 0){
-									mui.alert("已添加到书架~","OK");
-									_this.className  = "mui-icon iconfont book-favorite icon-favoritesfilling"
-								}
-							})
-						}
-						
-					})
+					var _data = {
+						userId: localStorage.getItem("userId"),
+						isbn: _isbn
+					}
 					
+					//已经添加到书架
+					if(storeClass == "icon-favoritesfilling") {
+						muiPost(api.bookUnstore, _data, function(data) {
+							if(data.errorCode == 0){
+								mui.alert("移除成功~","OK");
+								_this.className  = "mui-icon iconfont book-favorite icon-favorite"
+							}
+						})
+					
+					//还未添加到书架
+					} else if (storeClass == "icon-favorite"){
+						muiPost(api.bookStoreup, _data, function(data) {
+							if(data.errorCode == 0){
+								mui.alert("已添加到书架~","OK");
+								_this.className  = "mui-icon iconfont book-favorite icon-favoritesfilling"
+							}
+						})
+					}
 					
 				})
-				
-				
-				
-				
-				
+					
+					
 			})
+				
+				
+				
+				
+				
+		})
 			
 			
 		</script>

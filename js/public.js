@@ -42,9 +42,11 @@ var api = {
 	dynamicPublish:config.url + "dynamic/publish",
 	dynamicInfos:config.url + "dynamic/infos",
 	dynamicAll:config.url + "dynamic/all",
+	dynamicFriends: config.url + "dynamic/friends",
 	dynamicLike:config.url + "dynamic/like",
+	commentBook:config.url + "dynamic/book",
 	commentInfos:config.url + "comment/infos",
-	commentPublish:config.url + "comment/publish"
+	commentPublish:config.url + "comment/publish",
 }
 
 

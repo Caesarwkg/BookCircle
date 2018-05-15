@@ -209,12 +209,11 @@
 			})
 			
 			
-			muiGet(api.dynamicAll + "?pageIndex=1",function(data) {
+			muiGet(api.dynamicFriends + "?userId="+window.localStorage.getItem("userId")+"&pageIndex=1",function(data) {
 				
 				var list = data.data;
 				var itemStr = "";
-				list.forEach(function(it) {
-					var item = it.data;
+				list.forEach(function(item) {
 					itemStr += '<li class="mui-card ">' +
 									'<div class="mui-card-header mui-card-media account-detail" data-key="'+ item.user.id +'">' +
 										'<img src="img/avatar/' + item.user.headIcon +'.png" />' +

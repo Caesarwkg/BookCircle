@@ -78,7 +78,7 @@
 				<a href="javascript:;" id="search-cancle" class="mui-pull-right">取消</a>
 			</div>
 			<div class="index-title hide">
-				<h1 class="mui-title">
+				<h1 class="mui-title" id="cicleTab">
 		    	<div class="mui-btn mui-btn-outlined mui-active" id="circle-all">公共</div><div id="circle-care" class="mui-btn mui-btn-outlined">关注</div>
 		    </h1>
 				<a class="mui-icon iconfont icon-edit mui-pull-right jumpnew" href="comment-publish"></a>
@@ -291,6 +291,11 @@
 					}, 1000 * 2); //加个两秒钟的双击锁
 					var targetTab = this.getAttribute('href');
 					var contentWebview = plus.webview.getWebviewById(targetTab);
+					
+					if(!$("#circle-all").hasClass("mui-active")) {
+						$("#circle-all").addClass("mui-active");
+						$("#circle-care").removeClass("mui-active");
+					}
 					contentWebview.evalJS("plus.webview.currentWebview().reload();");
 				}
 			});

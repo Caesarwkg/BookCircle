@@ -89,6 +89,11 @@
 						地区<span id="location">未填</span>
 					</a>
 				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="showEduPicker">
+						教育<span id="edu">未填</span>
+					</a>
+				</li>
 			</ul>
 			<div class="mui-card">
 				<div class="mui-card-header">介绍</div>
@@ -133,6 +138,7 @@
 				document.getElementById("sex").innerHTML = (info.sex || info.sex==0 ? (info.sex == 0 ? '男' : '女') : '未填');
 				document.getElementById("birthday").innerHTML = info.birthday ? info.birthday : "未填";
 				document.getElementById("location").innerHTML = (info.provinceName && info.cityName ? info.provinceName + " " + info.cityName  : "未填");
+				document.getElementById("edu").innerHTML = info.educationBackground ? info.educationBackground : "未填";
 				document.getElementById("introduction").innerHTML = info.description ? info.description : "";
 				
 			}) 
@@ -148,7 +154,13 @@
 				var maxDate = new Date();
 				plus.nativeUI.pickDate(function(e) {
 					var d = e.date;
-					var birthday = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+					
+					var gMonth = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : (d.getMonth() + 1);
+					var gDate = (d.getDate() < 10) ? ("0" + d.getDate()) : d.getDate();
+					
+					var birthday = d.getFullYear() + "-" + gMonth + "-" + gDate;
+					
+					
 					var _data = {
 						userId: localStorage.getItem("userId"),
 						birthday: birthday
@@ -230,6 +242,54 @@
 					//return false;
 				});
 			}, false);
+			
+			
+			
+			
+			var eduPicker = new mui.PopPicker();
+			eduPicker.setData([{
+				value: '初中',
+				text: '初中'
+			}, {
+				value: '高中',
+				text: '高中'
+			}, {
+				value: '大学',
+				text: '大学'
+			}, {
+				value: '硕士',
+				text: '硕士'
+			}, {
+				value: '博士',
+				text: '博士'
+			}, {
+				value: '工作',
+				text: '工作'
+			}]);
+			document.getElementById('showEduPicker').addEventListener('tap', function(event) {
+				eduPicker.show(function(items) {
+					var edu = items[0].value;
+					var _data = {
+						userId: localStorage.getItem("userId"),
+						educationBackground: edu
+					}
+					muiPost(api.userUpdate, _data, function(data) {
+						if (data.errorCode != 0) {
+							mui.alert(data.errorMsg, "更新失败了π_π");
+						} else {
+							document.getElementById("edu").innerHTML = items[0].text;
+						}
+					})
+					
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+			
+			
+			
+			
+			
 			
 			//介绍introduction
 			document.getElementById('introduction').addEventListener('keyup',function () {

@@ -227,19 +227,19 @@
 					var comments = value.data;
 					var commentStr = "";
 					if(comments){
-						comments.forEach(function(item) {
+					
+						comments.forEach(function(item,index) {
 							commentStr += '<li class="mui-table-view-cell mui-media">' +
 									        '<a href="javascript:;">' +
 									            '<img class="mui-media-object mui-pull-left account-detail" data-key="'+item.userId+'" src="img/avatar/'+item.headIcon+'.png">' +
-									            '<div class="mui-media-body">' +
-									                item.nickName +
+									            '<div class="mui-media-body">' + item.nickName +
 									                '<p class="mui-ellipsis-4">'+item.content+'</p>' +
 									            '</div>' +
 									            '<p>'+item.createTime+'</p>' +
 									        '</a>' +
 									    '</li>';
+							
 						})
-						
 						commentStr = '<ul class="mui-table-view" id="comment">'+commentStr+'</ul>'
 					}
 					document.getElementById("body").innerHTML = dynamicStr + commentStr + publishStr;

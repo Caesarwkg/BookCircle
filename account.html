@@ -96,12 +96,26 @@
 			}
 			.book-list li {
 				width: 30%;
-				height: 130px;
+				height: 150px;
 				float: left;
 				padding: 11px;
 				object-fit: cover;
 				
 			}
+			@media only screen and (max-width: 415px) {
+				.book-list li {
+					height: 160px;
+				}
+			}
+			@media only screen and (max-width: 374px) {
+				.book-list li {
+					height: 130px;
+				}
+			}
+			
+			
+			
+			
 			.book-list li:nth-child(3n - 1), .book-list li:nth-child(3n - 3){
 				margin-left: 5%;
 			}
@@ -198,7 +212,7 @@
 								<span class="mui-icon iconfont icon-trust"></span> 相互关注
 							</div>-->
 							<!--<div>
-								<span class="mui-icon iconfont icon-email"></span>
+								<span class="mui-icon iconfont icon-email jumpnew" href="im-chat"></span>
 							</div>
 						</div>-->
 					</div>
@@ -312,11 +326,12 @@
 
 		<script src="js/mui.min.js"></script>
 		<script src="js/public.js"></script>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 		
 			openNewWindow();
 			openBookDetail();
-			
+			openCircleDetail();
 			mui.plusReady(function() {
 				//index页关闭侧滑菜单
 				plus.webview.getWebviewById("index.html").evalJS("closeMenu();plus.webview.currentWebview().setStyle({mask:'none'})")
@@ -335,6 +350,7 @@
 				
 				if(_userId == _selfUserId) {
 					document.getElementById("relationship").innerHTML = '<div type="button" class="mui-btn mui-btn-outlined jumpnew" href="account-info"><span class="mui-icon iconfont icon-edit"></span> 编辑</div>';
+					_relationship = -2; //自己
 				}else {
 					//获取用户之间的关系
 					muiGet(api.relationship + "?userId=" + _selfUserId + "&friendId=" + _userId, function(data) {
@@ -354,7 +370,7 @@
 													'<div >'+
 														'<span class="mui-icon iconfont icon-add"></span> 关注'+
 													'</div>'+
-														'<span class="mui-icon iconfont icon-email"></span>'+
+														'<span class="mui-icon iconfont icon-email jumpnew" href="im-chat"></span>'+
 													'</div>'+
 												'</div>';	
 								break;
@@ -364,7 +380,7 @@
 													'<span class="mui-icon iconfont icon-add"></span> 关注'+
 												'</div>'+
 												'<div>'+
-													'<span class="mui-icon iconfont icon-email"></span>'+
+													'<span class="mui-icon iconfont icon-email jumpnew" href="im-chat"></span>'+
 												'</div>'+
 											'</div>';
 								break;
@@ -374,7 +390,7 @@
 													'<span class="mui-icon iconfont icon-selected"></span> 已关注'+
 												'</div>'+
 												'<div>'+
-													'<span class="mui-icon iconfont icon-email"></span>'+
+													'<span class="mui-icon iconfont icon-email jumpnew" href="im-chat"></span>'+
 												'</div>'+
 											'</div>';
 								break;
@@ -384,7 +400,7 @@
 													'<span class="mui-icon iconfont icon-trust"></span> 相互关注'+
 												'</div>'+
 												'<div>'+
-													'<span class="mui-icon iconfont icon-email"></span>'+
+													'<span class="mui-icon iconfont icon-email jumpnew" href="im-chat"></span>'+
 												'</div>'+
 											'</div>';
 								break;
@@ -515,26 +531,48 @@
 										itemStr += '</div>' +
 										'<div class="mui-card-footer">' +
 											'<a class="mui-card-link"></a>' +
-											'<a class="mui-card-link" data-key="'+item.id+'"><span class="mui-icon iconfont icon-comments"> '+item.commentCount+'</span></a>' +
+											"<a class='mui-card-link circle-detail' data-key='"+JSON.stringify(item)+"'><span class='mui-icon iconfont icon-comments'> "+item.commentCount+"</span></a>" +
 											'<a class="mui-card-link zan" data-status="true" data-id="'+item.id+'"><span class="mui-icon iconfont icon-good"> <span class="like-count">'+item.likeCount+'</span></span></a>' +
 										'</div>' +
 									'</li>';
 					})
 					document.getElementById("circle-self").innerHTML += itemStr ? itemStr : "<p class='no-book'>还没有任何动态~</p>";
 					
-					
+					//点赞
+					mui('body').on('tap', '.zan', function(e) {
+						if(this.style.color == "rgb(246, 113, 5)") {
+							return false;
+						}
+						this.style.color = "rgb(246, 113, 5)";
+						var _id = this.dataset.id;
+						var count = $(this).find(".like-count").text();
+						$(this).find(".like-count").text(parseInt(count) + 1);
+						
+						var _data = {
+							userId : localStorage.getItem("userId"),
+							dynamicId :_id
+						}
+						muiPost(api.dynamicLike, _data, function(data){})
+						
+					})
 				})
 				
 				
-			
+						//-2, 自己
 						//0,  互不关注
 						//-1,  已被关注 
 						//1,  已关注
 						//2,  互相关注
 				document.getElementById("relationship").addEventListener('tap', function() {
 					
+					//自己
+					if(_relationship == -2) {
+						return false;
+						
 					//关注
-					if(_relationship == 0 || _relationship == -1) {
+					}else if (_relationship == 0 || _relationship == -1) {
+						
+						
 						muiPost(api.follow, _data, function(data) {
 							if(data.errorCode != 0){
 								mui.alert("出错了");
@@ -547,7 +585,7 @@
 													'<span class="mui-icon iconfont icon-selected"></span> 已关注'+
 												'</div>'+
 												'<div>'+
-													'<span class="mui-icon iconfont icon-email"></span>'+
+													'<span class="mui-icon iconfont icon-email jumpnew" href="im-chat"></span>'+
 												'</div>'+
 											'</div>';
 								document.getElementById("relationship").innerHTML = relStr;
@@ -558,7 +596,7 @@
 													'<span class="mui-icon iconfont icon-trust"></span> 相互关注'+
 												'</div>'+
 												'<div>'+
-													'<span class="mui-icon iconfont icon-email"></span>'+
+													'<span class="mui-icon iconfont icon-email jumpnew" href="im-chat"></span>'+
 												'</div>'+
 											'</div>';
 											document.getElementById("relationship").innerHTML = relStr;
@@ -580,7 +618,7 @@
 													'<span class="mui-icon iconfont icon-add"></span> 关注'+
 												'</div>'+
 												'<div>'+
-													'<span class="mui-icon iconfont icon-email"></span>'+
+													'<span class="mui-icon iconfont icon-email jumpnew" href="im-chat"></span>'+
 												'</div>'+
 											'</div>';
 							
