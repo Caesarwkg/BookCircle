@@ -48,6 +48,15 @@
 			.mui-content>.mui-table-view:first-child {
 			     margin-top: 0; 
 			}
+			.no-book {
+				line-height: 60px;
+				text-align: center;
+				width: 100%;
+				background-color: #EFEFF4;
+			}
+			#OA_task:after {
+				height: 0;
+			}
 		</style>
 	</head>
 
@@ -168,8 +177,11 @@
 							'</li>';
 				
 			});
-			
-			document.getElementById("OA_task").innerHTML += itemStr;
+			if(list.length > 0){
+				document.getElementById("OA_task").innerHTML = itemStr;
+			}else {
+				document.getElementById("OA_task").innerHTML = "<p class='no-book'>快去寻找你的书友吧~</p>";
+			}
 		});
 		
 	</script>

@@ -52,6 +52,11 @@
 			.mui-content>.mui-table-view:first-child {
 			    margin-top: 0 !important;
 			}
+			.no-book {
+				line-height: 60px;
+				text-align: center;
+				width: 100%;
+			}
 		</style>
 	</head>
 
@@ -243,7 +248,11 @@
 								'</li>';
 				})
 				
-				document.getElementById("circle-care").innerHTML = itemStr;
+				if(list.length > 0) {
+					document.getElementById("circle-care").innerHTML = itemStr;
+				}else {
+					document.getElementById("circle-care").innerHTML = "<p class='no-book'>快去寻找你的书友吧~</p>";
+				}
 				
 				
 			})
