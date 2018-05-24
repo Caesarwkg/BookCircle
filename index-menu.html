@@ -159,6 +159,10 @@
 									all[i].close("slide-out-right", 300);
 								}
 							}
+							var _data = {
+								userId : userId,
+							}
+							muiPost(api.userOffline, _data, function(data){});
 							window.localStorage.clear();
 						}
 					});
