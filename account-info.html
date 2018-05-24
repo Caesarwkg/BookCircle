@@ -135,7 +135,7 @@
 				var info = data.data;
 				document.getElementById("headIcon").src = "img/avatar/" + info.headIcon + ".png";
 				document.getElementById("nickName").innerHTML = info.nickName;	
-				document.getElementById("sex").innerHTML = (info.sex || info.sex==0 ? (info.sex == 0 ? '男' : '女') : '未填');
+				document.getElementById("sex").innerHTML = (info.sex || info.sex==0 ? (info.sex == 0 ? '女' : '男') : '未填');
 				document.getElementById("birthday").innerHTML = info.birthday ? info.birthday : "未填";
 				document.getElementById("location").innerHTML = (info.provinceName && info.cityName ? info.provinceName + " " + info.cityName  : "未填");
 				document.getElementById("edu").innerHTML = info.educationBackground ? info.educationBackground : "未填";

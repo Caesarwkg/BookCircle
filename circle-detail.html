@@ -203,16 +203,19 @@
 								'<div class="mui-card-content">' +
 									'<div class="mui-card-content-inner">' +
 										self.content +
-									'</div>' +
-									'<div class="mui-card-content-inner ref-book-info flex book-detail" data-key="' + self.book.isbn+'">' +
-							            '<img class="mui-media-object" src="'+ self.book.images.large+'">' +
-							            '<div class="flex_1">' +
-							               '<div class="book-title mui-ellipsis-2">'+ self.book.title+'</div>' +
-							                '<p class="mui-ellipsis-2">'+ self.book.author+'<br />' +
-							                	self.book.summary+'</p>' +
-							            '</div>' +
-									'</div>' +
-								'</div>' +
+									'</div>';
+									if(self.book) {
+										dynamicStr += '<div class="mui-card-content-inner ref-book-info flex book-detail" data-key="' + self.book.isbn+'">' +
+												            '<img class="mui-media-object" src="'+ self.book.images.large+'">' +
+												            '<div class="flex_1">' +
+												               '<div class="book-title mui-ellipsis-2">'+ self.book.title+'</div>' +
+												                '<p class="mui-ellipsis-2">'+ self.book.author+'<br />' +
+												                	self.book.summary+'</p>' +
+												            '</div>' +
+														'</div>';
+									}
+									
+								dynamicStr += '</div>' +
 							'</div>';
 				
 				var publishStr = '<div class="bottom"><textarea id="comment-content" class="bottom-input" placeholder="此刻的想法..."></textarea><div class="send-btn" id="send-btn">发送</div></div>';

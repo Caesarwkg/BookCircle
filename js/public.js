@@ -20,7 +20,7 @@ var config = {
 var api = {
 	userRegister: config.url + "user/register",
 	userLogin: config.url + "user/login",
-	userOffline: config.utl + "user/offline",
+	userOffline: config.url + "user/offline",
 	userUpdate: config.url + "user/update",
 	userSearch: config.url + "user/search",
 	userGet: config.url + "user/get",
